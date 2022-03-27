@@ -1,0 +1,852 @@
+.movieInfoWrapper {
+  position: relative;
+  display: grid;
+  gap: 40px;
+  max-width: calc(var(--max-width) - 400px);
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto;
+  margin: 0 auto;
+  padding: 100px var(--padding-lg);
+}
+
+.movieArticle {
+  background: rgba(255, 255, 255, 0.18);
+  padding: 40px;
+  border-radius: 20px;
+}
+
+/* Background Image Properties */
+
+.backgroundImageContainer {
+  position: fixed;
+  inset: 0;
+  filter: blur(40px) brightness(0.9);
+}
+
+.backgroundImage {
+  object-fit: cover;
+}
+
+/* Movie Image Container Properties */
+
+.movieImageAndUserActionsContainer {
+  position: relative;
+  grid-column: 1 / 2;
+  overflow: hidden;
+  padding: unset;
+  min-height: 600px;
+}
+
+.movieImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.userActionsContainer {
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.userActionButton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 10px;
+  font-size: var(--font-size-default);
+  font-weight: 500;
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(15px);
+  width: 50%;
+  padding: 10px 30px;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  transition: background 0.3s;
+}
+
+.userActionButton:hover,
+.userActionButton:focus {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.userActionButton:last-child {
+  border-left: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.userActionIcon {
+  width: 15px;
+  height: 15px;
+}
+
+/* Movie Main Info Container Properties */
+
+.movieMainInfoContainer {
+  grid-column: 2 / 4;
+  display: flex;
+  gap: 40px;
+}
+
+/* Movie Main Info Content Properties */
+
+.movieMainInfoContent {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  row-gap: 30px;
+}
+
+.movieMainInfoTitle {
+  font-size: var(--font-size-md);
+  font-weight: 300;
+  letter-spacing: 0.4px;
+  line-height: 0.9;
+  padding-bottom: 30px;
+  word-wrap: break-word;
+}
+
+.movieMainInfoSectionContainer {
+  position: relative;
+  padding: 5px 0;
+}
+
+.movieMainInfoSectionContainer::after {
+  content: "";
+  position: absolute;
+  bottom: -15px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 2px;
+}
+
+.movieMainInfoSectionContainer:last-child::after {
+  all: unset;
+}
+
+.movieMainInfoSectionTitle {
+  font-size: var(--font-size-default);
+  letter-spacing: 1px;
+  padding-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.movieOverview {
+  max-height: 130px;
+  overflow-y: auto;
+  padding-right: 15px;
+}
+
+.movieOverview::-webkit-scrollbar {
+  background: none;
+  width: 6px;
+}
+
+.movieOverview::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 4px;
+}
+
+.movieOverview::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Movie Main Info Aside properties */
+
+.movieMainInfoAside {
+  display: flex;
+  flex-direction: column;
+  row-gap: 7px;
+  letter-spacing: 0.4px;
+}
+
+.movieMainInfoDuration {
+  position: relative;
+  display: flex;
+  align-items: center;
+  letter-spacing: 1px;
+}
+
+.movieMainInfoDuration::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.3);
+  height: 2px;
+  border-radius: 2px;
+}
+
+.movieMainInfoDurationIcon {
+  width: 17px;
+  height: 17px;
+  margin-right: 5px;
+}
+
+.movieMainInfoAvgVote {
+  font-size: var(--font-size-lg);
+  font-weight: 400;
+  line-height: 0.3;
+  margin: 30px 0 20px 0;
+}
+
+.movieMainInfoAvgVoteIcon {
+  width: 25px;
+  height: 25px;
+  fill: gold;
+  margin-left: 10px;
+}
+
+.movieMainInfoVoteCount {
+  font-size: var(--font-size-default);
+}
+
+.movieMainInfoVoteCountNumber {
+  font-size: var(--font-size-h3);
+}
+
+.movieMainInfoReleaseDate {
+  position: relative;
+  display: flex;
+  align-items: center;
+  font-size: var(--font-size-xs);
+}
+
+.movieMainInfoReleaseDate::before {
+  content: "";
+  position: absolute;
+  top: -13px;
+  left: 0;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.3);
+  height: 2px;
+  border-radius: 2px;
+}
+
+.movieMainInfoReleaseDate::after {
+  content: "";
+  position: absolute;
+  bottom: -13px;
+  left: 0;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.3);
+  height: 2px;
+  border-radius: 2px;
+}
+
+.movieMainInfoReleaseDateIcon {
+  width: 17px;
+  height: 17px;
+  margin-right: 5px;
+}
+
+.playTrailerButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 15px;
+  font-size: var(--font-size-default);
+  min-width: 170px;
+  padding: 5px 10px;
+  background: rgba(255, 255, 255, 0.3);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  outline: none;
+  transition: background 0.3s;
+}
+
+.playTrailerButton:hover,
+.playTrailerButton:focus {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.playTrailerButtonIcon {
+  margin-right: 5px;
+  width: 35px;
+  height: 35px;
+}
+
+/* Movie Cast & Crew Container Properties */
+
+.movieCastWatchKeywordsContainer {
+  grid-column: 1 / -1;
+  display: grid;
+  gap: 40px;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+}
+
+.movieCastAndCrewContainer {
+  grid-column: 1 / 3;
+  grid-row: 1 / 4;
+}
+
+.movieWhereToWatchContainer {
+  grid-column: 3 / 4;
+  grid-row: 1 / 3;
+}
+
+.movieKeywordsContainer {
+  grid-column: 3 / 4;
+  grid-row: 3 / 4;
+}
+
+.movieArticleTitle {
+  font-size: var(--font-size-h1);
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  padding-bottom: 25px;
+}
+
+.movieSmallArticleTitle {
+  font-size: var(--font-size-h2);
+  font-weight: 400;
+  letter-spacing: 0.4px;
+  padding-bottom: 25px;
+}
+
+/* Cast Row Properties */
+
+.castAndCrewRow {
+  position: relative;
+  display: flex;
+}
+
+.castAndCrewRow + .castAndCrewRow {
+  margin-top: 50px;
+}
+
+.castAndCrewRowTitle {
+  position: sticky;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  margin-right: 30px;
+  border-radius: 5px;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  writing-mode: vertical-lr;
+  text-transform: uppercase;
+  transform: rotate(180deg);
+  color: rgba(255, 255, 255, 0.6);
+  z-index: 1;
+}
+
+.castAndCrewRowTitle::after {
+  content: "";
+  position: absolute;
+  left: -5px;
+  bottom: 0;
+  width: 2px;
+  height: 100%;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.castAndCrewScrollableRow {
+  display: flex;
+  gap: 15px;
+  overflow-x: auto;
+}
+
+.castAndCrewScrollableRow::-webkit-scrollbar {
+  display: none;
+}
+
+.castAndCrewCard {
+  flex: 0 0 150px;
+  cursor: pointer;
+}
+
+.memberImage {
+  border-radius: 15px;
+}
+
+.memberName {
+  font-size: var(--font-size-default);
+  font-weight: 400;
+  letter-spacing: 0.4px;
+  margin-top: 5px;
+}
+
+.memberCharacterName {
+  font-size: var(--font-size-sm);
+  font-weight: 400;
+  letter-spacing: 0.6px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Where to Watch Container Properties */
+
+.whereToWatchRow + .whereToWatchRow {
+  margin-top: 40px;
+}
+
+.whereToWatchRowTitle {
+  position: relative;
+  padding-bottom: 10px;
+  font-size: var(--font-size-default);
+  font-weight: 500;
+  letter-spacing: 2px;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+}
+
+.whereToWatchRowTitle::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 3px;
+  width: 100%;
+  height: 2px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.whereToWatchScrollableRow {
+  display: flex;
+  gap: 12px;
+  margin-top: 13px;
+  padding-bottom: 5px;
+  overflow-x: auto;
+}
+
+.whereToWatchScrollableRow::-webkit-scrollbar {
+  display: none;
+}
+
+.whereToWatchImageContainer {
+  position: relative;
+  flex: 0 0 55px;
+  height: 55px;
+}
+
+.whereToWatchProviderImage {
+  border-radius: 5px;
+}
+
+/* Keywords Container Properties */
+
+.keywordsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.keywordsContainer::-webkit-scrollbar {
+  background: none;
+  width: 6px;
+}
+
+.keywordsContainer::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 4px;
+}
+
+.keywordsContainer::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.keyword {
+  padding: 7px 15px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.3);
+  letter-spacing: 0.4px;
+  font-size: var(--font-size-default);
+  font-weight: 300;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.keyword:hover,
+.keyword:focus {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Images Container Properties */
+
+.movieImagesContainer {
+  grid-column: 1 / -1;
+}
+
+.imagesScrollableRow {
+  display: flex;
+  gap: 15px;
+  overflow-x: auto;
+}
+
+.imagesScrollableRow::-webkit-scrollbar {
+  display: none;
+}
+
+.imageContainerHorizontal {
+  position: relative;
+  flex: 0 0 400px;
+  height: 250px;
+}
+
+.imageContainerVertical {
+  position: relative;
+  flex: 0 0 170px;
+  height: 250px;
+}
+
+.image {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+  border-radius: 15px;
+}
+
+/* Related Movies Container Properties */
+
+.movieRelatedMoviesContainer {
+  grid-column: 1 / -1;
+}
+
+.relatedMoviesScrollableRow {
+  display: flex;
+  gap: 15px;
+  overflow-x: auto;
+  padding-bottom: 15px;
+}
+
+.relatedMoviesScrollableRow::-webkit-scrollbar {
+  display: none;
+}
+
+.relatedMovieContainer {
+  flex: 0 0 300px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  cursor: pointer;
+  outline: none;
+  transition: box-shadow 0.5s ease-out;
+}
+
+.relatedMovieContainer:hover,
+.relatedMovieContainer:focus {
+  box-shadow: 3px 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.relatedMovieContainer:hover img,
+.movieArticle:focus img {
+  transform: scale(1.05);
+}
+
+.relatedMovieImageContainer {
+  position: relative;
+  border-radius: 10px 10px 0 0;
+  overflow: hidden;
+  height: 140px;
+}
+
+.relatedMovieImage {
+  width: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+.relatedMovieContent {
+  padding: 20px;
+}
+
+.relatedMovieTitleAndVoteAvg {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 20px;
+}
+
+.relatedMovieTitle {
+  font-weight: 400;
+  font-size: var(--font-size-default);
+  max-width: 150px;
+  line-height: 1.1;
+  letter-spacing: 0.3px;
+}
+
+.relatedMovieVoteContainer {
+  display: flex;
+  column-gap: 7px;
+}
+
+.relatedMovieVoteAvg {
+  font-weight: 500;
+}
+
+.relatedMovieVoteIcon {
+  fill: gold;
+}
+
+.relatedMovieDescription {
+  font-weight: 300;
+  font-size: var(--font-size-sm);
+}
+
+/* Movie Reviews Container Properties */
+
+.movieReviewsContainer {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 40px;
+  justify-content: space-evenly;
+}
+
+.reviewsContainer,
+.reviewFormContainer {
+  flex-basis: 50%;
+}
+
+/* Movie Reviews Comments Container Properties */
+
+.commentsContainer {
+  display: flex;
+  flex-direction: column;
+  row-gap: 30px;
+  overflow-y: auto;
+  max-height: 650px;
+  padding-right: 5px;
+}
+
+.commentsContainer::-webkit-scrollbar {
+  background: none;
+  width: 6px;
+}
+
+.commentsContainer::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 4px;
+}
+
+.commentsContainer::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.commentContainer {
+  position: relative;
+  flex-grow: 0;
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 15px;
+  padding: 30px 30px 50px;
+  overflow: hidden;
+}
+
+.commentInfoContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 20px;
+}
+
+.userInfoContainer {
+  display: grid;
+  column-gap: 10px;
+  grid-template-columns: 50px 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+
+.userImageContainer {
+  grid-column: 1 / 2;
+  grid-row: 1 / -1;
+}
+
+.userImage {
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.userUsername {
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+  letter-spacing: 0.3px;
+  font-size: var(--font-size-h3);
+}
+
+.commentDate {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+  text-transform: uppercase;
+  font-size: var(--font-size-sm);
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.userVoteContainer {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: var(--font-size-h2);
+  font-weight: 300;
+}
+
+.movieCommentAvgVoteIcon {
+  fill: gold;
+  width: 20px;
+  height: 20px;
+}
+
+.userComment {
+  font-size: var(--font-size-default);
+  line-height: 1.3;
+  letter-spacing: 0.2px;
+  font-weight: 300;
+}
+
+.expandShrinkCommentButton {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 8px 15px;
+  font-size: var(--font-size-default);
+  background: rgba(255, 255, 255, 0.3);
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.expandShrinkCommentButton:hover,
+.expandShrinkCommentButton:focus {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Review Form Container Properties */
+
+.reviewForm {
+  display: flex;
+  flex-direction: column;
+  row-gap: 100px;
+}
+
+.userCommentInput {
+  width: 100%;
+  height: 250px;
+  padding: 30px;
+  font-size: var(--font-size-default);
+  font-weight: 300;
+  line-height: 1.3;
+  letter-spacing: 0.2px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 15px;
+  border: none;
+  outline: none;
+  resize: none;
+  overflow-y: auto;
+}
+
+.userCommentInput:focus {
+  outline: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+.userCommentInput::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.userCommentInput::-webkit-scrollbar {
+  background: none;
+  width: 8px;
+}
+
+.userCommentInput::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 4px;
+}
+
+.userCommentInput::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.ratingsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.userRatingLabel {
+  display: flex;
+  align-items: center;
+  column-gap: 3px;
+  padding: 5px 20px;
+  font-size: var(--font-size-h3);
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  border: 2px solid transparent;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.userRatingLabel:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.ratingButton {
+  position: fixed;
+  width: 0;
+  opacity: 0;
+}
+
+.ratingButton:checked + .userRatingLabel {
+  background-color: rgba(255, 255, 255, 0.4);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+.ratingButtonIcon {
+  width: 15px;
+  height: 15px;
+  fill: gold;
+}
+
+.customRatingInput {
+  margin: 0 5px;
+  width: 60px;
+  font-size: var(--font-size-h3);
+  font-weight: 600;
+  background: none;
+  border: none;
+  outline: none;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.formPostClearButtonContainer {
+  display: flex;
+  gap: 10px;
+}
+
+.formPostClearButton {
+  padding: 9px 25px;
+  font-size: var(--font-size-h3);
+  font-weight: 500;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  background: rgba(0, 255, 64, 0.3);
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.formPostClearButton:last-child {
+  background: rgba(255, 25, 0, 0.3);
+}
+
+.formPostClearButton:hover,
+.formPostClearButton:focus {
+  background: rgba(0, 255, 64, 0.5);
+}
+
+.formPostClearButton:last-child:hover,
+.formPostClearButton:last-child:focus {
+  background: rgba(255, 25, 0, 0.5);
+}

@@ -1,0 +1,128 @@
+.formsContainer {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  height: 460px;
+  margin: 300px auto;
+  padding: 80px;
+  background: var(--dark-blue-color);
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+
+.formsContainer::before,
+.formsContainer::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 30px;
+  background: linear-gradient(to right, var(--dark-blue-color), transparent);
+  z-index: 10;
+}
+
+.formsContainer::after {
+  left: unset;
+  right: 0;
+  background: linear-gradient(to left, var(--dark-blue-color), transparent);
+}
+
+.loginContainer,
+.registerContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 70px 80px;
+  width: 100%;
+  max-width: 600px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+}
+
+.formTitle {
+  text-align: center;
+  font-size: var(--font-size-h1);
+  font-weight: 600;
+  letter-spacing: 0.4px;
+}
+
+.formInput {
+  width: 100%;
+  border: none;
+  outline: none;
+  color: rgba(255, 255, 255, 0.9);
+  background: var(--dark-blue-darker-color);
+  font-size: var(--font-size-sm);
+  font-weight: 400;
+  letter-spacing: 1px;
+  padding: 20px 30px;
+  border-radius: 10px;
+  transition: box-shadow 0.5s;
+}
+
+.formInput::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.formInput:focus {
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
+}
+
+.formButton {
+  position: relative;
+  width: fit-content;
+  margin: 0 auto;
+  padding: 15px 40px;
+  background: var(--pink-color);
+  font-size: var(--font-size-default);
+  font-weight: 700;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: box-shadow 0.5s;
+}
+
+.formButton:hover,
+.formButton:focus {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.formRegisterText {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.formChangeToRegisterButton {
+  padding: 5px;
+  cursor: pointer;
+  color: var(--pink-color);
+  font-size: var(--font-size-default);
+  font-weight: 600;
+}
+
+.loginContainer {
+  transition: transform 1s cubic-bezier(0.48, 0.42, 0, 1.01);
+}
+
+.registerContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translateX(110%);
+  transition: transform 1s cubic-bezier(0.48, 0.42, 0, 1.01);
+}
+
+.loginContainer.formInactive {
+  transform: translateX(-110%);
+}
+
+.registerContainer.formActive {
+  transform: translateX(0);
+}

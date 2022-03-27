@@ -1,0 +1,70 @@
+.joinUs {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0 var(--padding-lg);
+  margin: 50px 0;
+  height: 550px;
+  background: linear-gradient(to right, var(--purple-darker-color), var(--purple-color));
+}
+
+.joinUsContent {
+  display: flex;
+  flex-direction: column;
+  row-gap: 60px;
+  z-index: 1;
+}
+
+.joinUsTitle {
+  line-height: 0.75;
+  font-size: var(--font-size-lg);
+  position: relative;
+}
+
+.joinUsTitleSmall {
+  position: absolute;
+  font-size: var(--font-size-h3);
+  font-weight: 300;
+  letter-spacing: 0.8px;
+  bottom: -22px;
+}
+
+.joinUsDescription {
+  max-width: 550px;
+  letter-spacing: 0.5px;
+}
+
+.joinUsDescriptionBigWord {
+  font-size: var(--font-size-h3);
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.joinUsButton {
+  width: fit-content;
+  background: var(--pink-color);
+  padding: 13px 85px;
+  border-radius: 12px;
+  font-size: var(--font-size-h2);
+  font-weight: 600;
+  outline: none;
+  transition: 0.3s;
+}
+
+.joinUsButton:hover,
+.joinUsButton:focus {
+  filter: brightness(1.07);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.joinUsImageContainer {
+  position: absolute;
+  top: 0;
+  right: var(--padding-lg);
+  bottom: 0;
+  width: 600px;
+}
+
+.joinUsImage {
+  object-fit: contain;
+}
