@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import Head from "next/head";
 import axios from "axios";
 import rateLimit from "axios-rate-limit";
 import instance from "../axios";
@@ -96,6 +97,14 @@ function Movie() {
 
   return (
     <>
+      <Head>
+        <title>
+          YMDB-
+          {movieResults?.movieDetails?.name ||
+            movieResults?.movieDetails?.title ||
+            movieResults?.movieDetails?.original_title}
+        </title>
+      </Head>
       <main>{loaded ? <MovieInfo movieResults={movieResults} /> : <MovieLoading />}</main>
     </>
   );
