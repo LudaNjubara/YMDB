@@ -35,7 +35,8 @@ function Footer() {
               <a className={styles.joinUsButton}>Join Us</a>
             </Link>
             <p className={styles.footerJoinUsDescription}>
-              Haven't joined us yet? Now's your chance. Click the button above and enter the world of movies!
+              Haven&apos;t joined us yet? Now's your chance. Click the button above and enter the world of
+              movies!
             </p>
           </div>
         </section>
@@ -106,7 +107,7 @@ function Footer() {
           <article className={styles.footerSection}>
             <div>
               <h2 className={styles.sectionTitle}>Support</h2>
-              <p className={styles.sectionTitleDescription}>We're here to help</p>
+              <p className={styles.sectionTitleDescription}>We&apos;re here to help</p>
             </div>
             <div className={styles.sectionContent}>
               <a href="#!" className={styles.sectionLink}>

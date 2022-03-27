@@ -89,7 +89,7 @@ function LoginRegisterForm() {
             Login
           </button>
           <p className={styles.formRegisterText}>
-            Don't have an account? Create it over
+            Don&apos;t have an account? Create it over
             <span
               className={styles.formChangeToRegisterButton}
               onClick={() => {

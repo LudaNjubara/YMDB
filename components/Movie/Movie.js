@@ -8,6 +8,7 @@ import MovieInfo from "./MovieInfo";
 
 function Movie() {
   const [movieResults, setMovieResults] = useState({});
+  const [loaded, setLoaded] = useState(false);
   const router = useRouter();
   const { movieId } = router.query;
 
@@ -75,11 +76,13 @@ function Movie() {
               }
               setMovieResults({ ...movieResults });
             });
+            setLoaded(true);
             console.log(movieResults);
           }
         })
         .catch((err) => {
           if (axios.isCancel()) console.error(err.message);
+          console.log("Movie ID unavailable");
         });
     }
 
@@ -93,10 +96,7 @@ function Movie() {
 
   return (
     <>
-      <main>
-        {Object.keys(movieResults).length ? <MovieInfo movieResults={movieResults} /> : <MovieLoading />}
-        {/*         <MovieInfo movieResults={null} /> */}
-      </main>
+      <main>{loaded ? <MovieInfo movieResults={movieResults} /> : <MovieLoading />}</main>
     </>
   );
 }

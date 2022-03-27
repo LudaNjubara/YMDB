@@ -1,5 +1,4 @@
 import styles from "../../styles/Movie/movieInfo.module.css";
-import Script from "next/script";
 import Link from "next/link";
 import Image from "next/image";
 import moment from "moment";
@@ -12,11 +11,10 @@ function MovieInfo({ movieResults }) {
   const movieDuration = movieResults?.movieDetails?.runtime;
 
   function formatDuration(duration) {
-    const durationContainer = document.querySelector("#durationContainer");
     const hours = Math.floor(duration / 60);
     const minutes = duration % 60;
     const durationString = `${hours}h ${minutes}min`;
-    durationContainer?.innerHTML = durationString;
+    return durationString;
   }
 
   return (
@@ -81,7 +79,9 @@ function MovieInfo({ movieResults }) {
 
             <div className={styles.movieMainInfoSectionContainer}>
               <h2 className={styles.movieMainInfoSectionTitle}>TAGLINE</h2>
-              <p className={styles.movieTagline}>{movieResults?.movieDetails?.tagline}</p>
+              <p className={styles.movieTagline}>
+                {movieResults?.movieDetails?.tagline ? movieResults?.movieDetails?.tagline : "N/A"}
+              </p>
             </div>
 
             <div className={styles.movieMainInfoSectionContainer}>
