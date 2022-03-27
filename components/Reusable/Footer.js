@@ -35,8 +35,8 @@ function Footer() {
               <a className={styles.joinUsButton}>Join Us</a>
             </Link>
             <p className={styles.footerJoinUsDescription}>
-              Haven&apos;t joined us yet? Now's your chance. Click the button above and enter the world of
-              movies!
+              Haven&apos;t joined us yet? Now&apos;s your chance. Click the button above and enter the world
+              of movies!
             </p>
           </div>
         </section>
