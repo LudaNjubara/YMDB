@@ -9,6 +9,7 @@ export default function Home() {
     <div id="root">
       <Head>
         <title key="title">YMDB - Your Movie DataBase</title>
+        <meta name="google-site-verification" content="XJNmUcYtBUBDsXwwo3qJbIekYufFozDjpMFU1fS2O80" />
       </Head>
 
       <Hero fetchURL={requests.fetchTrending} />
