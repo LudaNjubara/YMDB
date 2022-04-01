@@ -1,4 +1,4 @@
-import styles from "../../styles/Movie/movieInfo.module.css";
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import moment from "moment";
@@ -6,8 +6,12 @@ import { truncate, baseImageURL } from "../Home/Row";
 import { BsStarFill, BsBookmarkFill, BsCalendar3, BsPlayFill } from "react-icons/bs";
 import { FiClock } from "react-icons/fi";
 import { FaStar } from "react-icons/fa";
+import styles from "../../styles/Movie/movieInfo.module.css";
 
 function MovieInfo({ movieResults }) {
+  const [showBackgroundDarkener, setShowBackgroundDarkener] = useState(false);
+  const [showTrailerPopup, setShowTrailerPopup] = useState(false);
+  const [showImagesPopup, setShowImagesPopup] = useState(false);
   const movieDuration = movieResults?.movieDetails?.runtime;
 
   function formatDuration(duration) {
@@ -15,6 +19,29 @@ function MovieInfo({ movieResults }) {
     const minutes = duration % 60;
     const durationString = `${hours}h ${minutes}min`;
     return durationString;
+  }
+
+  function randomImageGenerator() {
+    let images = [];
+    let randomImages = [];
+
+    if (movieResults?.movieImages?.backdrops) images = images.concat(movieResults?.movieImages?.backdrops);
+
+    if (movieResults?.movieImages?.posters) images = images.concat(movieResults?.movieImages?.posters);
+
+    if (images.length >= 20) {
+      for (let i = 0; i < 20; i++) {
+        let randomImage = images[Math.floor(Math.random() * images.length)];
+        randomImages.push(randomImage);
+      }
+    } else {
+      for (let i = 0; i < images.length; i++) {
+        let randomImage = images[Math.floor(Math.random() * images.length)];
+        randomImages.push(randomImage);
+      }
+    }
+
+    return randomImages;
   }
 
   return (
@@ -32,6 +59,36 @@ function MovieInfo({ movieResults }) {
           className={styles.backgroundImage}
         />
       </div>
+
+      {/* Background Darkener */}
+      <div className={`${showBackgroundDarkener && styles.show} ${styles.backgroundDarkener}`}></div>
+
+      {/* Trailer Popup */}
+      <section className={`${showTrailerPopup && styles.show} ${styles.movieTrailerPopup}`}>
+        {movieResults?.movieVideos?.results?.filter((video) =>
+          video?.name?.toLowerCase().includes("official trailer")
+        ) ? (
+          <iframe
+            className={styles.movieTrailerVideo}
+            src={`https://www.youtube.com/embed/${
+              movieResults?.movieVideos?.results?.filter((video) =>
+                video?.name?.toLowerCase().includes("official trailer")
+              )[0]?.key
+            }`}
+            title={`${
+              movieResults?.movieDetails?.name ||
+              movieResults?.movieDetails?.title ||
+              movieResults?.movieDetails?.original_title
+            } Official Trailer`}
+            frameBorder="0"
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          ></iframe>
+        ) : (
+          "Sorry, there is no trailer for this movie at the moment"
+        )}
+      </section>
 
       {/* Movie Info Wrapper */}
       <section className={styles.movieInfoWrapper}>
@@ -113,7 +170,28 @@ function MovieInfo({ movieResults }) {
               {moment(movieResults?.movieDetails?.release_date).format("Do MMMM YYYY")}
             </span>
 
-            <button type="button" className={styles.playTrailerButton}>
+            <button
+              type="button"
+              className={styles.playTrailerButton}
+              onClick={() => {
+                const trailerPopup = document.querySelector(`.${styles.movieTrailerPopup}`);
+
+                document.body.addEventListener("click", (e) => {
+                  if (trailerPopup.contains(e.target)) {
+                    const movieTrailerVideo = document.querySelector(`.${styles.movieTrailerVideo}`);
+                    let movieTrailerVideoSrc = movieTrailerVideo.src;
+                    movieTrailerVideo.src = movieTrailerVideoSrc;
+
+                    setShowBackgroundDarkener(false);
+                    setShowTrailerPopup(false);
+                  }
+                  document.body.removeEventListener("click", null);
+                });
+
+                setShowBackgroundDarkener(true);
+                setShowTrailerPopup(true);
+              }}
+            >
               <BsPlayFill className={styles.playTrailerButtonIcon} />
               Play Trailer
             </button>
@@ -285,16 +363,24 @@ function MovieInfo({ movieResults }) {
           <h1 className={styles.movieArticleTitle}>Images</h1>
 
           <div className={styles.imagesScrollableRow}>
-            {movieResults?.movieImages?.backdrops.map((backdropImage, index) => {
-              return index < 5 ? (
-                <div className={styles.imageContainerHorizontal} key={backdropImage?.file_path}>
+            {randomImageGenerator().map((image) => {
+              return image.aspect_ratio < 1 ? (
+                <div className={styles.imageContainerVertical} key={image.file_path}>
                   <Image
-                    src={`${baseImageURL}${backdropImage?.file_path}`}
+                    src={`${baseImageURL}${image.file_path}`}
                     layout="fill"
                     className={styles.whereToWatchProviderImage}
                   />
                 </div>
-              ) : null;
+              ) : (
+                <div className={styles.imageContainerHorizontal} key={image.file_path}>
+                  <Image
+                    src={`${baseImageURL}${image.file_path}`}
+                    layout="fill"
+                    className={styles.whereToWatchProviderImage}
+                  />
+                </div>
+              );
             })}
           </div>
         </article>
