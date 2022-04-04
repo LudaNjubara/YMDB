@@ -16,6 +16,10 @@
   height: 420px;
 }
 
+.footerWave {
+  pointer-events: none;
+}
+
 /* Footer bg icons properties */
 .footerBgIconsContainer {
   position: absolute;

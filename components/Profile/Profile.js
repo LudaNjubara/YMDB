@@ -1,4 +1,8 @@
 import Image from "next/image";
+import Personal_Info from "./Personal_Info";
+import Watchlist from "./Watchlist";
+import Favourites from "./Favourites";
+import DangerZone from "./DangerZone";
 import styles from "../../styles/Profile/profile.module.css";
 
 function Profile() {
@@ -8,34 +12,41 @@ function Profile() {
         <aside className={styles.profileAside}>
           <div className={styles.userMainInfo}>
             <div className={styles.profileImageContainer}>
-              <Image src="/defaultUser.png" layout="fill" />
+              <Image src="/defaultUser.png" width={60} height={60} className={styles.profileImage} />
             </div>
+            <h1 className={styles.profileUsername}>LudaNjubara</h1>
           </div>
           <nav className={styles.profileNavigation}>
             <ul className={styles.profileNavigationList}>
               <li className={styles.profileNavigationItem}>
-                <a href="#personal-info" className={styles.profileNavigationLink}>
+                <button type="button" className={styles.profileNavigationButton}>
                   Personal info
-                </a>
+                </button>
               </li>
               <li className={styles.profileNavigationItem}>
-                <a href="#your-watchlist" className={styles.profileNavigationLink}>
+                <button type="button" className={styles.profileNavigationButton}>
                   Your Watchlist
-                </a>
+                </button>
               </li>
               <li className={styles.profileNavigationItem}>
-                <a href="#your-favourites" className={styles.profileNavigationLink}>
+                <button type="button" className={styles.profileNavigationButton}>
                   Your Favourites
-                </a>
+                </button>
+              </li>
+              <li className={styles.profileNavigationItem}>
+                <button type="button" className={styles.profileNavigationButton}>
+                  Danger zone
+                </button>
               </li>
             </ul>
           </nav>
         </aside>
 
         <article className={styles.profileContent}>
-          <h1 id="personal-info">Hi there, LudaNjubara</h1>
-          <h1 id="your-watchlist">Your Watchlist</h1>
-          <h1 id="your-favourites">Your Favourites</h1>
+          <Personal_Info />
+          <Watchlist />
+          <Favourites />
+          <DangerZone />
         </article>
       </section>
     </main>

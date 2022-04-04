@@ -420,6 +420,7 @@
 
 .memberImage {
   border-radius: 15px;
+  object-fit: cover;
 }
 
 .memberName {

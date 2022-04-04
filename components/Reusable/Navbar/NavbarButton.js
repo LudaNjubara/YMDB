@@ -46,8 +46,7 @@ const NavbarButton = () => {
 
         <div id="userOptionsContainerId" className={styles.userOptionsContainer}>
           <h3 className={styles.userOptionsTitle}>{user?.displayName}</h3>
-
-          <Link href="/login">
+          <Link href="/profile">
             <a className={styles.userOptionContainer}>
               <BiCog className={styles.userOptionIcon} />
               <span className={styles.userOptionText}>Preferences</span>
