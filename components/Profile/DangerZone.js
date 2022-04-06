@@ -1,5 +1,5 @@
 function DangerZone() {
-  return <div>DangerZone</div>;
+  return <article>DangerZone</article>;
 }
 
 export default DangerZone;

@@ -6,7 +6,7 @@
   display: flex;
   margin: 0 auto;
   max-width: 1200px;
-  max-height: 900px;
+  min-height: 700px;
   border-radius: 15px;
   background: var(--purple-darker-color);
 }
@@ -14,16 +14,20 @@
 /* Profile Aside Properties */
 .profileAside {
   flex-basis: 350px;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
   padding: 0 var(--padding-md);
   margin: var(--padding-md) 0;
   border-right: 2px solid var(--pink-color);
 }
 
+/* Aside - User Main info properties */
+
 .userMainInfo {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-bottom: 50px;
 }
 
 .profileImageContainer {
@@ -47,10 +51,17 @@
   letter-spacing: 0.4px;
 }
 
+/* Aside - Navigation properties */
+
+.profileNavigation {
+  flex-grow: 1;
+}
+
 .profileNavigationList {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  height: 100%;
 }
 
 .profileNavigationItem {
@@ -60,12 +71,11 @@
 }
 
 .profileNavigationItem:last-child {
-  margin-top: 30px;
-  background: rgba(255, 0, 0, 0.2);
+  margin-top: auto;
+  background: #d13b3b;
 }
 
-.profileNavigationItem:last-child .profileNavigationButton:hover,
-.profileNavigationItem:last-child .profileNavigationButton:focus {
+.profileNavigationItem:last-child .profileNavigationButton:hover {
   background: #ff4a4a;
 }
 
@@ -78,11 +88,15 @@
   border: none;
   letter-spacing: 0.4px;
   cursor: pointer;
+  transition: background 0.1s;
 }
 
-.profileNavigationButton:hover,
-.profileNavigationButton:focus {
+.profileNavigationButton.active {
   background: var(--pink-color);
+}
+
+.profileNavigationButton:hover {
+  background: rgba(255, 255, 255, 0.1);
 }
 
 /* Profile Content Properties */

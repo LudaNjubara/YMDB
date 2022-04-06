@@ -1,5 +1,5 @@
 import { useRef } from "react/";
-import Router from "next/router";
+import { useRouter } from "next/router";
 import styles from "../../styles/Login/loginRegisterForm.module.css";
 import { auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "../firebase";
 
@@ -9,13 +9,7 @@ function LoginRegisterForm() {
   const passwordRefRegister = useRef(null);
   const emailRefLogin = useRef(null);
   const passwordRefLogin = useRef(null);
-
-  const redirectToHome = () => {
-    const { pathname } = Router;
-    if (pathname == "/login") {
-      Router.push("/");
-    }
-  };
+  const router = useRouter();
 
   const login = (e) => {
     e.preventDefault();
@@ -23,14 +17,13 @@ function LoginRegisterForm() {
     signInWithEmailAndPassword(auth, emailRefLogin.current.value, passwordRefLogin.current.value)
       .then((userCredential) => {
         // Logged in
-        console.log("User", userCredential.user?.displayName, "logged in");
-        redirectToHome();
+        const returnUrl = router.query.returnUrl || "/";
+        router.push(returnUrl);
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.error(errorMessage, errorCode);
-        // ..
       });
   };
 

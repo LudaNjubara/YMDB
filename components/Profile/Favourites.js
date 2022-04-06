@@ -1,5 +1,5 @@
 function Favourites() {
-  return <div>Favourites</div>;
+  return <article>Favourites</article>;
 }
 
 export default Favourites;

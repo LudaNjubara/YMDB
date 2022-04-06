@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { auth } from "../../firebase";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../redux/userSlice";
@@ -8,12 +9,13 @@ import { BiCaretDown, BiLogOut, BiCog } from "react-icons/bi";
 import styles from "../../../styles/Reusable/navbar.module.css";
 
 const NavbarButton = () => {
+  const router = useRouter();
   const user = useSelector(selectUser);
   const [userLoginState, setUserLoginState] = useState(false);
 
   useEffect(() => {
     auth.onAuthStateChanged((userAuth) => (userAuth ? setUserLoginState(true) : setUserLoginState(false)));
-  });
+  }, []);
 
   if (userLoginState) {
     return (
@@ -60,7 +62,13 @@ const NavbarButton = () => {
             </a>
           </Link>
 
-          <div className={styles.userOptionContainer} onClick={() => auth.signOut()}>
+          <div
+            className={styles.userOptionContainer}
+            onClick={() => {
+              auth.signOut();
+              router.push("/");
+            }}
+          >
             <BiLogOut className={styles.userOptionIcon} />
             <span className={styles.userOptionText}>Logout</span>
           </div>
