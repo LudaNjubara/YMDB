@@ -28,9 +28,11 @@ const NavbarButton = () => {
           if (userOptionsContainer.style.opacity === "1") {
             userOptionsContainer.style.opacity = "0";
             userOptionsContainer.style.transform = "translate(-50%, -10px)";
+            userOptionsContainer.style.pointerEvents = "none";
           } else {
             userOptionsContainer.style.opacity = "1";
             userOptionsContainer.style.transform = "translate(-50%, 0)";
+            userOptionsContainer.style.pointerEvents = "all";
           }
         }}
       >
@@ -55,12 +57,12 @@ const NavbarButton = () => {
             </a>
           </Link>
 
-          <Link href="/login">
+          {/* <Link href="/login">
             <a className={styles.userOptionContainer}>
               <BiCaretDown className={styles.userOptionIcon} />
               <span className={styles.userOptionText}>Whatever</span>
             </a>
-          </Link>
+          </Link> */}
 
           <div
             className={styles.userOptionContainer}

@@ -18,11 +18,12 @@ function truncate(string, length = 180) {
 
 function Row({ title, fetchURL, isLarge }) {
   const [movies, setMovies] = useState([]);
+  const [isApiSubscribed, setIsApiSubscribed] = useState(true);
+  const [displayMovieRow, setDisplayMovieRow] = useState(false);
 
   useEffect(() => {
-    let cancelToken = axios.CancelToken;
-    let source = cancelToken.source();
-    let isApiSubscribed = true;
+    const cancelToken = axios.CancelToken;
+    const source = cancelToken.source();
 
     async function fetchMoviesData() {
       await instance
@@ -32,14 +33,18 @@ function Row({ title, fetchURL, isLarge }) {
         .then((res) => {
           if (isApiSubscribed) {
             setMovies(res.data.results);
+            setDisplayMovieRow(true);
           }
         })
         .catch((err) => {
-          if (axios.isCancel()) console.error(err.message);
+          if (axios.isCancel()) {
+            console.error(err.message);
+            setDisplayMovieRow(false);
+          }
         });
 
       return () => {
-        isApiSubscribed = false;
+        setIsApiSubscribed(false);
         source.cancel("Request canceled.");
       };
     }
@@ -47,74 +52,76 @@ function Row({ title, fetchURL, isLarge }) {
   }, [fetchURL]);
 
   return (
-    <section className={styles.section} key={title}>
-      <div className={styles.sectionTitleContainer}>
-        <h2 className={styles.sectionTitle}>{title}</h2>
-        {isLarge ? <Image src="/netflix_logo.png" alt="Netflix Logo" width={90} height={30} /> : ""}
-      </div>
-      <div className={styles.moviesContainer}>
-        {!isLarge &&
-          movies.map(
-            (movie) =>
-              movie?.backdrop_path && (
-                <Link href={`/${encodeURIComponent(movie?.id)}`} key={movie?.id}>
-                  <article className={styles.movieArticle} tabIndex="0">
-                    <div className={styles.movieImageContainer}>
-                      <Image
-                        src={`${baseImageURL}${movie?.backdrop_path}`}
-                        alt={movie?.name}
-                        className={styles.movieImage}
-                        layout="fill"
-                      />
-                    </div>
-                    <div className={styles.movieContent}>
+    displayMovieRow && (
+      <section className={styles.section} key={title}>
+        <div className={styles.sectionTitleContainer}>
+          <h2 className={styles.sectionTitle}>{title}</h2>
+          {isLarge ? <Image src="/netflix_logo.png" alt="Netflix Logo" width={90} height={30} /> : ""}
+        </div>
+        <div className={styles.moviesContainer}>
+          {!isLarge &&
+            movies.map(
+              (movie) =>
+                movie?.backdrop_path && (
+                  <Link href={`/${encodeURIComponent(movie?.id)}`} key={movie?.id}>
+                    <article className={styles.movieArticle} tabIndex="0">
+                      <div className={styles.movieImageContainer}>
+                        <Image
+                          src={`${baseImageURL}${movie?.backdrop_path}`}
+                          alt={movie?.name}
+                          className={styles.movieImage}
+                          layout="fill"
+                        />
+                      </div>
+                      <div className={styles.movieContent}>
+                        <div className={styles.movieTitleAndVoteAvg}>
+                          <h3 className={styles.movieTitle}>
+                            {movie?.name || movie?.title || movie?.original_title}
+                          </h3>
+                          <div className={styles.movieVoteContainer}>
+                            <span className={styles.movieVoteAvg}>
+                              {movie?.vote_average ? movie?.vote_average : "N/A"}
+                            </span>
+                            <FaStar className={styles.movieVoteIcon} />
+                          </div>
+                        </div>
+                        <p className={styles.movieDescription}>{truncate(movie?.overview)}</p>
+                      </div>
+                    </article>
+                  </Link>
+                )
+            )}
+          {isLarge &&
+            movies.map(
+              (movie) =>
+                movie?.poster_path && (
+                  <Link href={`/${encodeURIComponent(movie?.id)}`} key={movie?.id}>
+                    <article className={`${styles.movieArticle} ${styles.large}`} tabIndex="0">
+                      <div className={styles.movieImageContainer}>
+                        <Image
+                          src={`${baseImageURL}${movie?.poster_path}`}
+                          alt={movie?.name}
+                          className={styles.movieImage}
+                          layout="fill"
+                        />
+                      </div>
                       <div className={styles.movieTitleAndVoteAvg}>
                         <h3 className={styles.movieTitle}>
-                          {movie?.name || movie?.title || movie?.original_title}
+                          {movie?.name || movie?.title || movie?.original_name}
                         </h3>
                         <div className={styles.movieVoteContainer}>
-                          <span className={styles.movieVoteAvg}>
-                            {movie?.vote_average ? movie?.vote_average : "N/A"}
-                          </span>
+                          <span className={styles.movieVoteAvg}>{movie?.vote_average}</span>
                           <FaStar className={styles.movieVoteIcon} />
                         </div>
                       </div>
-                      <p className={styles.movieDescription}>{truncate(movie?.overview)}</p>
-                    </div>
-                  </article>
-                </Link>
-              )
-          )}
-        {isLarge &&
-          movies.map(
-            (movie) =>
-              movie?.poster_path && (
-                <Link href={`/${encodeURIComponent(movie?.id)}`} key={movie?.id}>
-                  <article className={`${styles.movieArticle} ${styles.large}`} tabIndex="0">
-                    <div className={styles.movieImageContainer}>
-                      <Image
-                        src={`${baseImageURL}${movie?.poster_path}`}
-                        alt={movie?.name}
-                        className={styles.movieImage}
-                        layout="fill"
-                      />
-                    </div>
-                    <div className={styles.movieTitleAndVoteAvg}>
-                      <h3 className={styles.movieTitle}>
-                        {movie?.name || movie?.title || movie?.original_name}
-                      </h3>
-                      <div className={styles.movieVoteContainer}>
-                        <span className={styles.movieVoteAvg}>{movie?.vote_average}</span>
-                        <FaStar className={styles.movieVoteIcon} />
-                      </div>
-                    </div>
-                    <p className={styles.movieDescription}>{truncate(movie?.overview, 338)}</p>
-                  </article>
-                </Link>
-              )
-          )}
-      </div>
-    </section>
+                      <p className={styles.movieDescription}>{truncate(movie?.overview, 338)}</p>
+                    </article>
+                  </Link>
+                )
+            )}
+        </div>
+      </section>
+    )
   );
 }
 

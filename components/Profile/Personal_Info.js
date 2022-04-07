@@ -5,7 +5,7 @@ function Personal_Info({ user }) {
     const date = new Date();
     const hours = date.getHours();
     const greeting = hours < 12 ? "Good morning" : hours < 18 ? "Good afternoon" : "Good evening";
-    return `${greeting}, ${user.displayName}`;
+    return `${greeting}, ${user?.displayName}`;
   }
 
   return (

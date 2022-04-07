@@ -65,8 +65,7 @@ ul {
 }
 
 * {
-  font-family: "Poppins", sans-serif;
-  font-family: "Roboto", sans-serif;
+  font-family: "Poppins", "Roboto", sans-serif;
   color: white;
   box-sizing: border-box;
   margin: 0;

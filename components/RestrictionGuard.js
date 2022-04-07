@@ -17,7 +17,7 @@ function RestrictionGuard({ children }) {
     // Run authCheck on route change
     router.events.on("routeChangeComplete", authCheck);
 
-    // unsubscribe from events in useEffect return function
+    // unsubscribe from events
     return () => {
       router.events.off("routeChangeStart", hideContent);
       router.events.off("routeChangeComplete", authCheck);
@@ -29,13 +29,15 @@ function RestrictionGuard({ children }) {
     const privatePaths = ["/profile"];
     const path = url.split("?")[0];
 
-    if (!auth.currentUser && privatePaths.includes(path)) {
-      setAuthorized(false);
-      router.push({
-        pathname: "/login",
-        query: { returnUrl: router.asPath },
-      });
-    } else setAuthorized(true);
+    auth.onAuthStateChanged((user) => {
+      if (!user && privatePaths.includes(path)) {
+        setAuthorized(false);
+        router.push({
+          pathname: "/login",
+          query: { returnUrl: router.asPath },
+        });
+      } else setAuthorized(true);
+    });
   }
 
   return authorized && children;

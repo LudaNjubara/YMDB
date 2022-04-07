@@ -34,22 +34,19 @@ function LoginRegisterForm() {
       .then((userCredential) => {
         // Account created
         const user = userCredential.user;
-        console.log("Created user", userCredential.user?.displayName, "logged in");
 
         updateProfile(user, {
           displayName: usernameRefRegister.current.value,
         })
           .then(() => {
-            redirectToHome();
+            router.push("/");
           })
           .catch((err) => {
             console.error(err.message, err.code);
           });
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.error(errorMessage, errorCode);
+        console.error(error.message, error.code); // remove console logging and display message to user
       });
   };
 

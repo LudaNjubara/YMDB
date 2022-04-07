@@ -9,14 +9,16 @@ import MovieInfo from "./MovieInfo";
 
 function Movie() {
   const [movieResults, setMovieResults] = useState({});
-  const [loaded, setLoaded] = useState(false);
+  const [isApiSubscribed, setIsApiSubscribed] = useState(true);
+  const [movieLoaded, setMovieLoaded] = useState(false);
+  const [movieUnavailable, setMovieUnavailable] = useState(false);
+
   const router = useRouter();
   const { movieId } = router.query;
 
   useEffect(() => {
     const cancelToken = axios.CancelToken;
     const source = cancelToken.source();
-    let isApiSubscribed = true;
 
     const movieDetailsRequests = [
       `/movie/${movieId}?api_key=${process.env.API_KEY}&language=en-US`,
@@ -77,20 +79,19 @@ function Movie() {
               }
               setMovieResults({ ...movieResults });
             });
-            setLoaded(true);
-            console.log(movieResults);
+            setMovieLoaded(true);
           }
         })
         .catch((err) => {
           if (axios.isCancel()) console.error(err.message);
-          console.log("Movie ID unavailable");
+          setMovieUnavailable(true);
         });
     }
 
     if (movieId) fetchMovie();
 
     return () => {
-      isApiSubscribed = false;
+      setIsApiSubscribed(false);
       source.cancel("Request canceled.");
     };
   }, [movieId]);
@@ -105,7 +106,15 @@ function Movie() {
             movieResults?.movieDetails?.original_title}
         </title>
       </Head>
-      <main>{loaded ? <MovieInfo movieResults={movieResults} /> : <MovieLoading />}</main>
+      <main>
+        {movieUnavailable ? (
+          "Movie unavailable"
+        ) : movieLoaded ? (
+          <MovieInfo movieResults={movieResults} />
+        ) : (
+          <MovieLoading />
+        )}
+      </main>
     </>
   );
 }
