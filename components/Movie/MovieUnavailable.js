@@ -5,7 +5,8 @@ function MovieUnavailable() {
   return (
     <div className={styles.unavailableWrapper}>
       <p className={styles.movieUnavailableText}>
-        <span className={styles.oopsText}>Oops...</span> seems like we can&apos;t find what you're looking for
+        <span className={styles.oopsText}>Oops...</span> seems like we can&apos;t find what you&apos;re
+        looking for
       </p>
       <div className={styles.movieUnavailableImageContainer}>
         <Image
