@@ -13,7 +13,10 @@ function Navbar() {
         else return;
       } else setShow(false);
     });
-    return window.removeEventListener("scroll", null);
+    return () => {
+      window.removeEventListener("scroll", null);
+      setShow(false);
+    };
   }, []);
 
   return (

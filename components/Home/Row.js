@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import instance from "../axios";
+import uniqid from "uniqid";
 import axios from "axios";
+import instance from "../axios";
 import { FaStar } from "react-icons/fa";
 import styles from "../../styles/Home/row.module.css";
 
@@ -53,7 +54,7 @@ function Row({ title, fetchURL, isLarge }) {
 
   return (
     displayMovieRow && (
-      <section className={styles.section} key={title}>
+      <section className={styles.section} key={uniqid()}>
         <div className={styles.sectionTitleContainer}>
           <h2 className={styles.sectionTitle}>{title}</h2>
           {isLarge ? <Image src="/netflix_logo.png" alt="Netflix Logo" width={90} height={30} /> : ""}
@@ -63,7 +64,7 @@ function Row({ title, fetchURL, isLarge }) {
             movies.map(
               (movie) =>
                 movie?.backdrop_path && (
-                  <Link href={`/${encodeURIComponent(movie?.id)}`} key={movie?.id}>
+                  <Link href={`/${encodeURIComponent(movie?.id)}`} key={uniqid()}>
                     <article className={styles.movieArticle} tabIndex="0">
                       <div className={styles.movieImageContainer}>
                         <Image
@@ -95,7 +96,7 @@ function Row({ title, fetchURL, isLarge }) {
             movies.map(
               (movie) =>
                 movie?.poster_path && (
-                  <Link href={`/${encodeURIComponent(movie?.id)}`} key={movie?.id}>
+                  <Link href={`/${encodeURIComponent(movie?.id)}`} key={uniqid()}>
                     <article className={`${styles.movieArticle} ${styles.large}`} tabIndex="0">
                       <div className={styles.movieImageContainer}>
                         <Image

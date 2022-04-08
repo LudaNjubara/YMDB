@@ -2,6 +2,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import moment from "moment";
+import uniqid from "uniqid";
 import { truncate, baseImageURL } from "../Home/Row";
 import { BsStarFill, BsBookmarkFill, BsCalendar3, BsPlayFill } from "react-icons/bs";
 import { FiClock } from "react-icons/fi";
@@ -209,7 +210,7 @@ function MovieInfo({ movieResults }) {
               <div className={styles.castAndCrewScrollableRow}>
                 {movieResults?.movieCredits?.cast.map((castMember, index) => {
                   return index < 20 ? (
-                    <div className={styles.castAndCrewCard} key={castMember?.id}>
+                    <div className={styles.castAndCrewCard} key={uniqid()}>
                       <Image
                         src={`${baseImageURL}${castMember?.profile_path}`}
                         alt={castMember?.name}
@@ -236,7 +237,7 @@ function MovieInfo({ movieResults }) {
                   })
                   .map((crewMember) => {
                     return (
-                      <div className={styles.castAndCrewCard} key={crewMember?.id}>
+                      <div className={styles.castAndCrewCard} key={uniqid()}>
                         <Image
                           src={`${baseImageURL}${crewMember?.profile_path}`}
                           alt={crewMember?.name}
@@ -261,7 +262,7 @@ function MovieInfo({ movieResults }) {
                   })
                   .map((crewMember) => {
                     return (
-                      <div className={styles.castAndCrewCard} key={crewMember?.id}>
+                      <div className={styles.castAndCrewCard} key={uniqid()}>
                         <Image
                           src={`${baseImageURL}${crewMember?.profile_path}`}
                           alt={crewMember?.name}
@@ -288,7 +289,7 @@ function MovieInfo({ movieResults }) {
                 {movieResults?.movieWatchProviders?.US?.buy
                   ? movieResults?.movieWatchProviders?.US?.buy.map((provider) => {
                       return (
-                        <div className={styles.whereToWatchImageContainer} key={provider?.provider_id}>
+                        <div className={styles.whereToWatchImageContainer} key={uniqid()}>
                           <Image
                             src={`${baseImageURL}${provider?.logo_path}`}
                             layout="fill"
@@ -308,7 +309,7 @@ function MovieInfo({ movieResults }) {
                 {movieResults?.movieWatchProviders?.US?.rent
                   ? movieResults?.movieWatchProviders?.US?.rent.map((provider) => {
                       return (
-                        <div className={styles.whereToWatchImageContainer} key={provider?.provider_id}>
+                        <div className={styles.whereToWatchImageContainer} key={uniqid()}>
                           <Image
                             src={`${baseImageURL}${provider?.logo_path}`}
                             layout="fill"
@@ -328,7 +329,7 @@ function MovieInfo({ movieResults }) {
                 {movieResults?.movieWatchProviders?.US?.flatrate
                   ? movieResults?.movieWatchProviders?.US?.flatrate.map((provider) => {
                       return (
-                        <div className={styles.whereToWatchImageContainer} key={provider?.provider_id}>
+                        <div className={styles.whereToWatchImageContainer} key={uniqid()}>
                           <Image
                             src={`${baseImageURL}${provider?.logo_path}`}
                             layout="fill"
@@ -349,7 +350,7 @@ function MovieInfo({ movieResults }) {
             <div className={styles.keywordsContainer}>
               {movieResults?.movieKeywords?.keywords.map((keyword) => {
                 return (
-                  <span className={styles.keyword} key={keyword?.id}>
+                  <span className={styles.keyword} key={uniqid()}>
                     {keyword?.name}
                   </span>
                 );
@@ -365,7 +366,7 @@ function MovieInfo({ movieResults }) {
           <div className={styles.imagesScrollableRow}>
             {randomImageGenerator().map((image) => {
               return image.aspect_ratio < 1 ? (
-                <div className={styles.imageContainerVertical} key={image.file_path}>
+                <div className={styles.imageContainerVertical} key={uniqid()}>
                   <Image
                     src={`${baseImageURL}${image.file_path}`}
                     layout="fill"
@@ -373,7 +374,7 @@ function MovieInfo({ movieResults }) {
                   />
                 </div>
               ) : (
-                <div className={styles.imageContainerHorizontal} key={image.file_path}>
+                <div className={styles.imageContainerHorizontal} key={uniqid()}>
                   <Image
                     src={`${baseImageURL}${image.file_path}`}
                     layout="fill"
@@ -393,7 +394,7 @@ function MovieInfo({ movieResults }) {
             {movieResults?.movieSimilar?.results.map(
               (movie) =>
                 movie?.backdrop_path && (
-                  <Link href={`/${encodeURIComponent(movie?.id)}`} key={movie?.id}>
+                  <Link href={`/${encodeURIComponent(movie?.id)}`} key={uniqid()}>
                     <article className={styles.relatedMovieContainer} tabIndex="0">
                       <div className={styles.relatedMovieImageContainer}>
                         <Image
@@ -432,7 +433,7 @@ function MovieInfo({ movieResults }) {
             <div className={styles.commentsContainer}>
               {movieResults?.movieReviews?.results.map((review) => {
                 return (
-                  <div className={styles.commentContainer} key={review?.id}>
+                  <div className={styles.commentContainer} key={uniqid()}>
                     <div className={styles.commentInfoContainer}>
                       <div className={styles.userInfoContainer}>
                         <div className={styles.userImageContainer}>

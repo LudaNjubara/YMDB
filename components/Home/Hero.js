@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
-import axios from "../axios";
-import { truncate, baseImageURL } from "./Row";
 import Image from "next/image";
 import Link from "next/link";
+import uniqid from "uniqid";
+import axios from "../axios";
+import { truncate, baseImageURL } from "./Row";
 import styles from "../../styles/Home/hero.module.css";
 
 function Hero({ fetchURL }) {
@@ -26,7 +27,7 @@ function Hero({ fetchURL }) {
           <button type="button" className={styles.heroButton}>
             Add to favourites
           </button>
-          <Link href={`/${encodeURIComponent(movie?.id)}`} key={movie?.id}>
+          <Link href={`/${encodeURIComponent(movie?.id)}`} key={uniqid()}>
             <a className={styles.heroButton}>Show info</a>
           </Link>
         </div>
@@ -37,7 +38,7 @@ function Hero({ fetchURL }) {
           src={`${baseImageURL}${movie?.backdrop_path}`}
           alt={movie?.name}
           className={styles.heroImage}
-          key={movie?.id}
+          key={uniqid()}
           width={1500}
           height={900}
           priority={true}

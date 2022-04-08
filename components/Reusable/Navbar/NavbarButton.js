@@ -15,7 +15,9 @@ const NavbarButton = () => {
 
   useEffect(() => {
     auth.onAuthStateChanged((userAuth) => (userAuth ? setUserLoginState(true) : setUserLoginState(false)));
-  }, []);
+
+    return () => setUserLoginState(false);
+  }, [user]);
 
   if (userLoginState) {
     return (

@@ -5,6 +5,7 @@ import axios from "axios";
 import rateLimit from "axios-rate-limit";
 import instance from "../axios";
 import MovieLoading from "./MovieLoading";
+import MovieUnavailable from "./MovieUnavailable";
 import MovieInfo from "./MovieInfo";
 
 function Movie() {
@@ -82,10 +83,7 @@ function Movie() {
             setMovieLoaded(true);
           }
         })
-        .catch((err) => {
-          if (axios.isCancel()) console.error(err.message);
-          setMovieUnavailable(true);
-        });
+        .catch(() => setMovieUnavailable(true));
     }
 
     if (movieId) fetchMovie();
@@ -108,7 +106,7 @@ function Movie() {
       </Head>
       <main>
         {movieUnavailable ? (
-          "Movie unavailable"
+          <MovieUnavailable />
         ) : movieLoaded ? (
           <MovieInfo movieResults={movieResults} />
         ) : (

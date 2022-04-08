@@ -1,0 +1,35 @@
+.unavailableWrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  row-gap: 20px;
+  width: 100%;
+  max-width: 1200px;
+  height: 100vh;
+  padding: 200px 0;
+}
+
+.movieUnavailableText {
+  font-size: var(--font-size-h3);
+  max-width: 30ch;
+  padding-bottom: 10px;
+  text-align: center;
+}
+
+.oopsText {
+  display: block;
+  justify-content: center;
+  margin-bottom: 10px;
+  font-size: var(--font-size-lg);
+  font-weight: 900;
+  color: rgb(245, 203, 255);
+  text-shadow: 4px 4px 0 rgb(204, 2, 255);
+  letter-spacing: 0.4px;
+  font-style: italic;
+}
+
+.movieUnavailableImageContainer {
+  position: relative;
+}

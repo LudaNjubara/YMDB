@@ -17,6 +17,7 @@ function MovieLoading() {
           height={400}
           className={styles.movieLoadingImage}
           priority={true}
+          alt="Movie loading"
         />
       </div>
     </div>
