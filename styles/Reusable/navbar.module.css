@@ -83,11 +83,14 @@
   width: 33px;
   height: 33px;
   border-radius: 50px;
+  pointer-events: none;
 }
 
 .caretDownIcon {
   width: 2.3em;
   height: 2.3em;
+  outline: none;
+  pointer-events: none;
 }
 
 .userOptionsContainer {
@@ -104,6 +107,12 @@
   overflow: hidden;
   transition: transform 0.3s ease-out, opacity 0.3s ease-out;
   pointer-events: none;
+}
+
+.showUserOptions {
+  opacity: 1;
+  transform: translate(-50%, 0);
+  pointer-events: all;
 }
 
 .userOptionsTitle {

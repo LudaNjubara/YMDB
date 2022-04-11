@@ -12,11 +12,15 @@ const NavbarButton = () => {
   const router = useRouter();
   const user = useSelector(selectUser);
   const [userLoginState, setUserLoginState] = useState(false);
+  const [showUserOptions, setShowUserOptions] = useState(false);
 
   useEffect(() => {
     auth.onAuthStateChanged((userAuth) => (userAuth ? setUserLoginState(true) : setUserLoginState(false)));
 
-    return () => setUserLoginState(false);
+    return () => {
+      setUserLoginState(false);
+      setShowUserOptions(false);
+    };
   }, [user]);
 
   if (userLoginState) {
@@ -24,18 +28,13 @@ const NavbarButton = () => {
       <button
         type="button"
         className={styles.profileButton}
-        onClick={() => {
-          const userOptionsContainer = document.getElementById("userOptionsContainerId");
+        onClick={(buttonEvent) => {
+          showUserOptions ? setShowUserOptions(false) : setShowUserOptions(true);
 
-          if (userOptionsContainer.style.opacity === "1") {
-            userOptionsContainer.style.opacity = "0";
-            userOptionsContainer.style.transform = "translate(-50%, -10px)";
-            userOptionsContainer.style.pointerEvents = "none";
-          } else {
-            userOptionsContainer.style.opacity = "1";
-            userOptionsContainer.style.transform = "translate(-50%, 0)";
-            userOptionsContainer.style.pointerEvents = "all";
-          }
+          document.body.addEventListener("click", (documentEvent) => {
+            if (!buttonEvent.target.contains(documentEvent.target)) setShowUserOptions(false);
+            document.body.removeEventListener("click", null);
+          });
         }}
       >
         <div className={styles.profileImageContainer}>
@@ -50,7 +49,10 @@ const NavbarButton = () => {
 
         <BiCaretDown className={styles.caretDownIcon} />
 
-        <div id="userOptionsContainerId" className={styles.userOptionsContainer}>
+        <div
+          id="userOptionsContainerId"
+          className={`${styles.userOptionsContainer} ${showUserOptions && styles.showUserOptions}`}
+        >
           <h3 className={styles.userOptionsTitle}>{user?.displayName}</h3>
           <Link href="/profile">
             <a className={styles.userOptionContainer}>

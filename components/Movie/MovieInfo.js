@@ -129,9 +129,7 @@ function MovieInfo({ movieResults }) {
             <div className={styles.movieMainInfoSectionContainer}>
               <h2 className={styles.movieMainInfoSectionTitle}>GENRE</h2>
               <p className={styles.movieGenres}>
-                {movieResults?.movieDetails?.genres.map((genre, index, genresArray) => {
-                  return index !== genresArray.length - 1 ? `${genre?.name} / ` : genre?.name;
-                })}
+                {movieResults?.movieDetails?.genres.map((genre) => genre?.name).join(" / ")}
               </p>
             </div>
 
@@ -178,6 +176,7 @@ function MovieInfo({ movieResults }) {
                 const trailerPopup = document.querySelector(`.${styles.movieTrailerPopup}`);
 
                 document.body.addEventListener("click", (e) => {
+                  e.preventDefault();
                   if (trailerPopup.contains(e.target)) {
                     const movieTrailerVideo = document.querySelector(`.${styles.movieTrailerVideo}`);
                     let movieTrailerVideoSrc = movieTrailerVideo.src;

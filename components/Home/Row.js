@@ -45,6 +45,7 @@ function Row({ title, fetchURL, isLarge }) {
         });
 
       return () => {
+        setDisplayMovieRow(false);
         setIsApiSubscribed(false);
         source.cancel("Request canceled.");
       };
