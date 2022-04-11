@@ -11,14 +11,14 @@
   padding: 150px 0;
 }
 
-.movieUnavailableText {
+.pageErrorText {
   font-size: var(--font-size-h3);
-  max-width: 30ch;
+  max-width: 40ch;
   padding-bottom: 10px;
   text-align: center;
 }
 
-.oopsText {
+.emptinessText {
   display: block;
   justify-content: center;
   margin-bottom: 10px;
@@ -30,6 +30,12 @@
   font-style: italic;
 }
 
-.movieUnavailableImageContainer {
+.homeLink {
+  color: rgb(245, 203, 255);
+  padding: 2px 5px;
+  text-decoration: underline;
+}
+
+.pageErrorImageContainer {
   position: relative;
 }
