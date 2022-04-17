@@ -19,9 +19,10 @@
 .moviesContainer {
   display: flex;
   column-gap: 30px;
+  padding: 0 var(--padding-lg) 20px 0;
   overflow-y: hidden;
   overflow-x: scroll;
-  padding: 0 var(--padding-lg) 20px 0;
+  scroll-snap-type: inline mandatory;
 }
 
 .moviesContainer::-webkit-scrollbar {
@@ -35,6 +36,7 @@
   cursor: pointer;
   outline: none;
   transition: box-shadow 0.5s ease-out;
+  scroll-snap-align: start;
 }
 
 .movieArticle:hover,

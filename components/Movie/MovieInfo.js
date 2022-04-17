@@ -174,22 +174,21 @@ function MovieInfo({ movieResults }) {
               className={styles.playTrailerButton}
               onClick={() => {
                 const trailerPopup = document.querySelector(`.${styles.movieTrailerPopup}`);
-
-                document.body.addEventListener("click", (e) => {
-                  e.preventDefault();
-                  if (trailerPopup.contains(e.target)) {
-                    const movieTrailerVideo = document.querySelector(`.${styles.movieTrailerVideo}`);
-                    let movieTrailerVideoSrc = movieTrailerVideo.src;
-                    movieTrailerVideo.src = movieTrailerVideoSrc;
-
-                    setShowBackgroundDarkener(false);
-                    setShowTrailerPopup(false);
-                  }
-                  document.body.removeEventListener("click", null);
-                });
-
                 setShowBackgroundDarkener(true);
                 setShowTrailerPopup(true);
+
+                trailerPopup.addEventListener("click", (e) => {
+                  e.preventDefault();
+
+                  const movieTrailerVideo = document.querySelector(`.${styles.movieTrailerVideo}`);
+                  let movieTrailerVideoSrc = movieTrailerVideo.src;
+                  movieTrailerVideo.src = movieTrailerVideoSrc;
+
+                  setShowBackgroundDarkener(false);
+                  setShowTrailerPopup(false);
+
+                  trailerPopup.removeEventListener("click", null);
+                });
               }}
             >
               <BsPlayFill className={styles.playTrailerButtonIcon} />
@@ -393,7 +392,7 @@ function MovieInfo({ movieResults }) {
             {movieResults?.movieSimilar?.results.map(
               (movie) =>
                 movie?.backdrop_path && (
-                  <Link href={`/${encodeURIComponent(movie?.id)}`} key={uniqid()}>
+                  <Link href={`/movies/${encodeURIComponent(movie?.id)}`} key={uniqid()}>
                     <article className={styles.relatedMovieContainer} tabIndex="0">
                       <div className={styles.relatedMovieImageContainer}>
                         <Image

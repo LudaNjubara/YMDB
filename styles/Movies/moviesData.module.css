@@ -1,0 +1,133 @@
+/* Main Container Properties */
+.movieDataContainer {
+  display: flex;
+  gap: 50px;
+  margin: 0 auto;
+  max-width: calc(var(--max-width) - 600px);
+  padding: 150px var(--padding-lg);
+  max-width: var(--max-width);
+}
+
+/* Movies Container Properties*/
+
+#scrollAreaContainerId::-webkit-scrollbar {
+  display: none;
+}
+
+.moviesContainer {
+  display: grid;
+  gap: 15px;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  max-width: 1000px;
+  height: 1100px;
+  overscroll-behavior-y: contain;
+}
+
+.movieArticle {
+  position: relative;
+  border-radius: 5px;
+  flex-basis: 230px;
+  height: 340px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.movieImage {
+  width: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+.movieArticle:hover .movieImage,
+.movieArticle:focus .movieImage {
+  transform: scale(1.06);
+}
+
+.movieArticle .movieImageContainer {
+  position: relative;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.movieArticle .movieImageContainer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, var(--dark-blue-color), transparent);
+}
+
+.movieArticle .movieTitleAndVoteAvg {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 10px;
+}
+
+.movieVoteContainer {
+  display: flex;
+  column-gap: 7px;
+}
+
+.movieVoteAvg {
+  font-weight: 500;
+}
+
+.movieVoteIcon {
+  fill: gold;
+}
+
+.movieArticle .movieTitle {
+  font-weight: 400;
+  font-size: var(--font-size-default);
+  max-width: 150px;
+  line-height: 1;
+  letter-spacing: 0.3px;
+}
+
+.movieArticle .movieDescription {
+  position: absolute;
+  inset: 0;
+  padding: 20px;
+  backdrop-filter: blur(20px);
+  opacity: 0;
+  font-size: var(--font-size-default);
+  font-weight: 300;
+  line-height: 1.3;
+  transform: translateY(0);
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.movieArticle:hover .movieDescription,
+.movieArticle:focus .movieDescription {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Status Message Properties */
+.statusMessageContainer {
+  width: 100%;
+  margin: 15px 0;
+  padding: 10px 30px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 5px;
+}
+
+.statusMessage {
+  font-size: var(--font-size-h3);
+  text-align: center;
+}
+
+/* Filter And Sort Container Properties */
+.filterAndSortContainer {
+  position: sticky;
+  left: 0;
+  top: 100px;
+  flex-basis: 400px;
+  background: red;
+}

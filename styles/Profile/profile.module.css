@@ -105,3 +105,21 @@
   padding: var(--padding-md);
   overflow-y: auto;
 }
+
+/* Watchlist tab properties */
+.articleTitle {
+  font-size: var(--font-size-md);
+  font-weight: 700;
+  letter-spacing: 0.4px;
+}
+
+.watchlistAndFavouritesContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+}
+
+/* .watchlistAndFavouritesMovieContainer {
+  
+} */

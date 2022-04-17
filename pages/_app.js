@@ -1,7 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { auth } from "../components/firebase";
 import { Provider, useDispatch } from "react-redux";
 import { login, logout } from "../components/redux/userSlice";
+import { QueryClient, QueryClientProvider } from "react-query";
 import store from "../components/redux/store";
 import RestrictionGuard from "../components/RestrictionGuard";
 import Navbar from "../components/Reusable/Navbar/Navbar";
@@ -10,6 +11,7 @@ import "../styles/globals.css";
 
 export default function AppWrapper({ Component, pageProps }) {
   function App() {
+    const [queryClient] = useState(() => new QueryClient());
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -32,11 +34,13 @@ export default function AppWrapper({ Component, pageProps }) {
     }, [dispatch]);
     return (
       <>
-        <Navbar />
-        <RestrictionGuard>
-          <Component {...pageProps} />
-        </RestrictionGuard>
-        <Footer />
+        <QueryClientProvider client={queryClient}>
+          <Navbar />
+          <RestrictionGuard>
+            <Component {...pageProps} />
+          </RestrictionGuard>
+          <Footer />
+        </QueryClientProvider>
       </>
     );
   }

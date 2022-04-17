@@ -27,7 +27,7 @@ function Hero({ fetchURL }) {
           <button type="button" className={styles.heroButton}>
             Add to favourites
           </button>
-          <Link href={`/${encodeURIComponent(movie?.id)}`} key={uniqid()}>
+          <Link href={`/movies/${encodeURIComponent(movie?.id)}`} key={uniqid()}>
             <a className={styles.heroButton}>Show info</a>
           </Link>
         </div>
