@@ -5,14 +5,43 @@ import Image from "next/image";
 import Link from "next/link";
 import uniqid from "uniqid";
 import { baseImageURL, truncate } from "../Home/Row";
-import { FaStar } from "react-icons/fa";
+import { FaStar, FaSearch } from "react-icons/fa";
 import styles from "../../styles/Movies/moviesData.module.css";
 
 function MoviesData() {
+  const genres = [
+    "Action",
+    "Adventure",
+    "Animation",
+    "Comedy",
+    "Crime",
+    "Documentary",
+    "Drama",
+    "Family",
+    "Fantasy",
+    "History",
+    "Horror",
+    "Music",
+    "Mystery",
+    "Romance",
+    "Science Fiction",
+    "TV Movie",
+    "Thriller",
+    "War",
+    "Western",
+  ];
   const [year, setYear] = useState(() => {
     const date = new Date();
     return date.getFullYear();
   });
+
+  function getListOfSelectableYears() {
+    const listOfYears = [];
+    for (let i = year - 1; i >= 1950; i--) {
+      listOfYears.push(i);
+    }
+    return listOfYears;
+  }
 
   const { data, isSuccess, fetchNextPage, hasNextPage } = useInfiniteQuery(
     "infiniteMovies",
@@ -32,20 +61,52 @@ function MoviesData() {
   return (
     <>
       <main className={styles.movieDataContainer}>
-        <aside className={styles.filterAndSortContainer}>aa</aside>
-        <div
-          id="scrollAreaContainerId"
-          style={{
-            height: 1000,
-            overflow: "hidden",
-          }}
-        >
+        <aside className={styles.filterAndSortContainer}>
+          <div className={styles.filterAndSortInnerContainer}>
+            <h3 className={styles.filterAndSortTitle}>Genre</h3>
+            <select name="genreSelect" id="genreSelectId" className={styles.filterAndSortSelect}>
+              <option value="All" defaultValue key={uniqid()}>
+                All
+              </option>
+              {genres.map((genre) => (
+                <option value={genre} key={uniqid()}>
+                  {genre}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className={styles.filterAndSortInnerContainer}>
+            <h3 className={styles.filterAndSortTitle}>Year</h3>
+            <select name="yearSelect" id="yearSelectId" className={styles.filterAndSortSelect}>
+              <option value={year} defaultValue key={uniqid()}>
+                {year}
+              </option>
+              {getListOfSelectableYears().map((year) => (
+                <option value={year} key={uniqid()}>
+                  {year}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className={styles.filterAndSortInnerContainer}>
+            <h3 className={styles.filterAndSortTitle}>Sort</h3>
+          </div>
+
+          <button type="button" className={styles.filterAndSortButton}>
+            <FaSearch className={styles.filterAndSortButtonIcon} /> Search
+          </button>
+        </aside>
+
+        <div className={styles.infiniteScrollWrapper}>
           {isSuccess && (
             <InfiniteScroll
+              className={styles.moviesContainer}
               dataLength={data?.pages.length}
               next={fetchNextPage}
               hasMore={hasNextPage}
-              scrollableTarget="scrollAreaContainerId"
+              height={1300}
               loader={
                 <div className={styles.statusMessageContainer}>
                   <p className={styles.statusMessage}>Loading more movies...</p>
@@ -59,35 +120,36 @@ function MoviesData() {
                 </div>
               }
             >
-              <div className={styles.moviesContainer}>
-                {data?.pages.map((page) =>
-                  page.results.map((movie) => (
-                    <Link href={`/movies/${encodeURIComponent(movie?.id)}`} key={uniqid()}>
-                      <article className={`${styles.movieArticle}`} tabIndex="0">
-                        <div className={styles.movieImageContainer}>
-                          <Image
-                            src={`${baseImageURL}${movie?.poster_path}`}
-                            alt={movie?.name}
-                            className={styles.movieImage}
-                            width={230}
-                            height={340}
-                          />
-                        </div>
-                        <div className={styles.movieTitleAndVoteAvg}>
-                          <h3 className={styles.movieTitle}>
-                            {movie?.name || movie?.title || movie?.original_name}
-                          </h3>
-                          <div className={styles.movieVoteContainer}>
-                            <span className={styles.movieVoteAvg}>{movie?.vote_average}</span>
-                            <FaStar className={styles.movieVoteIcon} />
+              {data?.pages.map((page) =>
+                page.results.map(
+                  (movie) =>
+                    movie.poster_path && (
+                      <Link href={`/movies/${encodeURIComponent(movie.id)}`} key={uniqid()}>
+                        <article className={`${styles.movieArticle}`} tabIndex="0">
+                          <div className={styles.movieImageContainer}>
+                            <Image
+                              src={`${baseImageURL}${movie.poster_path}`}
+                              alt={movie.name}
+                              className={styles.movieImage}
+                              width={200}
+                              height={310}
+                            />
                           </div>
-                        </div>
-                        <p className={styles.movieDescription}>{truncate(movie?.overview, 338)}</p>
-                      </article>
-                    </Link>
-                  ))
-                )}
-              </div>
+                          <div className={styles.movieTitleAndVoteAvg}>
+                            <h3 className={styles.movieTitle}>
+                              {movie.name || movie.title || movie.original_name}
+                            </h3>
+                            <div className={styles.movieVoteContainer}>
+                              <span className={styles.movieVoteAvg}>{movie?.vote_average}</span>
+                              <FaStar className={styles.movieVoteIcon} />
+                            </div>
+                          </div>
+                          <p className={styles.movieDescription}>{truncate(movie?.overview, 310)}</p>
+                        </article>
+                      </Link>
+                    )
+                )
+              )}
             </InfiniteScroll>
           )}
         </div>

@@ -3,33 +3,56 @@
   display: flex;
   gap: 50px;
   margin: 0 auto;
-  max-width: calc(var(--max-width) - 600px);
   padding: 150px var(--padding-lg);
-  max-width: var(--max-width);
+  max-width: calc(var(--max-width) - 550px);
 }
 
 /* Movies Container Properties*/
 
-#scrollAreaContainerId::-webkit-scrollbar {
-  display: none;
+.infiniteScrollWrapper {
+  position: relative;
+  flex-grow: 1;
+  border-radius: 5px;
 }
 
 .moviesContainer {
   display: grid;
   gap: 15px;
-  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-  max-width: 1000px;
-  height: 1100px;
+  grid-template-columns: repeat(auto-fill, 200px); /* checkup minmax */
   overscroll-behavior-y: contain;
+  border-radius: 5px;
+}
+
+.infiniteScrollWrapper::before,
+.infiniteScrollWrapper::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: linear-gradient(to bottom, var(--dark-blue-darker-color), transparent);
+  height: 50px;
+  width: 100%;
+  z-index: 1;
+}
+
+.infiniteScrollWrapper::after {
+  top: unset;
+  bottom: 0;
+  background: linear-gradient(to top, var(--dark-blue-darker-color), transparent);
+  height: 80px;
+}
+
+.moviesContainer::-webkit-scrollbar {
+  display: none;
 }
 
 .movieArticle {
   position: relative;
   border-radius: 5px;
-  flex-basis: 230px;
-  height: 340px;
+  height: 310px;
   overflow: hidden;
   cursor: pointer;
+  outline: none;
 }
 
 .movieImage {
@@ -84,7 +107,7 @@
 
 .movieArticle .movieTitle {
   font-weight: 400;
-  font-size: var(--font-size-default);
+  font-size: var(--font-size-sm);
   max-width: 150px;
   line-height: 1;
   letter-spacing: 0.3px;
@@ -94,19 +117,18 @@
   position: absolute;
   inset: 0;
   padding: 20px;
+  border-radius: 5px;
   backdrop-filter: blur(20px);
   opacity: 0;
-  font-size: var(--font-size-default);
+  font-size: var(--font-size-sm);
   font-weight: 300;
   line-height: 1.3;
-  transform: translateY(0);
-  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
 }
 
 .movieArticle:hover .movieDescription,
 .movieArticle:focus .movieDescription {
   opacity: 1;
-  transform: translateY(0);
 }
 
 /* Status Message Properties */
@@ -126,8 +148,61 @@
 /* Filter And Sort Container Properties */
 .filterAndSortContainer {
   position: sticky;
+  top: 0;
   left: 0;
-  top: 100px;
-  flex-basis: 400px;
-  background: red;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  height: min-content;
+  max-width: 400px;
+}
+
+.filterAndSortInnerContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: var(--dark-blue-color);
+  padding: 15px 30px;
+  border-radius: 5px;
+}
+
+.filterAndSortTitle {
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  font-size: var(--font-size-sm);
+}
+
+.filterAndSortSelect {
+  margin: 0;
+  padding: 5px 10px;
+  border-radius: 5px;
+  background: var(--blue-color);
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.filterAndSortSelect:focus,
+.filterAndSortButton:focus {
+  outline: 1px solid white;
+}
+
+.filterAndSortButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 10px 40px;
+  font-size: var(--font-size-sm);
+  background: var(--purple-color);
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: filter 0.2s;
+}
+
+.filterAndSortButton:hover,
+.filterAndSortButton:focus {
+  filter: brightness(1.15);
 }
