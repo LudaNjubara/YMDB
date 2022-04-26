@@ -209,14 +209,17 @@ function MovieInfo({ movieResults }) {
                 {movieResults?.movieCredits?.cast.map((castMember, index) => {
                   return index < 20 ? (
                     <div className={styles.castAndCrewCard} key={uniqid()}>
-                      <Image
-                        src={`${baseImageURL}${castMember?.profile_path}`}
-                        alt={castMember?.name}
-                        width={150}
-                        height={200}
-                        className={styles.memberImage}
-                      />
-
+                      <div className={styles.castAndCrewImageContainer}>
+                        <Image
+                          src={`${baseImageURL}${castMember?.profile_path}`}
+                          placeholder="blur"
+                          blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP87wMAAlABTQluYBcAAAAASUVORK5CYII="
+                          alt={castMember?.name}
+                          width={150}
+                          height={200}
+                          className={styles.memberImage}
+                        />
+                      </div>
                       <h3 className={styles.memberName}>{castMember?.name}</h3>
                       <h4 className={styles.memberCharacterName}>{castMember.character}</h4>
                     </div>
@@ -236,13 +239,17 @@ function MovieInfo({ movieResults }) {
                   .map((crewMember) => {
                     return (
                       <div className={styles.castAndCrewCard} key={uniqid()}>
-                        <Image
-                          src={`${baseImageURL}${crewMember?.profile_path}`}
-                          alt={crewMember?.name}
-                          width={150}
-                          height={200}
-                          className={styles.memberImage}
-                        />
+                        <div className={styles.castAndCrewImageContainer}>
+                          <Image
+                            src={`${baseImageURL}${crewMember?.profile_path}`}
+                            placeholder="blur"
+                            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP87wMAAlABTQluYBcAAAAASUVORK5CYII="
+                            alt={crewMember?.name}
+                            width={150}
+                            height={200}
+                            className={styles.memberImage}
+                          />
+                        </div>
                         <h3 className={styles.memberName}>{crewMember?.name}</h3>
                       </div>
                     );
@@ -261,13 +268,17 @@ function MovieInfo({ movieResults }) {
                   .map((crewMember) => {
                     return (
                       <div className={styles.castAndCrewCard} key={uniqid()}>
-                        <Image
-                          src={`${baseImageURL}${crewMember?.profile_path}`}
-                          alt={crewMember?.name}
-                          width={150}
-                          height={200}
-                          className={styles.memberImage}
-                        />
+                        <div className={styles.castAndCrewImageContainer}>
+                          <Image
+                            src={`${baseImageURL}${crewMember?.profile_path}`}
+                            placeholder="blur"
+                            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP87wMAAlABTQluYBcAAAAASUVORK5CYII="
+                            alt={crewMember?.name}
+                            width={150}
+                            height={200}
+                            className={styles.memberImage}
+                          />
+                        </div>
                         <h3 className={styles.memberName}>{crewMember?.name}</h3>
                       </div>
                     );

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import Image from "next/image";
 import Link from "next/link";
 import uniqid from "uniqid";
@@ -18,6 +19,7 @@ function truncate(string, length = 180) {
 }
 
 function Row({ title, fetchURL, isLarge }) {
+  const router = useRouter();
   const [movies, setMovies] = useState([]);
   const [isApiSubscribed, setIsApiSubscribed] = useState(true);
   const [displayMovieRow, setDisplayMovieRow] = useState(false);
@@ -57,8 +59,10 @@ function Row({ title, fetchURL, isLarge }) {
     displayMovieRow && (
       <section className={styles.section} key={uniqid()}>
         <div className={styles.sectionTitleContainer}>
-          <h2 className={styles.sectionTitle}>{title}</h2>
-          {isLarge ? <Image src="/netflix_logo.png" alt="Netflix Logo" width={90} height={30} /> : ""}
+          <h2 className={styles.sectionTitle}>
+            {title}
+            {isLarge ? <Image src="/netflix_logo.png" alt="Netflix Logo" width={90} height={30} /> : ""}
+          </h2>
         </div>
         <div className={styles.moviesContainer}>
           {!isLarge &&

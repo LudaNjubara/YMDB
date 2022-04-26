@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useInfiniteQuery } from "react-query";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Image from "next/image";
@@ -9,47 +9,61 @@ import { FaStar, FaSearch } from "react-icons/fa";
 import styles from "../../styles/Movies/moviesData.module.css";
 
 function MoviesData() {
-  const genres = [
-    "Action",
-    "Adventure",
-    "Animation",
-    "Comedy",
-    "Crime",
-    "Documentary",
-    "Drama",
-    "Family",
-    "Fantasy",
-    "History",
-    "Horror",
-    "Music",
-    "Mystery",
-    "Romance",
-    "Science Fiction",
-    "TV Movie",
-    "Thriller",
-    "War",
-    "Western",
+  const genresArray = [
+    { id: null, name: "All" },
+    { id: 28, name: "Action" },
+    { id: 12, name: "Adventure" },
+    { id: 16, name: "Animation" },
+    { id: 35, name: "Comedy" },
+    { id: 80, name: "Crime" },
+    { id: 99, name: "Documentary" },
+    { id: 18, name: "Drama" },
+    { id: 10751, name: "Family" },
+    { id: 14, name: "Fantasy" },
+    { id: 36, name: "History" },
+    { id: 27, name: "Horror" },
+    { id: 10402, name: "Music" },
+    { id: 9648, name: "Mystery" },
+    { id: 10749, name: "Romance" },
+    { id: 878, name: "Science Fiction" },
+    { id: 10770, name: "TvMovie" },
+    { id: 53, name: "Thriller" },
+    { id: 10752, name: "War" },
+    { id: 37, name: "Western" },
   ];
-  const [year, setYear] = useState(() => {
+
+  const currentYear = () => {
     const date = new Date();
     return date.getFullYear();
-  });
+  };
+  const [genre, setGenre] = useState(null);
+  const [year, setYear] = useState(currentYear);
+  let selectedYearOptionIndex = selectedYearOptionIndex || 0;
+  let selectedGenreOptionIndex = selectedGenreOptionIndex || 0;
 
   function getListOfSelectableYears() {
     const listOfYears = [];
-    for (let i = year - 1; i >= 1950; i--) {
+
+    for (let i = currentYear(); i >= 1950; i--) {
       listOfYears.push(i);
     }
     return listOfYears;
   }
 
+  const fetchMovies = async ({ pageParam = 1 }) =>
+    await fetch(
+      `https://api.themoviedb.org/3/discover/movie?api_key=${
+        process.env.API_KEY
+      }&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&primary_release_year=${year}${
+        genre ? `&with_genres=${genre}` : null
+      }&page=${pageParam}`
+    ).then((result) => result.json());
+
   const { data, isSuccess, fetchNextPage, hasNextPage } = useInfiniteQuery(
-    "infiniteMovies",
-    async ({ pageParam = 1 }) =>
-      await fetch(
-        `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&primary_release_year=${year}&page=${pageParam}`
-      ).then((result) => result.json()),
+    ["infiniteMovies", year, genre],
+    fetchMovies,
     {
+      refetchOnWindowFocus: false,
       getNextPageParam: (lastPage, pages) => {
         if (lastPage.page < lastPage.total_pages) {
           return pages.length + 1;
@@ -64,24 +78,30 @@ function MoviesData() {
         <aside className={styles.filterAndSortContainer}>
           <div className={styles.filterAndSortInnerContainer}>
             <h3 className={styles.filterAndSortTitle}>Genre</h3>
-            <select name="genreSelect" id="genreSelectId" className={styles.filterAndSortSelect}>
-              <option value="All" defaultValue key={uniqid()}>
-                All
-              </option>
-              {genres.map((genre) => (
-                <option value={genre} key={uniqid()}>
-                  {genre}
-                </option>
-              ))}
+            <select
+              name="genreSelect"
+              id="genreSelectId"
+              className={styles.filterAndSortSelect}
+              defaultValue={genre}
+            >
+              {genresArray.map((genre) => {
+                return (
+                  <option value={genre.id} key={uniqid()}>
+                    {genre.name}
+                  </option>
+                );
+              })}
             </select>
           </div>
 
           <div className={styles.filterAndSortInnerContainer}>
             <h3 className={styles.filterAndSortTitle}>Year</h3>
-            <select name="yearSelect" id="yearSelectId" className={styles.filterAndSortSelect}>
-              <option value={year} defaultValue key={uniqid()}>
-                {year}
-              </option>
+            <select
+              name="yearSelect"
+              id="yearSelectId"
+              className={styles.filterAndSortSelect}
+              defaultValue={year}
+            >
               {getListOfSelectableYears().map((year) => (
                 <option value={year} key={uniqid()}>
                   {year}
@@ -94,7 +114,22 @@ function MoviesData() {
             <h3 className={styles.filterAndSortTitle}>Sort</h3>
           </div>
 
-          <button type="button" className={styles.filterAndSortButton}>
+          <button
+            type="button"
+            className={styles.filterAndSortButton}
+            onClick={() => {
+              const yearSelect = document.getElementById("yearSelectId");
+              const genreSelect = document.getElementById("genreSelectId");
+
+              console.log(selectedYearOptionIndex);
+              selectedYearOptionIndex = yearSelect.selectedIndex;
+              selectedGenreOptionIndex = genreSelect.selectedIndex;
+              console.log(selectedYearOptionIndex);
+
+              setYear(yearSelect.value);
+              setGenre(genreSelect.value);
+            }}
+          >
             <FaSearch className={styles.filterAndSortButtonIcon} /> Search
           </button>
         </aside>
@@ -106,7 +141,7 @@ function MoviesData() {
               dataLength={data?.pages.length}
               next={fetchNextPage}
               hasMore={hasNextPage}
-              height={1300}
+              height={1200}
               loader={
                 <div className={styles.statusMessageContainer}>
                   <p className={styles.statusMessage}>Loading more movies...</p>

@@ -31,6 +31,8 @@ const NavbarButton = () => {
         onClick={(buttonEvent) => {
           showUserOptions ? setShowUserOptions(false) : setShowUserOptions(true);
 
+          buttonEvent.stopPropagation();
+
           document.body.addEventListener("click", (documentEvent) => {
             if (!buttonEvent.target.contains(documentEvent.target)) setShowUserOptions(false);
             document.body.removeEventListener("click", null);

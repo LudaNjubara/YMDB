@@ -418,6 +418,12 @@
   cursor: pointer;
 }
 
+.castAndCrewImageContainer {
+  position: relative;
+  overflow: hidden;
+  border-radius: 15px;
+}
+
 .memberImage {
   border-radius: 15px;
   object-fit: cover;

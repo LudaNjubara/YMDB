@@ -1,6 +1,7 @@
 import Head from "next/head";
 import requests from "../components/requests";
 import Hero from "../components/Home/Hero";
+import ViewAll from "../components/Home/ViewAll";
 import Row from "../components/Home/Row";
 import Join from "../components/Home/Join";
 
@@ -15,6 +16,8 @@ export default function Home() {
       <Hero fetchURL={requests.fetchTrending} />
 
       <main>
+        <ViewAll />
+
         <Row title="Trending Now" fetchURL={requests.fetchTrending} />
         <Row title="Playing on" fetchURL={requests.fetchNetflixOriginals} isLarge />
         <Row title="Upcoming Movies" fetchURL={requests.fetchUpcomingMovies} />

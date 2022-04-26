@@ -11,6 +11,17 @@ import styles from "../../styles/Profile/profile.module.css";
 function Profile() {
   const user = useSelector(selectUser);
   const [activeTab, setActiveTab] = useState("personal_info");
+  const profileNavButtons = document.querySelectorAll(`.${styles.profileNavigationButton}`);
+
+  function changeActiveTab(targetElement) {
+    if (targetElement.classList.contains(styles.active)) return;
+
+    profileNavButtons.forEach((button) => {
+      button.classList.remove(styles.active);
+    });
+
+    targetElement.classList.add(styles.active);
+  }
 
   return (
     <main className={styles.profileWrapper}>
@@ -29,9 +40,9 @@ function Profile() {
                   type="button"
                   onClick={(e) => {
                     setActiveTab("personal_info");
-                    e.target.classList.add("active");
+                    changeActiveTab(e.target);
                   }}
-                  className={styles.profileNavigationButton}
+                  className={`${styles.profileNavigationButton} ${styles.active}`}
                 >
                   Personal info
                 </button>
@@ -39,7 +50,10 @@ function Profile() {
               <li className={styles.profileNavigationItem}>
                 <button
                   type="button"
-                  onClick={() => setActiveTab("watchlist")}
+                  onClick={(e) => {
+                    setActiveTab("watchlist");
+                    changeActiveTab(e.target);
+                  }}
                   className={styles.profileNavigationButton}
                 >
                   Your Watchlist
@@ -48,7 +62,10 @@ function Profile() {
               <li className={styles.profileNavigationItem}>
                 <button
                   type="button"
-                  onClick={() => setActiveTab("favourites")}
+                  onClick={(e) => {
+                    setActiveTab("favourites");
+                    changeActiveTab(e.target);
+                  }}
                   className={styles.profileNavigationButton}
                 >
                   Your Favourites
@@ -57,7 +74,10 @@ function Profile() {
               <li className={styles.profileNavigationItem}>
                 <button
                   type="button"
-                  onClick={() => setActiveTab("dangerZone")}
+                  onClick={(e) => {
+                    setActiveTab("dangerZone");
+                    changeActiveTab(e.target);
+                  }}
                   className={styles.profileNavigationButton}
                 >
                   Danger zone

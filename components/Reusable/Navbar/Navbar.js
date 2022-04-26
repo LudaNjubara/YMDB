@@ -5,15 +5,20 @@ import NavbarButton from "./NavbarButton";
 
 function Navbar() {
   const [show, setShow] = useState(false);
+  const [isMounted, setIsMounted] = useState(true);
 
   useEffect(() => {
-    window.addEventListener("scroll", () => {
-      if (window.scrollY >= 100) return show ? null : setShow(true);
-      else setShow(false);
-    });
+    if (isMounted) {
+      window.addEventListener("scroll", () => {
+        if (window.scrollY >= 100) return show ? null : setShow(true);
+        else setShow(false);
+      });
+    }
+
     return () => {
       window.removeEventListener("scroll", null);
       setShow(false);
+      setIsMounted(false);
     };
   }, []);
 

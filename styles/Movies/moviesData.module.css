@@ -8,7 +8,6 @@
 }
 
 /* Movies Container Properties*/
-
 .infiniteScrollWrapper {
   position: relative;
   flex-grow: 1;
@@ -18,9 +17,8 @@
 .moviesContainer {
   display: grid;
   gap: 15px;
-  grid-template-columns: repeat(auto-fill, 200px); /* checkup minmax */
+  grid-template-columns: repeat(auto-fill, 200px);
   overscroll-behavior-y: contain;
-  border-radius: 5px;
 }
 
 .infiniteScrollWrapper::before,
@@ -33,6 +31,7 @@
   height: 50px;
   width: 100%;
   z-index: 1;
+  pointer-events: none;
 }
 
 .infiniteScrollWrapper::after {
@@ -55,17 +54,6 @@
   outline: none;
 }
 
-.movieImage {
-  width: 100%;
-  object-fit: cover;
-  transition: transform 0.3s;
-}
-
-.movieArticle:hover .movieImage,
-.movieArticle:focus .movieImage {
-  transform: scale(1.06);
-}
-
 .movieArticle .movieImageContainer {
   position: relative;
   border-radius: 5px;
@@ -81,28 +69,15 @@
   background: linear-gradient(to top, var(--dark-blue-color), transparent);
 }
 
-.movieArticle .movieTitleAndVoteAvg {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  padding: 10px;
+.movieImage {
+  width: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
 }
 
-.movieVoteContainer {
-  display: flex;
-  column-gap: 7px;
-}
-
-.movieVoteAvg {
-  font-weight: 500;
-}
-
-.movieVoteIcon {
-  fill: gold;
+.movieArticle:hover .movieImage,
+.movieArticle:focus .movieImage {
+  transform: scale(1.06);
 }
 
 .movieArticle .movieTitle {
@@ -129,6 +104,30 @@
 .movieArticle:hover .movieDescription,
 .movieArticle:focus .movieDescription {
   opacity: 1;
+}
+
+.movieArticle .movieTitleAndVoteAvg {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 10px;
+}
+
+.movieVoteContainer {
+  display: flex;
+  column-gap: 7px;
+}
+
+.movieVoteAvg {
+  font-weight: 500;
+}
+
+.movieVoteIcon {
+  fill: gold;
 }
 
 /* Status Message Properties */

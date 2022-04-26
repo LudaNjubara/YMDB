@@ -7,6 +7,7 @@
   margin: 0 auto;
   max-width: 1200px;
   min-height: 700px;
+  max-height: 700px;
   border-radius: 15px;
   background: var(--purple-darker-color);
 }
@@ -68,6 +69,7 @@
   background: rgba(255, 255, 255, 0.1);
   border-radius: 5px;
   overflow: hidden;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
 }
 
 .profileNavigationItem:last-child {
@@ -85,14 +87,14 @@
   padding: 8px 10px;
   font-size: var(--font-size-sm);
   background: none;
-  border: none;
+  border: 3px solid transparent;
   letter-spacing: 0.4px;
   cursor: pointer;
   transition: background 0.1s;
 }
 
-.profileNavigationButton.active {
-  background: var(--pink-color);
+.active {
+  border: 3px solid rgba(255, 255, 255, 0.2);
 }
 
 .profileNavigationButton:hover {
@@ -104,22 +106,9 @@
   flex-basis: 100%;
   padding: var(--padding-md);
   overflow-y: auto;
-}
-
-/* Watchlist tab properties */
-.articleTitle {
-  font-size: var(--font-size-md);
-  font-weight: 700;
-  letter-spacing: 0.4px;
-}
-
-.watchlistAndFavouritesContainer {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  overflow-y: auto;
   overscroll-behavior-y: contain;
 }
 
-/* .watchlistAndFavouritesMovieContainer {
-  
-} */
+.profileContent::-webkit-scrollbar {
+  display: none;
+}

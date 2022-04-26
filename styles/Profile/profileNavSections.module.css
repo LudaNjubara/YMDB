@@ -1,0 +1,261 @@
+/* General tab properties */
+.navSectionContentContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.navSectionContentArticle {
+  padding: 20px;
+  border-radius: 15px;
+  background: rgb(85, 25, 189);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+}
+
+.titleAndDescriptionContainer {
+  padding-bottom: 20px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.articleTitle {
+  margin-bottom: 8px;
+  font-size: var(--font-size-h3);
+  font-weight: 400;
+  letter-spacing: 0.4px;
+}
+
+.articleDescription {
+  font-size: var(--font-size-sm);
+  max-width: 80ch;
+  color: rgb(240, 232, 253);
+}
+
+.articleContent {
+  margin-top: 20px;
+}
+
+/* Personal info tab properties */
+.navSectionContentContainer.navSectionPersonalInfo {
+  margin-top: 85px;
+}
+
+.sectionGreetingTitle {
+  font-size: var(--font-size-md);
+  font-weight: 400;
+}
+
+/* Personal image settings */
+
+.profileImageContainer {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  border: 3px solid var(--pink-color);
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.buttonsContainer {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.articleButton,
+.uploadImageLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 9px 15px;
+  font-size: var(--font-size-sm);
+  border-radius: 5px;
+  background: #601cd6;
+  border: none;
+  outline: none;
+  letter-spacing: 0.4px;
+  cursor: pointer;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+  transition: transform 0.15s linear, box-shadow 0.15s linear, filter 0.15s linear;
+}
+
+.articleButton:hover,
+.uploadImageLabel:hover {
+  filter: brightness(1.03);
+  transform: scale(0.97);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+}
+
+.checkmarkIcon,
+.uploadImageIcon {
+  width: 25px;
+  height: 25px;
+  fill: white;
+}
+
+.editIcon {
+  width: 20px;
+  height: 20px;
+  fill: white;
+}
+
+.uploadImageLabel {
+  font-size: var(--font-size-sm);
+  letter-spacing: 0.4px;
+  cursor: pointer;
+}
+
+.uploadImageInput {
+  display: none;
+}
+
+/* Username settings */
+
+.profileUsernameContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.profileUsernameInput {
+  width: 250px;
+  padding: 7px 12px;
+  font-size: var(--font-size-sm);
+  letter-spacing: 1px;
+  background: transparent;
+  border-radius: 5px;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  outline: none;
+  backdrop-filter: blur(20px);
+}
+
+.profileUsernameInput.enabled {
+  border: 2px solid white;
+}
+
+.profileUsernameInput::placeholder {
+  color: #ffffff99;
+}
+
+/* Stats settings */
+
+.statisticsContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 260px);
+  gap: 20px;
+}
+
+.statisticsItem {
+  padding-bottom: 15px;
+  height: 250px;
+  border-radius: 15px;
+  background: var(--purple-darker-color);
+  overflow: hidden;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+}
+
+.statisticsItemTitle {
+  padding: 15px;
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  letter-spacing: 0.4px;
+  background: #5318b9;
+}
+
+/* Watchlist tab properties */
+.watchlistAndFavouritesContainer {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fit, 200px);
+}
+
+.watchlistAndFavouritesItem {
+  position: relative;
+  border-radius: 5px;
+  height: 310px;
+  outline: none;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.movieArticle .movieImageContainer {
+  position: relative;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.movieArticle .movieImageContainer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, var(--dark-blue-color), transparent);
+}
+
+.movieImage {
+  width: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+.movieArticle:hover .movieImage,
+.movieArticle:focus .movieImage {
+  transform: scale(1.06);
+}
+
+.movieArticle .movieTitle {
+  font-weight: 400;
+  font-size: var(--font-size-sm);
+  max-width: 150px;
+  line-height: 1;
+  letter-spacing: 0.3px;
+}
+
+.movieArticle .movieDescription {
+  position: absolute;
+  inset: 0;
+  padding: 20px;
+  border-radius: 5px;
+  backdrop-filter: blur(20px);
+  opacity: 0;
+  font-size: var(--font-size-sm);
+  font-weight: 300;
+  line-height: 1.3;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.movieArticle:hover .movieDescription,
+.movieArticle:focus .movieDescription {
+  opacity: 1;
+}
+
+.movieArticle .movieTitleAndVoteAvg {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 10px;
+}
+
+.movieVoteContainer {
+  display: flex;
+  column-gap: 7px;
+}
+
+.movieVoteAvg {
+  font-weight: 500;
+}
+
+.movieVoteIcon {
+  fill: gold;
+}
+
+.watchlistAndFavouritesContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+}
