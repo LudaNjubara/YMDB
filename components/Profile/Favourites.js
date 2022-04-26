@@ -8,7 +8,8 @@ function Favourites() {
           <h3 className={styles.articleTitle}>Favourites</h3>
           <p className={styles.articleDescription}>
             Here is where all your favourite movies reside. To add movies to your Favourites simply click/tap
-            on button "Add to Favourites" when viewing a specific movie and you will be able to see them here.
+            on button &quot;Add to Favourites&quot; when viewing a specific movie and you will be able to see
+            them here.
           </p>
         </div>
 
