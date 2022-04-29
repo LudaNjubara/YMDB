@@ -5,9 +5,11 @@ const nextConfig = {
 
 module.exports = {
   images: {
-    domains: ["images.pexels.com", "image.tmdb.org", "www.gravatar.com"],
+    domains: ["images.pexels.com", "image.tmdb.org", "www.gravatar.com", "res.cloudinary.com"],
   },
   env: {
     API_KEY: "e9dc1da92c8f0ee871ed0cc34a7b13c8",
+    CLOUDINARY_UPLOAD_PRESET: "userProfileImages",
+    CLOUDINARY_UPLOAD_URL: "https://api.cloudinary.com/v1_1/ymdb/upload",
   },
 };

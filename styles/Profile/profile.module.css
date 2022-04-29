@@ -74,11 +74,11 @@
 
 .profileNavigationItem:last-child {
   margin-top: auto;
-  background: #d13b3b;
+  background: #e71f30;
 }
 
 .profileNavigationItem:last-child .profileNavigationButton:hover {
-  background: #ff4a4a;
+  background: #f13746;
 }
 
 .profileNavigationButton {

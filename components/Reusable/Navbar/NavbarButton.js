@@ -41,7 +41,7 @@ const NavbarButton = () => {
       >
         <div className={styles.profileImageContainer}>
           <Image
-            src="/defaultUser.png"
+            src={`${user?.photoURL || auth.currentUser.photoURL || "/defaultUser.png"}`}
             width={30}
             height={30}
             alt="Profile image"

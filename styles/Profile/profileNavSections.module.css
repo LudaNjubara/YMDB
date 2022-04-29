@@ -259,3 +259,101 @@
   overflow-y: auto;
   overscroll-behavior-y: contain;
 }
+
+/* Danger Zone tab properties */
+
+.dangerZoneContainer {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fit, 300px);
+}
+
+.dangerZoneItem {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  border-radius: 15px;
+  background: #e23341;
+}
+
+.dangerZoneItemDescription {
+  padding: 10px 0 20px;
+}
+
+.dangerZoneArticleButton {
+  width: fit-content;
+  margin-top: auto;
+  background: #e71f30;
+  font-weight: 500;
+}
+
+.dangerZonePopup {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  column-gap: 20px;
+  bottom: 30px;
+  left: 50%;
+  width: 100%;
+  max-width: 600px;
+  padding: 10px 13px 13px;
+  background: #e23341;
+  border-radius: 10px;
+  opacity: 0;
+  transform: translate(-50%, 30px);
+  pointer-events: none;
+  z-index: 100;
+  overflow: hidden;
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.dangerZonePopup.visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+  pointer-events: all;
+}
+
+.passwordPopupInput {
+  flex-grow: 1;
+  padding: 9px 15px;
+  background: transparent;
+  border-radius: 5px;
+  /*   border: 2px solid #e71f30; */
+  border: none;
+  outline: none;
+  letter-spacing: 0.4px;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+.passwordPopupInput::placeholder {
+  font-size: var(--font-size-sm);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.dangerZonePopupButtonsContainer {
+  display: flex;
+  gap: 10px;
+}
+
+.dangerZonePopupCancelButton {
+  background: white;
+  color: #e71f30;
+  font-weight: 500;
+}
+
+.dangerZonePopupCountdownLine {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  transform: translateX(0);
+  background: rgba(255, 255, 255, 0.6);
+  height: 3px;
+}
+
+.dangerZonePopupCountdownLine.countingDown {
+  transform: translateX(-100%);
+  transition: transform 15s linear;
+}

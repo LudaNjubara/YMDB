@@ -2,6 +2,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { useSelector } from "react-redux";
 import { selectUser } from "../redux/userSlice";
+import { auth } from "../firebase";
 import Personal_Info from "./Personal_Info";
 import Watchlist from "./Watchlist";
 import Favourites from "./Favourites";
@@ -29,7 +30,12 @@ function Profile() {
         <aside className={styles.profileAside}>
           <div className={styles.userMainInfo}>
             <div className={styles.profileImageContainer}>
-              <Image src="/defaultUser.png" width={60} height={60} className={styles.profileImage} />
+              <Image
+                src={`${user?.photoURL || auth.currentUser.photoURL || "/defaultUser.png"}`}
+                width={60}
+                height={60}
+                className={styles.profileImage}
+              />
             </div>
             <h1 className={styles.profileUsername}>{user?.displayName}</h1>
           </div>
