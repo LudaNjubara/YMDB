@@ -1,0 +1,207 @@
+/* Main Container Properties */
+.serieDataContainer {
+  display: flex;
+  gap: 50px;
+  margin: 0 auto;
+  padding: 150px var(--padding-lg);
+  max-width: calc(var(--max-width) - 550px);
+}
+
+/* Series Container Properties*/
+.infiniteScrollWrapper {
+  position: relative;
+  flex-grow: 1;
+  border-radius: 5px;
+}
+
+.seriesContainer {
+  display: grid;
+  gap: 15px;
+  grid-template-columns: repeat(auto-fill, 200px);
+  overscroll-behavior-y: contain;
+}
+
+.infiniteScrollWrapper::before,
+.infiniteScrollWrapper::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: linear-gradient(to bottom, var(--dark-blue-darker-color), transparent);
+  height: 50px;
+  width: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.infiniteScrollWrapper::after {
+  top: unset;
+  bottom: 0;
+  background: linear-gradient(to top, var(--dark-blue-darker-color), transparent);
+  height: 80px;
+}
+
+.seriesContainer::-webkit-scrollbar {
+  display: none;
+}
+
+.serieArticle {
+  position: relative;
+  border-radius: 5px;
+  height: 310px;
+  overflow: hidden;
+  cursor: pointer;
+  outline: none;
+}
+
+.serieArticle .serieImageContainer {
+  position: relative;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.serieArticle .serieImageContainer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, var(--dark-blue-color), transparent);
+}
+
+.serieImage {
+  width: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+.serieArticle:hover .serieImage,
+.serieArticle:focus .serieImage {
+  transform: scale(1.06);
+}
+
+.serieArticle .serieTitle {
+  font-weight: 400;
+  font-size: var(--font-size-sm);
+  max-width: 150px;
+  line-height: 1;
+  letter-spacing: 0.3px;
+}
+
+.serieArticle .serieDescription {
+  position: absolute;
+  inset: 0;
+  padding: 20px;
+  border-radius: 5px;
+  backdrop-filter: blur(20px);
+  opacity: 0;
+  font-size: var(--font-size-sm);
+  font-weight: 300;
+  line-height: 1.3;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.serieArticle:hover .serieDescription,
+.serieArticle:focus .serieDescription {
+  opacity: 1;
+}
+
+.serieArticle .serieTitleAndVoteAvg {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 10px;
+}
+
+.serieVoteContainer {
+  display: flex;
+  column-gap: 7px;
+}
+
+.serieVoteAvg {
+  font-weight: 500;
+}
+
+.serieVoteIcon {
+  fill: gold;
+}
+
+/* Status Message Properties */
+.statusMessageContainer {
+  width: 100%;
+  margin: 15px 0;
+  padding: 10px 30px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 5px;
+}
+
+.statusMessage {
+  font-size: var(--font-size-h3);
+  text-align: center;
+}
+
+/* Filter And Sort Container Properties */
+.filterAndSortContainer {
+  position: sticky;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  height: min-content;
+  max-width: 400px;
+}
+
+.filterAndSortInnerContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: var(--dark-blue-color);
+  padding: 15px 30px;
+  border-radius: 5px;
+}
+
+.filterAndSortTitle {
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  font-size: var(--font-size-sm);
+}
+
+.filterAndSortSelect {
+  margin: 0;
+  padding: 5px 10px;
+  border-radius: 5px;
+  background: var(--blue-color);
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.filterAndSortSelect:focus,
+.filterAndSortButton:focus {
+  outline: 1px solid white;
+}
+
+.filterAndSortButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 10px 40px;
+  font-size: var(--font-size-sm);
+  background: var(--purple-color);
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: filter 0.2s;
+}
+
+.filterAndSortButton:hover,
+.filterAndSortButton:focus {
+  filter: brightness(1.15);
+}

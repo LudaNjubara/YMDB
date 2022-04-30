@@ -6,30 +6,27 @@ import Link from "next/link";
 import uniqid from "uniqid";
 import { baseImageURL, truncate } from "../Home/Row";
 import { FaStar, FaSearch } from "react-icons/fa";
-import styles from "../../styles/Movies/moviesData.module.css";
+import styles from "../../styles/Series/seriesData.module.css";
 
-function MoviesData() {
+function SeriesData() {
   const genresArray = [
-    { id: null, name: "All" },
-    { id: 28, name: "Action" },
-    { id: 12, name: "Adventure" },
-    { id: 16, name: "Animation" },
-    { id: 35, name: "Comedy" },
-    { id: 80, name: "Crime" },
-    { id: 99, name: "Documentary" },
-    { id: 18, name: "Drama" },
-    { id: 10751, name: "Family" },
-    { id: 14, name: "Fantasy" },
-    { id: 36, name: "History" },
-    { id: 27, name: "Horror" },
-    { id: 10402, name: "Music" },
-    { id: 9648, name: "Mystery" },
-    { id: 10749, name: "Romance" },
-    { id: 878, name: "Science Fiction" },
-    { id: 10770, name: "TvMovie" },
-    { id: 53, name: "Thriller" },
-    { id: 10752, name: "War" },
-    { id: 37, name: "Western" },
+    { name: "All", id: null },
+    { name: "Action & Adventure", id: 10759 },
+    { name: "Animation", id: 16 },
+    { name: "Comedy", id: 35 },
+    { name: "Crime", id: 80 },
+    { name: "Documentary ", id: 99 },
+    { name: "Drama", id: 18 },
+    { name: "Family ", id: 10751 },
+    { name: "Kids   ", id: 10762 },
+    { name: "Mystery  ", id: 9648 },
+    { name: "News     ", id: 10763 },
+    { name: "Reality  ", id: 10764 },
+    { name: "Sci-Fi & Fantasy", id: 10765 },
+    { name: "Soap     ", id: 10766 },
+    { name: "Talk      ", id: 10767 },
+    { name: "War & Politics ", id: 10768 },
+    { name: "Western    ", id: 37 },
   ];
 
   const currentYear = () => {
@@ -50,18 +47,18 @@ function MoviesData() {
     return listOfYears;
   }
 
-  const fetchMovies = async ({ pageParam = 1 }) =>
+  const fetchSeries = async ({ pageParam = 1 }) =>
     await fetch(
-      `https://api.themoviedb.org/3/discover/movie?api_key=${
+      `https://api.themoviedb.org/3/discover/tv?api_key=${
         process.env.API_KEY
-      }&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&primary_release_year=${year}${
+      }&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&first_air_date_year=${year}${
         genre ? `&with_genres=${genre}` : null
       }&page=${pageParam}`
     ).then((result) => result.json());
 
   const { data, isSuccess, fetchNextPage, hasNextPage } = useInfiniteQuery(
-    ["infiniteMovies", year, genre],
-    fetchMovies,
+    ["infiniteSeries", year, genre],
+    fetchSeries,
     {
       refetchOnWindowFocus: false,
       getNextPageParam: (lastPage, pages) => {
@@ -74,7 +71,7 @@ function MoviesData() {
 
   return (
     <>
-      <main className={styles.movieDataContainer}>
+      <main className={styles.serieDataContainer}>
         <aside className={styles.filterAndSortContainer}>
           <div className={styles.filterAndSortInnerContainer}>
             <h3 className={styles.filterAndSortTitle}>Genre</h3>
@@ -121,10 +118,8 @@ function MoviesData() {
               const yearSelect = document.getElementById("yearSelectId");
               const genreSelect = document.getElementById("genreSelectId");
 
-              console.log(selectedYearOptionIndex);
               selectedYearOptionIndex = yearSelect.selectedIndex;
               selectedGenreOptionIndex = genreSelect.selectedIndex;
-              console.log(selectedYearOptionIndex);
 
               setYear(yearSelect.value);
               setGenre(genreSelect.value);
@@ -137,14 +132,14 @@ function MoviesData() {
         <div className={styles.infiniteScrollWrapper}>
           {isSuccess && (
             <InfiniteScroll
-              className={styles.moviesContainer}
+              className={styles.seriesContainer}
               dataLength={data?.pages.length}
               next={fetchNextPage}
               hasMore={hasNextPage}
               height={1200}
               loader={
                 <div className={styles.statusMessageContainer}>
-                  <p className={styles.statusMessage}>Loading more movies...</p>
+                  <p className={styles.statusMessage}>Loading more series...</p>
                 </div>
               }
               endMessage={
@@ -157,29 +152,27 @@ function MoviesData() {
             >
               {data?.pages.map((page) =>
                 page.results.map(
-                  (movie) =>
-                    movie.poster_path && (
-                      <Link href={`/movies/${encodeURIComponent(movie.id)}`} key={uniqid()}>
-                        <article className={`${styles.movieArticle}`} tabIndex="0">
-                          <div className={styles.movieImageContainer}>
+                  (serie) =>
+                    serie.poster_path && (
+                      <Link href={`/series/${encodeURIComponent(serie.id)}`} key={uniqid()}>
+                        <article className={`${styles.serieArticle}`} tabIndex="0">
+                          <div className={styles.serieImageContainer}>
                             <Image
-                              src={`${baseImageURL}${movie.poster_path}`}
-                              alt={movie.name}
-                              className={styles.movieImage}
+                              src={`${baseImageURL}${serie.poster_path}`}
+                              alt={serie.name}
+                              className={styles.serieImage}
                               width={200}
                               height={310}
                             />
                           </div>
-                          <div className={styles.movieTitleAndVoteAvg}>
-                            <h3 className={styles.movieTitle}>
-                              {movie.name || movie.title || movie.original_name}
-                            </h3>
-                            <div className={styles.movieVoteContainer}>
-                              <span className={styles.movieVoteAvg}>{movie?.vote_average}</span>
-                              <FaStar className={styles.movieVoteIcon} />
+                          <div className={styles.serieTitleAndVoteAvg}>
+                            <h3 className={styles.serieTitle}>{serie.name || serie.original_name}</h3>
+                            <div className={styles.serieVoteContainer}>
+                              <span className={styles.serieVoteAvg}>{serie?.vote_average}</span>
+                              <FaStar className={styles.serieVoteIcon} />
                             </div>
                           </div>
-                          <p className={styles.movieDescription}>{truncate(movie?.overview, 310)}</p>
+                          <p className={styles.serieDescription}>{truncate(serie?.overview, 310)}</p>
                         </article>
                       </Link>
                     )
@@ -193,4 +186,4 @@ function MoviesData() {
   );
 }
 
-export default MoviesData;
+export default SeriesData;

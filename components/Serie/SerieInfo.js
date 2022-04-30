@@ -7,18 +7,18 @@ import { truncate, baseImageURL } from "../Home/Row";
 import { BsStarFill, BsBookmarkFill, BsCalendar3, BsPlayFill } from "react-icons/bs";
 import { FiClock } from "react-icons/fi";
 import { FaStar } from "react-icons/fa";
-import styles from "../../styles/Movie/movieInfo.module.css";
+import styles from "../../styles/Serie/serieInfo.module.css";
 
-function MovieInfo({ movieResults }) {
+function SerieInfo({ serieResults }) {
   const [showBackgroundDarkener, setShowBackgroundDarkener] = useState(false);
   const [showTrailerPopup, setShowTrailerPopup] = useState(false);
   const [showImagesPopup, setShowImagesPopup] = useState(false);
-  const movieDuration = movieResults?.movieDetails?.runtime;
+  const duration = serieResults?.serieDetails?.episode_run_time[0];
 
   function formatDuration(duration) {
     const hours = Math.floor(duration / 60);
     const minutes = duration % 60;
-    const durationString = `${hours}h ${minutes}min`;
+    const durationString = hours ? `${hours}h ${minutes}min` : `${minutes}min`;
     return durationString;
   }
 
@@ -26,9 +26,9 @@ function MovieInfo({ movieResults }) {
     let images = [];
     let randomImages = [];
 
-    if (movieResults?.movieImages?.backdrops) images = images.concat(movieResults?.movieImages?.backdrops);
+    if (serieResults?.serieImages?.backdrops) images = images.concat(serieResults?.serieImages?.backdrops);
 
-    if (movieResults?.movieImages?.posters) images = images.concat(movieResults?.movieImages?.posters);
+    if (serieResults?.serieImages?.posters) images = images.concat(serieResults?.serieImages?.posters);
 
     if (images.length >= 20) {
       for (let i = 0; i < 20; i++) {
@@ -50,12 +50,8 @@ function MovieInfo({ movieResults }) {
       {/* Body Background Image */}
       <div className={styles.backgroundImageContainer}>
         <Image
-          src={`${baseImageURL}${movieResults?.movieDetails?.backdrop_path}`}
-          alt={
-            movieResults?.movieDetails?.name ||
-            movieResults?.movieDetails?.title ||
-            movieResults?.movieDetails?.original_title
-          }
+          src={`${baseImageURL}${serieResults?.serieDetails?.backdrop_path}`}
+          alt={serieResults?.serieDetails?.name || serieResults?.serieDetails?.original_name}
           layout="fill"
           className={styles.backgroundImage}
         />
@@ -65,27 +61,19 @@ function MovieInfo({ movieResults }) {
       <div className={`${showBackgroundDarkener && styles.show} ${styles.backgroundDarkener}`}></div>
 
       {/* Trailer Popup */}
-      <section className={`${showTrailerPopup && styles.show} ${styles.movieTrailerPopup}`}>
-        {movieResults?.movieVideos?.results?.filter(
-          (video) =>
-            video?.name?.toLowerCase().includes("official trailer") ||
-            video?.name?.toLowerCase().includes("final trailer") ||
-            video?.name?.toLowerCase().includes("main trailer")
+      <section className={`${showTrailerPopup && styles.show} ${styles.serieTrailerPopup}`}>
+        {serieResults?.serieVideos?.results?.filter((video) =>
+          video?.name?.toLowerCase().includes("official trailer")
         ) ? (
           <iframe
-            className={styles.movieTrailerVideo}
+            className={styles.serieTrailerVideo}
             src={`https://www.youtube.com/embed/${
-              movieResults?.movieVideos?.results?.filter(
-                (video) =>
-                  video?.name?.toLowerCase().includes("official trailer") ||
-                  video?.name?.toLowerCase().includes("final trailer") ||
-                  video?.name?.toLowerCase().includes("main trailer")
+              serieResults?.serieVideos?.results?.filter((video) =>
+                video?.name?.toLowerCase().includes("official trailer")
               )[0]?.key
             }`}
             title={`${
-              movieResults?.movieDetails?.name ||
-              movieResults?.movieDetails?.title ||
-              movieResults?.movieDetails?.original_title
+              serieResults?.serieDetails?.name || serieResults?.serieDetails?.original_name
             } Official Trailer`}
             frameBorder="0"
             loading="lazy"
@@ -93,22 +81,18 @@ function MovieInfo({ movieResults }) {
             allowFullScreen
           ></iframe>
         ) : (
-          "Sorry, there is no trailer for this movie at the moment"
+          "Sorry, there is no trailer for this serie at the moment"
         )}
       </section>
 
-      {/* Movie Info Wrapper */}
-      <section className={styles.movieInfoWrapper}>
-        <article className={`${styles.movieImageAndUserActionsContainer} ${styles.movieArticle}`}>
+      {/* Serie Info Wrapper */}
+      <section className={styles.serieInfoWrapper}>
+        <article className={`${styles.serieImageAndUserActionsContainer} ${styles.serieArticle}`}>
           <Image
-            src={`${baseImageURL}${movieResults?.movieDetails?.poster_path}`}
-            alt={
-              movieResults?.movieDetails?.name ||
-              movieResults?.movieDetails?.title ||
-              movieResults?.movieDetails?.original_title
-            }
+            src={`${baseImageURL}${serieResults?.serieDetails?.poster_path}`}
+            alt={serieResults?.serieDetails?.name || serieResults?.serieDetails?.original_name}
             layout="fill"
-            className={styles.movieImage}
+            className={styles.serieImage}
             priority="true"
           />
           <div className={styles.userActionsContainer}>
@@ -124,71 +108,69 @@ function MovieInfo({ movieResults }) {
         </article>
 
         {/* Main Info */}
-        <article className={`${styles.movieMainInfoContainer} ${styles.movieArticle}`}>
-          <div className={styles.movieMainInfoContent}>
-            <h1 className={styles.movieMainInfoTitle}>
-              {movieResults?.movieDetails?.name ||
-                movieResults?.movieDetails?.title ||
-                movieResults?.movieDetails?.original_title}
+        <article className={`${styles.serieMainInfoContainer} ${styles.serieArticle}`}>
+          <div className={styles.serieMainInfoContent}>
+            <h1 className={styles.serieMainInfoTitle}>
+              {serieResults?.serieDetails?.name || serieResults?.serieDetails?.original_name}
             </h1>
 
-            <div className={styles.movieMainInfoSectionContainer}>
-              <h2 className={styles.movieMainInfoSectionTitle}>GENRE</h2>
-              <p className={styles.movieGenres}>
-                {movieResults?.movieDetails?.genres.map((genre) => genre?.name).join(" / ")}
+            <div className={styles.serieMainInfoSectionContainer}>
+              <h2 className={styles.serieMainInfoSectionTitle}>GENRE</h2>
+              <p className={styles.serieGenres}>
+                {serieResults?.serieDetails?.genres.map((genre) => genre?.name).join(" / ")}
               </p>
             </div>
 
-            <div className={styles.movieMainInfoSectionContainer}>
-              <h2 className={styles.movieMainInfoSectionTitle}>TAGLINE</h2>
-              <p className={styles.movieTagline}>
-                {movieResults?.movieDetails?.tagline ? movieResults?.movieDetails?.tagline : "N/A"}
+            <div className={styles.serieMainInfoSectionContainer}>
+              <h2 className={styles.serieMainInfoSectionTitle}>TAGLINE</h2>
+              <p className={styles.serieTagline}>
+                {serieResults?.serieDetails?.tagline ? serieResults?.serieDetails?.tagline : "N/A"}
               </p>
             </div>
 
-            <div className={styles.movieMainInfoSectionContainer}>
-              <h2 className={styles.movieMainInfoSectionTitle}>OVERVIEW</h2>
-              <p className={styles.movieOverview}>{movieResults?.movieDetails?.overview}</p>
+            <div className={styles.serieMainInfoSectionContainer}>
+              <h2 className={styles.serieMainInfoSectionTitle}>OVERVIEW</h2>
+              <p className={styles.serieOverview}>{serieResults?.serieDetails?.overview}</p>
             </div>
           </div>
 
-          <aside className={styles.movieMainInfoAside}>
-            <span className={styles.movieMainInfoDuration}>
-              <FiClock className={styles.movieMainInfoDurationIcon} />
-              <span id="durationContainer">{formatDuration(movieDuration)}</span>
-            </span>
-            <span className={styles.movieMainInfoAvgVote}>
-              {movieResults?.movieDetails?.vote_average ? movieResults?.movieDetails?.vote_average : "N/A"}
-              <BsStarFill className={styles.movieMainInfoAvgVoteIcon} />
+          <aside className={styles.serieMainInfoAside}>
+            <div className={styles.serieMainInfoDuration}>
+              <FiClock className={styles.serieMainInfoDurationIcon} />
+              <span className={styles.durationContainer}>{formatDuration(duration)}</span>
+            </div>
+            <span className={styles.serieMainInfoAvgVote}>
+              {serieResults?.serieDetails?.vote_average ? serieResults?.serieDetails?.vote_average : "N/A"}
+              <BsStarFill className={styles.serieMainInfoAvgVoteIcon} />
               <br />
-              <span className={styles.movieMainInfoVoteCount}>
-                <span className={styles.movieMainInfoVoteCountNumber}>
-                  {movieResults?.movieDetails?.vote_count
-                    ? `${movieResults?.movieDetails?.vote_count} `
+              <span className={styles.serieMainInfoVoteCount}>
+                <span className={styles.serieMainInfoVoteCountNumber}>
+                  {serieResults?.serieDetails?.vote_count
+                    ? `${serieResults?.serieDetails?.vote_count} `
                     : "No "}
                 </span>
                 votes
               </span>
             </span>
-            <span className={styles.movieMainInfoReleaseDate}>
-              <BsCalendar3 className={styles.movieMainInfoReleaseDateIcon} />
-              {moment(movieResults?.movieDetails?.release_date).format("Do MMMM YYYY")}
+            <span className={styles.serieMainInfoReleaseDate}>
+              <BsCalendar3 className={styles.serieMainInfoReleaseDateIcon} />
+              {moment(serieResults?.serieDetails?.first_air_date).format("Do MMMM YYYY")}
             </span>
 
             <button
               type="button"
               className={styles.playTrailerButton}
               onClick={() => {
-                const trailerPopup = document.querySelector(`.${styles.movieTrailerPopup}`);
+                const trailerPopup = document.querySelector(`.${styles.serieTrailerPopup}`);
                 setShowBackgroundDarkener(true);
                 setShowTrailerPopup(true);
 
                 trailerPopup.addEventListener("click", (e) => {
                   e.preventDefault();
 
-                  const movieTrailerVideo = document.querySelector(`.${styles.movieTrailerVideo}`);
-                  let movieTrailerVideoSrc = movieTrailerVideo.src;
-                  movieTrailerVideo.src = movieTrailerVideoSrc;
+                  const serieTrailerVideo = document.querySelector(`.${styles.serieTrailerVideo}`);
+                  let serieTrailerVideoSrc = serieTrailerVideo.src;
+                  serieTrailerVideo.src = serieTrailerVideoSrc;
 
                   setShowBackgroundDarkener(false);
                   setShowTrailerPopup(false);
@@ -203,16 +185,16 @@ function MovieInfo({ movieResults }) {
           </aside>
         </article>
 
-        <div className={styles.movieCastWatchKeywordsContainer}>
+        <div className={styles.serieCastWatchKeywordsContainer}>
           {/* Cast & Crew */}
-          <article className={`${styles.movieCastAndCrewContainer} ${styles.movieArticle}`}>
-            <h1 className={styles.movieArticleTitle}>Cast & Crew</h1>
+          <article className={`${styles.serieCastAndCrewContainer} ${styles.serieArticle}`}>
+            <h1 className={styles.serieArticleTitle}>Cast & Crew</h1>
 
             <div className={styles.castAndCrewRow}>
               <h2 className={styles.castAndCrewRowTitle}>Characters</h2>
 
               <div className={styles.castAndCrewScrollableRow}>
-                {movieResults?.movieCredits?.cast.map((castMember, index) => {
+                {serieResults?.serieCredits?.cast.map((castMember, index) => {
                   return index < 20 ? (
                     <div className={styles.castAndCrewCard} key={uniqid()}>
                       <div className={styles.castAndCrewImageContainer}>
@@ -238,9 +220,9 @@ function MovieInfo({ movieResults }) {
               <h2 className={styles.castAndCrewRowTitle}>Producers</h2>
 
               <div className={styles.castAndCrewScrollableRow}>
-                {movieResults?.movieCredits?.crew
+                {serieResults?.serieCredits?.crew
                   .filter((crewMember) => {
-                    return crewMember?.job === "Producer";
+                    return crewMember?.job === "Executive Producer";
                   })
                   .map((crewMember) => {
                     return (
@@ -264,12 +246,15 @@ function MovieInfo({ movieResults }) {
             </div>
 
             <div className={styles.castAndCrewRow}>
-              <h2 className={styles.castAndCrewRowTitle}>Screenplay</h2>
+              <h2 className={styles.castAndCrewRowTitle}>Writers</h2>
 
               <div className={styles.castAndCrewScrollableRow}>
-                {movieResults?.movieCredits?.crew
+                {serieResults?.serieCredits?.crew
                   .filter((crewMember) => {
-                    return crewMember?.job === "Screenplay" || crewMember?.job === "Writer";
+                    return (
+                      crewMember?.job === "Original Series Creator" ||
+                      crewMember?.known_for_department === "Writing"
+                    );
                   })
                   .map((crewMember) => {
                     return (
@@ -294,15 +279,15 @@ function MovieInfo({ movieResults }) {
           </article>
 
           {/* Where To Watch */}
-          <article className={`${styles.movieWhereToWatchContainer} ${styles.movieArticle}`}>
-            <h1 className={styles.movieSmallArticleTitle}>Where to Watch</h1>
+          <article className={`${styles.serieWhereToWatchContainer} ${styles.serieArticle}`}>
+            <h1 className={styles.serieSmallArticleTitle}>Where to Watch</h1>
 
             <div className={styles.whereToWatchRow}>
               <h2 className={styles.whereToWatchRowTitle}>Buy</h2>
 
               <div className={styles.whereToWatchScrollableRow}>
-                {movieResults?.movieWatchProviders?.US?.buy
-                  ? movieResults?.movieWatchProviders?.US?.buy.map((provider) => {
+                {serieResults?.serieWatchProviders?.US?.buy
+                  ? serieResults?.serieWatchProviders?.US?.buy.map((provider) => {
                       return (
                         <div className={styles.whereToWatchImageContainer} key={uniqid()}>
                           <Image
@@ -321,8 +306,8 @@ function MovieInfo({ movieResults }) {
               <h2 className={styles.whereToWatchRowTitle}>Rent</h2>
 
               <div className={styles.whereToWatchScrollableRow}>
-                {movieResults?.movieWatchProviders?.US?.rent
-                  ? movieResults?.movieWatchProviders?.US?.rent.map((provider) => {
+                {serieResults?.serieWatchProviders?.US?.rent
+                  ? serieResults?.serieWatchProviders?.US?.rent.map((provider) => {
                       return (
                         <div className={styles.whereToWatchImageContainer} key={uniqid()}>
                           <Image
@@ -341,8 +326,8 @@ function MovieInfo({ movieResults }) {
               <h2 className={styles.whereToWatchRowTitle}>Streaming on</h2>
 
               <div className={styles.whereToWatchScrollableRow}>
-                {movieResults?.movieWatchProviders?.US?.flatrate
-                  ? movieResults?.movieWatchProviders?.US?.flatrate.map((provider) => {
+                {serieResults?.serieWatchProviders?.US?.flatrate
+                  ? serieResults?.serieWatchProviders?.US?.flatrate.map((provider) => {
                       return (
                         <div className={styles.whereToWatchImageContainer} key={uniqid()}>
                           <Image
@@ -359,11 +344,11 @@ function MovieInfo({ movieResults }) {
           </article>
 
           {/* Keywords */}
-          <article className={`${styles.movieKeywordsContainer} ${styles.movieArticle}`}>
-            <h1 className={styles.movieSmallArticleTitle}>Keywords</h1>
+          <article className={`${styles.serieKeywordsContainer} ${styles.serieArticle}`}>
+            <h1 className={styles.serieSmallArticleTitle}>Keywords</h1>
 
             <div className={styles.keywordsContainer}>
-              {movieResults?.movieKeywords?.keywords.map((keyword) => {
+              {serieResults?.serieKeywords?.results.map((keyword) => {
                 return (
                   <span className={styles.keyword} key={uniqid()}>
                     {keyword?.name}
@@ -375,8 +360,8 @@ function MovieInfo({ movieResults }) {
         </div>
 
         {/* Images */}
-        <article className={`${styles.movieImagesContainer} ${styles.movieArticle}`}>
-          <h1 className={styles.movieArticleTitle}>Images</h1>
+        <article className={`${styles.serieImagesContainer} ${styles.serieArticle}`}>
+          <h1 className={styles.serieArticleTitle}>Images</h1>
 
           <div className={styles.imagesScrollableRow}>
             {randomImageGenerator().map((image) => {
@@ -401,37 +386,35 @@ function MovieInfo({ movieResults }) {
           </div>
         </article>
 
-        {/* Related Movies */}
-        <article className={`${styles.movieRelatedMoviesContainer} ${styles.movieArticle}`}>
-          <h1 className={styles.movieArticleTitle}>Related Movies</h1>
+        {/* Related Series */}
+        <article className={`${styles.serieRelatedSeriesContainer} ${styles.serieArticle}`}>
+          <h1 className={styles.serieArticleTitle}>Related Series</h1>
 
-          <div className={styles.relatedMoviesScrollableRow}>
-            {movieResults?.movieSimilar?.results.map(
-              (movie) =>
-                movie?.backdrop_path && (
-                  <Link href={`/movies/${encodeURIComponent(movie?.id)}`} key={uniqid()}>
-                    <article className={styles.relatedMovieContainer} tabIndex="0">
-                      <div className={styles.relatedMovieImageContainer}>
+          <div className={styles.relatedSeriesScrollableRow}>
+            {serieResults?.serieSimilar?.results.map(
+              (serie) =>
+                serie?.backdrop_path && (
+                  <Link href={`/series/${encodeURIComponent(serie?.id)}`} key={uniqid()}>
+                    <article className={styles.relatedSerieContainer} tabIndex="0">
+                      <div className={styles.relatedSerieImageContainer}>
                         <Image
-                          src={`${baseImageURL}${movie?.backdrop_path}`}
-                          alt={movie?.name}
-                          className={styles.relatedMovieImage}
+                          src={`${baseImageURL}${serie?.backdrop_path}`}
+                          alt={serie?.name}
+                          className={styles.relatedSerieImage}
                           layout="fill"
                         />
                       </div>
-                      <div className={styles.relatedMovieContent}>
-                        <div className={styles.relatedMovieTitleAndVoteAvg}>
-                          <h3 className={styles.relatedMovieTitle}>
-                            {movie?.name || movie?.title || movie?.original_title}
-                          </h3>
-                          <div className={styles.movieVoteContainer}>
-                            <span className={styles.relatedMovieVoteAvg}>
-                              {movie?.vote_average ? movie?.vote_average.toFixed(1) : "N/A"}
+                      <div className={styles.relatedSerieContent}>
+                        <div className={styles.relatedSerieTitleAndVoteAvg}>
+                          <h3 className={styles.relatedSerieTitle}>{serie?.name || serie?.original_name}</h3>
+                          <div className={styles.serieVoteContainer}>
+                            <span className={styles.relatedSerieVoteAvg}>
+                              {serie?.vote_average ? serie?.vote_average.toFixed(1) : "N/A"}
                             </span>
-                            <FaStar className={styles.relatedMovieVoteIcon} />
+                            <FaStar className={styles.relatedSerieVoteIcon} />
                           </div>
                         </div>
-                        <p className={styles.relatedMovieDescription}>{truncate(movie?.overview)}</p>
+                        <p className={styles.relatedSerieDescription}>{truncate(serie?.overview)}</p>
                       </div>
                     </article>
                   </Link>
@@ -441,12 +424,12 @@ function MovieInfo({ movieResults }) {
         </article>
 
         {/* Reviews */}
-        <article className={styles.movieReviewsContainer}>
-          <div className={`${styles.reviewsContainer} ${styles.movieArticle}`}>
-            <h1 className={styles.movieArticleTitle}>User Reviews</h1>
+        <article className={styles.serieReviewsContainer}>
+          <div className={`${styles.reviewsContainer} ${styles.serieArticle}`}>
+            <h1 className={styles.serieArticleTitle}>User Reviews</h1>
 
             <div className={styles.commentsContainer}>
-              {movieResults?.movieReviews?.results.map((review) => {
+              {serieResults?.serieReviews?.results.map((review) => {
                 return (
                   <div className={styles.commentContainer} key={uniqid()}>
                     <div className={styles.commentInfoContainer}>
@@ -473,7 +456,7 @@ function MovieInfo({ movieResults }) {
 
                       <div className={styles.userVoteContainer}>
                         {review?.author_details?.rating ? review?.author_details?.rating : "N/A"}
-                        <BsStarFill className={styles.movieCommentAvgVoteIcon} />
+                        <BsStarFill className={styles.serieCommentAvgVoteIcon} />
                       </div>
                     </div>
 
@@ -488,19 +471,19 @@ function MovieInfo({ movieResults }) {
             </div>
           </div>
 
-          <div className={`${styles.reviewFormContainer} ${styles.movieArticle}`}>
-            <h1 className={styles.movieArticleTitle}>Share your thoughts</h1>
+          <div className={`${styles.reviewFormContainer} ${styles.serieArticle}`}>
+            <h1 className={styles.serieArticleTitle}>Share your thoughts</h1>
 
             <form className={styles.reviewForm}>
               <textarea
                 className={styles.userCommentInput}
-                placeholder="Here you can express your thoughts on the movie..."
+                placeholder="Here you can express your thoughts on the serie..."
                 spellCheck="false"
                 required={true}
               ></textarea>
 
               <div className={styles.userRatingContainer}>
-                <h2 className={styles.movieSmallArticleTitle}>Your rating</h2>
+                <h2 className={styles.serieSmallArticleTitle}>Your rating</h2>
 
                 <div className={styles.ratingsContainer}>
                   <input
@@ -654,11 +637,11 @@ function MovieInfo({ movieResults }) {
             </form>
           </div>
 
-          <div className={styles.relatedMoviesScrollableRow}></div>
+          <div className={styles.relatedSeriesScrollableRow}></div>
         </article>
       </section>
     </>
   );
 }
 
-export default MovieInfo;
+export default SerieInfo;

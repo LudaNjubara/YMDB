@@ -101,7 +101,7 @@ function Row({ title, fetchURL, isLarge }) {
             movies.map(
               (movie) =>
                 movie?.poster_path && (
-                  <Link href={`/${encodeURIComponent(movie?.id)}`} key={uniqid()}>
+                  <Link href={`/series/${encodeURIComponent(movie?.id)}`} key={uniqid()}>
                     <article className={`${styles.movieArticle} ${styles.large}`} tabIndex="0">
                       <div className={styles.movieImageContainer}>
                         <Image

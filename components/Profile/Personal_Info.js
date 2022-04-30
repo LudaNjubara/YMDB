@@ -113,7 +113,7 @@ function Personal_Info({ user }) {
                         }
                       } else {
                         setUpdateProfileImageButtonDisabled(true);
-                        console.log("no good");
+                        console.log("file size is too big");
                       }
                     } else {
                       setUpdateProfileImageButtonDisabled(true);
