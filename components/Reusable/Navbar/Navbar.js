@@ -112,7 +112,7 @@ function Navbar() {
                   {filteredResultsFinal?.movies.map((movie) => {
                     return (
                       <Link href={`/movies/${encodeURIComponent(movie.id)}`} key={uniqid()}>
-                        <div className={styles.resultContainer}>
+                        <div className={styles.resultContainer} tabIndex="0">
                           <div className={styles.resultImageContainer}>
                             <Image
                               className={styles.resultImage}
@@ -155,7 +155,7 @@ function Navbar() {
                   {filteredResultsFinal?.series.map((serie) => {
                     return (
                       <Link href={`/series/${encodeURIComponent(serie.id)}`} key={uniqid()}>
-                        <div className={styles.resultContainer}>
+                        <div className={styles.resultContainer} tabIndex="0">
                           <div className={styles.resultImageContainer}>
                             <Image
                               className={styles.resultImage}
@@ -191,14 +191,48 @@ function Navbar() {
                   })}
                 </article>
               )}
-              {filteredResultsFinal.people.length > 0 && (
+              {/* {filteredResultsFinal.people.length > 0 && (
                 <article className={styles.articleSearchResults}>
                   <h3>People</h3>
                   {filteredResultsFinal?.people.map((person) => {
-                    return <p>{person.name}</p>;
+                    return (
+                      <Link href={`/series/${encodeURIComponent(serie.id)}`} key={uniqid()}>
+                        <div className={styles.resultContainer} tabIndex="0">
+                          <div className={styles.resultImageContainer}>
+                            <Image
+                              className={styles.resultImage}
+                              src={`${baseImageURL}${serie.poster_path}`}
+                              placeholder="blur"
+                              blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP87wMAAlABTQluYBcAAAAASUVORK5CYII="
+                              alt={serie.name || serie.original_name}
+                              width={120}
+                              height={200}
+                              objectFit="cover"
+                            />
+                          </div>
+                          <div className={styles.resultContent}>
+                            <h4 className={styles.resultTitle}>{serie.name || serie.original_name}</h4>
+                            <p className={styles.resultDescription}>{truncate(serie.overview, 180)}</p>
+                          </div>
+                          <div className={styles.resultVoteAndDateContainer}>
+                            <div className={styles.resultDateContainer}>
+                              <p className={styles.resultDateText}>
+                                <BsCalendar3 className={styles.serieDateIcon} />
+                                {formatDate(serie.first_air_date)}
+                              </p>
+                            </div>
+                            <div className={styles.resultVoteContainer}>
+                              <p className={styles.resultVoteText}>
+                                {serie.vote_average} <BsStarFill className={styles.serieVoteIcon} />
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </Link>
+                    );
                   })}
                 </article>
-              )}
+              )} */}
             </section>
           )}
         </div>
