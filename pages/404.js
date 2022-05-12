@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+
 import styles from "../styles/404/page_404.module.css";
 
 function custom404() {

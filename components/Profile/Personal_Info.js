@@ -4,9 +4,11 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { login } from "../redux/userSlice";
 import { auth, updateProfile } from "../firebase";
+
 import { IoMdCheckmark } from "react-icons/io";
 import { AiOutlineCloudUpload } from "react-icons/ai";
 import { FaEdit } from "react-icons/fa";
+
 import styles from "../../styles/Profile/profileNavSections.module.css";
 
 function Personal_Info({ user }) {
@@ -28,7 +30,6 @@ function Personal_Info({ user }) {
 
     formData.append("file", image);
     formData.append("upload_preset", process.env.CLOUDINARY_UPLOAD_PRESET);
-    console.log(process.env.CLOUDINARY_UPLOAD_URL);
 
     axios({
       url: process.env.CLOUDINARY_UPLOAD_URL,
@@ -102,18 +103,19 @@ function Personal_Info({ user }) {
 
                     if (input.files.length) {
                       const image = input.files[0];
-                      const imageSize = image.size / 1024 / 1024;
+                      const imageSizeMB = image.size / 1024 / 1024;
 
                       if (allowedImageTypes.includes(image.type.split("/")[1])) {
-                        if (imageSize < 10) {
+                        if (imageSizeMB < 10) {
                           setPreviewProfileImage(URL.createObjectURL(image));
                           setUpdateProfileImageButtonDisabled(false);
                         } else {
                           setUpdateProfileImageButtonDisabled(true);
+                          console.log("file size is too big");
                         }
                       } else {
                         setUpdateProfileImageButtonDisabled(true);
-                        console.log("file size is too big");
+                        console.log("file type is not allowed");
                       }
                     } else {
                       setUpdateProfileImageButtonDisabled(true);

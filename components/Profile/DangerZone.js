@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { auth, deleteUser, EmailAuthProvider, reauthenticateWithCredential } from "../firebase";
+
 import styles from "../../styles/Profile/profileNavSections.module.css";
 
 function DangerZone() {

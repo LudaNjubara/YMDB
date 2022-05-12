@@ -1,0 +1,54 @@
+.scrollHorizontallyButton {
+  position: sticky;
+  top: 50%;
+  left: 10px;
+  display: grid;
+  place-items: center;
+  margin-right: -65px;
+  min-width: 50px;
+  height: 50px;
+  opacity: 0;
+  border-radius: 50%;
+  background-color: var(--blue-color);
+  transform: translateY(-50%) scale(1);
+  border: none;
+  outline: none;
+  cursor: pointer;
+  box-shadow: 0 0 7px rgba(0, 0, 0, 0.4);
+  transition: opacity 0.2s linear, box-shadow 0.2s linear, transform 0.2s linear;
+  z-index: 1;
+}
+
+.scrollHorizontallyButton:last-child {
+  left: unset;
+  right: 10px;
+}
+
+.scrollHorizontallyButton:hover {
+  transform: translateY(-50%) scale(0.96);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.6);
+}
+
+.scrollHorizontallyButtonIcon {
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+}
+
+.scrollHorizontallyButton.isSmall {
+  margin-right: -40px;
+  min-width: 30px;
+  height: 30px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  transform: translateY(-37%) scale(1);
+}
+
+.scrollHorizontallyButton.isNetflix {
+  background-color: var(--netflix-color);
+}
+
+.scrollHorizontallyButton.isWhite {
+  backdrop-filter: blur(10px);
+  background-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}

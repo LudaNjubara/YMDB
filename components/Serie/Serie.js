@@ -4,6 +4,7 @@ import Head from "next/head";
 import axios from "axios";
 import rateLimit from "axios-rate-limit";
 import instance from "../axios";
+
 import MovieLoading from "../Movie/MovieLoading";
 import MovieUnavailable from "../Movie//MovieUnavailable";
 import SerieInfo from "./SerieInfo";
@@ -52,35 +53,34 @@ function Serie() {
             res.map((serieResult, index) => {
               switch (index) {
                 case 0:
-                  serieResults.serieDetails = serieResult.data;
+                  serieResults.details = serieResult.data;
                   break;
                 case 1:
-                  serieResults.serieCredits = serieResult.data;
+                  serieResults.credits = serieResult.data;
                   break;
                 case 2:
-                  serieResults.serieImages = serieResult.data;
+                  serieResults.images = serieResult.data;
                   break;
                 case 3:
-                  serieResults.serieKeywords = serieResult.data;
+                  serieResults.keywords = serieResult.data;
                   break;
                 case 4:
-                  serieResults.serieReviews = serieResult.data;
+                  serieResults.reviews = serieResult.data;
                   break;
                 case 5:
-                  serieResults.serieSimilar = serieResult.data;
+                  serieResults.similar = serieResult.data;
                   break;
                 case 6:
-                  serieResults.serieVideos = serieResult.data;
+                  serieResults.videos = serieResult.data;
                   break;
                 case 7:
-                  serieResults.serieWatchProviders = serieResult.data.results;
+                  serieResults.watchProviders = serieResult.data.results;
                   break;
                 default:
                   break;
               }
               setSerieResults({ ...serieResults });
             });
-            console.log(serieResults.serieCredits);
             setSerieLoaded(true);
           }
         })
@@ -100,14 +100,14 @@ function Serie() {
       <Head>
         <title>
           YMDB-
-          {serieResults?.serieDetails?.name || serieResults?.serieDetails?.original_name}
+          {serieResults?.details?.name || serieResults?.details?.original_name}
         </title>
       </Head>
       <main>
         {serieUnavailable ? (
           <MovieUnavailable />
         ) : serieLoaded ? (
-          <SerieInfo serieResults={serieResults} />
+          <SerieInfo serieResults={serieResults} serieId={serieId} />
         ) : (
           <MovieLoading />
         )}

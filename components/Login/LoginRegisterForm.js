@@ -1,7 +1,8 @@
 import { useRef } from "react/";
 import { useRouter } from "next/router";
-import styles from "../../styles/Login/loginRegisterForm.module.css";
 import { auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "../firebase";
+
+import styles from "../../styles/Login/loginRegisterForm.module.css";
 
 function LoginRegisterForm() {
   const usernameRefRegister = useRef(null);

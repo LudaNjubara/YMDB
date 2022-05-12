@@ -1,4 +1,5 @@
 import Link from "next/link";
+
 import styles from "../../styles/Home/row.module.css";
 
 function ViewAll() {

@@ -1,4 +1,5 @@
 import Head from "next/head";
+
 import LoginRegisterForm from "../components/Login/LoginRegisterForm";
 
 function Login() {

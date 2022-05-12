@@ -3,7 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import uniqid from "uniqid";
 import axios from "../axios";
-import { truncate, baseImageURL } from "./Row";
+import { truncate, baseImageURL } from "../Utils/utils";
+
 import styles from "../../styles/Home/hero.module.css";
 
 function Hero({ fetchURL }) {

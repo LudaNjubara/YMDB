@@ -101,7 +101,6 @@
 
 .resultContainer {
   display: flex;
-  justify-content: space-between;
   gap: 10px;
   border-radius: 5px;
   background: rgba(255, 255, 255, 0.2);
@@ -124,6 +123,10 @@
   border-radius: 5px;
 }
 
+.resultContent {
+  flex-grow: 1;
+}
+
 .resultTitle {
   padding-bottom: 5px;
   font-size: var(--font-size-default);
@@ -136,8 +139,23 @@
 }
 
 .resultVoteAndDateContainer {
-  flex-grow: 1;
-  flex-basis: 100px;
+  display: flex;
+  width: fit-content;
+  flex: 0 0 auto;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 5px;
+}
+
+.resultVoteAndDateContainer > div p {
+  display: flex;
+  font-size: var(--font-size-sm);
+  gap: 5px;
+}
+
+.serieVoteIcon {
+  fill: gold;
 }
 
 /* User action properties */

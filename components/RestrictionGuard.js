@@ -21,6 +21,7 @@ function RestrictionGuard({ children }) {
     return () => {
       router.events.off("routeChangeStart", hideContent);
       router.events.off("routeChangeComplete", authCheck);
+      setAuthorized(false);
     };
   }, []);
 

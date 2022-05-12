@@ -52,6 +52,7 @@ body {
   background: var(--dark-blue-darker-color);
   overflow-x: hidden;
   scroll-behavior: smooth;
+  scrollbar-color: var(--blue-darker-color) transparent;
 }
 
 a {

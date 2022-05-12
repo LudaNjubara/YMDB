@@ -67,10 +67,15 @@
   overflow-y: hidden;
   overflow-x: scroll;
   scroll-snap-type: inline mandatory;
+  scrollbar-width: none;
 }
 
 .moviesContainer::-webkit-scrollbar {
   display: none;
+}
+
+.moviesContainer:hover > button {
+  opacity: 1;
 }
 
 .movieArticle {

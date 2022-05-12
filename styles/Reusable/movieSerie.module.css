@@ -1,4 +1,6 @@
-.movieInfoWrapper {
+/* General Properties */
+
+.infoWrapper {
   position: relative;
   display: grid;
   gap: 40px;
@@ -9,13 +11,27 @@
   padding: 100px var(--padding-lg);
 }
 
-.movieArticle {
+.article {
   background: rgba(255, 255, 255, 0.18);
   padding: 40px;
   border-radius: 20px;
 }
 
-/* Background Image Properties */
+.articleTitle {
+  font-size: var(--font-size-h1);
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  padding-bottom: 25px;
+}
+
+.smallArticleTitle {
+  font-size: var(--font-size-h2);
+  font-weight: 400;
+  letter-spacing: 0.4px;
+  padding-bottom: 25px;
+}
+
+/* Background image properties */
 
 .backgroundImageContainer {
   position: fixed;
@@ -24,10 +40,11 @@
 }
 
 .backgroundImage {
+  pointer-events: none;
   object-fit: cover;
 }
 
-/* Background Darkener */
+/* Backtround Darkener Properties */
 
 .backgroundDarkener {
   position: fixed;
@@ -48,8 +65,9 @@
   visibility: visible;
 }
 
-/* Movie Trailer Popup */
-.movieTrailerPopup {
+/* Trailer popup properties */
+
+.trailerPopup {
   position: fixed;
   top: 0;
   bottom: 0;
@@ -65,13 +83,13 @@
   pointer-events: none;
 }
 
-.movieTrailerPopup.show {
+.trailerPopup.show {
   opacity: 1;
   visibility: visible;
   pointer-events: all;
 }
 
-.movieTrailerVideo {
+.trailerVideo {
   width: 100%;
   max-width: 1200px;
   aspect-ratio: 16/9;
@@ -79,9 +97,9 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
-/* Movie Image Container Properties */
+/* Image and User actions Properties */
 
-.movieImageAndUserActionsContainer {
+.imageAndUserActionsContainer {
   position: relative;
   grid-column: 1 / 2;
   overflow: hidden;
@@ -89,7 +107,7 @@
   min-height: 600px;
 }
 
-.movieImage {
+.image {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -135,24 +153,24 @@
   height: 15px;
 }
 
-/* Movie Main Info Container Properties */
+/* Main info Wrapper properties */
 
-.movieMainInfoContainer {
+.mainInfoWrapper {
   grid-column: 2 / 4;
   display: flex;
   gap: 40px;
 }
 
-/* Movie Main Info Content Properties */
+/*  Main Info Content Properties */
 
-.movieMainInfoContent {
+.mainInfoContent {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
   row-gap: 30px;
 }
 
-.movieMainInfoTitle {
+.mainInfoTitle {
   font-size: var(--font-size-md);
   font-weight: 300;
   letter-spacing: 0.4px;
@@ -161,12 +179,12 @@
   word-wrap: break-word;
 }
 
-.movieMainInfoSectionContainer {
+.mainInfoSectionContainer {
   position: relative;
   padding: 5px 0;
 }
 
-.movieMainInfoSectionContainer::after {
+.mainInfoSectionContainer::after {
   content: "";
   position: absolute;
   bottom: -15px;
@@ -177,54 +195,56 @@
   border-radius: 2px;
 }
 
-.movieMainInfoSectionContainer:last-child::after {
+.mainInfoSectionContainer:last-child::after {
   all: unset;
 }
 
-.movieMainInfoSectionTitle {
+.mainInfoSectionTitle {
   font-size: var(--font-size-default);
   letter-spacing: 1px;
   padding-bottom: 8px;
   text-transform: uppercase;
 }
 
-.movieOverview {
+.overview {
   max-height: 130px;
   overflow-y: auto;
   padding-right: 15px;
+  scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+  scrollbar-width: thin;
 }
 
-.movieOverview::-webkit-scrollbar {
+.overview::-webkit-scrollbar {
   background: none;
   width: 6px;
 }
 
-.movieOverview::-webkit-scrollbar-thumb {
+.overview::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.18);
   border-radius: 4px;
 }
 
-.movieOverview::-webkit-scrollbar-thumb:hover {
+.overview::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.3);
 }
 
-/* Movie Main Info Aside properties */
+/*  Main Info Aside properties */
 
-.movieMainInfoAside {
+.mainInfoAside {
   display: flex;
   flex-direction: column;
   row-gap: 7px;
   letter-spacing: 0.4px;
 }
 
-.movieMainInfoDuration {
+.mainInfoDuration {
   position: relative;
   display: flex;
   align-items: center;
   letter-spacing: 1px;
 }
 
-.movieMainInfoDuration::after {
+.mainInfoDuration::after {
   content: "";
   position: absolute;
   bottom: -10px;
@@ -235,42 +255,42 @@
   border-radius: 2px;
 }
 
-.movieMainInfoDurationIcon {
+.mainInfoDurationIcon {
   width: 17px;
   height: 17px;
   margin-right: 5px;
 }
 
-.movieMainInfoAvgVote {
+.mainInfoAvgVote {
   font-size: var(--font-size-lg);
   font-weight: 400;
   line-height: 0.3;
   margin: 30px 0 20px 0;
 }
 
-.movieMainInfoAvgVoteIcon {
+.mainInfoAvgVoteIcon {
   width: 25px;
   height: 25px;
   fill: gold;
   margin-left: 10px;
 }
 
-.movieMainInfoVoteCount {
+.mainInfoVoteCount {
   font-size: var(--font-size-default);
 }
 
-.movieMainInfoVoteCountNumber {
+.mainInfoVoteCountNumber {
   font-size: var(--font-size-h3);
 }
 
-.movieMainInfoReleaseDate {
+.mainInfoReleaseDate {
   position: relative;
   display: flex;
   align-items: center;
   font-size: var(--font-size-xs);
 }
 
-.movieMainInfoReleaseDate::before {
+.mainInfoReleaseDate::before {
   content: "";
   position: absolute;
   top: -13px;
@@ -281,7 +301,7 @@
   border-radius: 2px;
 }
 
-.movieMainInfoReleaseDate::after {
+.mainInfoReleaseDate::after {
   content: "";
   position: absolute;
   bottom: -13px;
@@ -292,7 +312,7 @@
   border-radius: 2px;
 }
 
-.movieMainInfoReleaseDateIcon {
+.mainInfoReleaseDateIcon {
   width: 17px;
   height: 17px;
   margin-right: 5px;
@@ -325,9 +345,9 @@
   height: 35px;
 }
 
-/* Movie Cast & Crew Container Properties */
+/* Movie Cast & Crew Properties */
 
-.movieCastWatchKeywordsContainer {
+.castWatchKeywordsWrapper {
   grid-column: 1 / -1;
   display: grid;
   gap: 40px;
@@ -335,36 +355,22 @@
   grid-template-rows: repeat(3, 1fr);
 }
 
-.movieCastAndCrewContainer {
+.castAndCrewWrapper {
   grid-column: 1 / 3;
   grid-row: 1 / 4;
 }
 
-.movieWhereToWatchContainer {
+.whereToWatchWrapper {
   grid-column: 3 / 4;
   grid-row: 1 / 3;
 }
 
-.movieKeywordsContainer {
+.keywordsWrapper {
   grid-column: 3 / 4;
   grid-row: 3 / 4;
 }
 
-.movieArticleTitle {
-  font-size: var(--font-size-h1);
-  font-weight: 400;
-  letter-spacing: 0.5px;
-  padding-bottom: 25px;
-}
-
-.movieSmallArticleTitle {
-  font-size: var(--font-size-h2);
-  font-weight: 400;
-  letter-spacing: 0.4px;
-  padding-bottom: 25px;
-}
-
-/* Cast Row Properties */
+/* Cast Row properties */
 
 .castAndCrewRow {
   position: relative;
@@ -407,6 +413,11 @@
   display: flex;
   gap: 15px;
   overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.castAndCrewScrollableRow:hover > button {
+  opacity: 1;
 }
 
 .castAndCrewScrollableRow::-webkit-scrollbar {
@@ -443,7 +454,7 @@
   color: rgba(255, 255, 255, 0.6);
 }
 
-/* Where to Watch Container Properties */
+/* Where to Watch properties */
 
 .whereToWatchRow + .whereToWatchRow {
   margin-top: 40px;
@@ -476,6 +487,11 @@
   margin-top: 13px;
   padding-bottom: 5px;
   overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.whereToWatchScrollableRow:hover > button {
+  opacity: 1;
 }
 
 .whereToWatchScrollableRow::-webkit-scrollbar {
@@ -492,7 +508,7 @@
   border-radius: 5px;
 }
 
-/* Keywords Container Properties */
+/* Keyword properties */
 
 .keywordsContainer {
   display: flex;
@@ -500,6 +516,8 @@
   gap: 20px;
   max-height: 150px;
   overflow-y: auto;
+  scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+  scrollbar-width: thin;
 }
 
 .keywordsContainer::-webkit-scrollbar {
@@ -532,9 +550,9 @@
   background: rgba(255, 255, 255, 0.5);
 }
 
-/* Images Container Properties */
+/* Images properties */
 
-.movieImagesContainer {
+.imagesWrapper {
   grid-column: 1 / -1;
 }
 
@@ -542,6 +560,11 @@
   display: flex;
   gap: 15px;
   overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.imagesScrollableRow:hover > button {
+  opacity: 1;
 }
 
 .imagesScrollableRow::-webkit-scrollbar {
@@ -567,25 +590,30 @@
   border-radius: 15px;
 }
 
-/* Related Movies Container Properties */
+/* Related movies/series properties */
 
-.movieRelatedMoviesContainer {
+.relatedWrapper {
   grid-column: 1 / -1;
 }
 
-.relatedMoviesScrollableRow {
+.relatedScrollableRow {
   display: flex;
   gap: 15px;
   overflow-x: auto;
   padding-bottom: 15px;
   scroll-snap-type: inline mandatory;
+  scrollbar-width: none;
 }
 
-.relatedMoviesScrollableRow::-webkit-scrollbar {
+.relatedScrollableRow:hover > button {
+  opacity: 1;
+}
+
+.relatedScrollableRow::-webkit-scrollbar {
   display: none;
 }
 
-.relatedMovieContainer {
+.relatedContainer {
   flex: 0 0 300px;
   background: rgba(255, 255, 255, 0.3);
   border-radius: 10px;
@@ -595,40 +623,40 @@
   scroll-snap-align: start;
 }
 
-.relatedMovieContainer:hover,
-.relatedMovieContainer:focus {
+.relatedContainer:hover,
+.relatedContainer:focus {
   box-shadow: 3px 6px 12px rgba(0, 0, 0, 0.1);
 }
 
-.relatedMovieContainer:hover img,
-.movieArticle:focus img {
+.relatedContainer:hover img,
+.article:focus img {
   transform: scale(1.05);
 }
 
-.relatedMovieImageContainer {
+.relatedImageContainer {
   position: relative;
   border-radius: 10px 10px 0 0;
   overflow: hidden;
   height: 140px;
 }
 
-.relatedMovieImage {
+.relatedImage {
   width: 100%;
   object-fit: cover;
   transition: transform 0.3s;
 }
 
-.relatedMovieContent {
+.relatedContent {
   padding: 20px;
 }
 
-.relatedMovieTitleAndVoteAvg {
+.relatedTitleAndVoteAvg {
   display: flex;
   justify-content: space-between;
   padding-bottom: 20px;
 }
 
-.relatedMovieTitle {
+.relatedTitle {
   font-weight: 400;
   font-size: var(--font-size-default);
   max-width: 150px;
@@ -636,39 +664,39 @@
   letter-spacing: 0.3px;
 }
 
-.relatedMovieVoteContainer {
+.relatedVoteContainer {
   display: flex;
   column-gap: 7px;
 }
 
-.relatedMovieVoteAvg {
+.relatedVoteAvg {
   font-weight: 500;
 }
 
-.relatedMovieVoteIcon {
+.relatedVoteIcon {
   fill: gold;
 }
 
-.relatedMovieDescription {
+.relatedDescription {
   font-weight: 300;
   font-size: var(--font-size-sm);
 }
 
-/* Movie Reviews Container Properties */
+/* Comments & Review Form Wrapper properties */
 
-.movieReviewsContainer {
+.commentsAndReviewFormWrapper {
   grid-column: 1 / -1;
   display: flex;
   gap: 40px;
   justify-content: space-evenly;
 }
 
-.reviewsContainer,
-.reviewFormContainer {
+.commentsWrapper,
+.reviewFormWrapper {
   flex-basis: 50%;
 }
 
-/* Movie Reviews Comments Container Properties */
+/* Comments properties */
 
 .commentsContainer {
   display: flex;
@@ -678,6 +706,8 @@
   overscroll-behavior-y: contain;
   max-height: 650px;
   padding-right: 5px;
+  scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+  scrollbar-width: thin;
 }
 
 .commentsContainer::-webkit-scrollbar {
@@ -751,7 +781,7 @@
   font-weight: 300;
 }
 
-.movieCommentAvgVoteIcon {
+.commentAvgVoteIcon {
   fill: gold;
   width: 20px;
   height: 20px;
@@ -769,6 +799,7 @@
   bottom: 0;
   left: 0;
   right: 0;
+  width: 100%;
   padding: 8px 15px;
   font-size: var(--font-size-default);
   background: rgba(255, 255, 255, 0.3);
@@ -783,7 +814,7 @@
   background: rgba(255, 255, 255, 0.5);
 }
 
-/* Review Form Container Properties */
+/* Review Form properties */
 
 .reviewForm {
   display: flex;
@@ -805,6 +836,8 @@
   outline: none;
   resize: none;
   overflow-y: auto;
+  scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+  scrollbar-width: thin;
 }
 
 .userCommentInput:focus {

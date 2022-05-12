@@ -5,18 +5,12 @@ import Link from "next/link";
 import uniqid from "uniqid";
 import axios from "axios";
 import instance from "../axios";
+import HorizontalScrollButton from "../Reusable/HorizontalScrollButtons";
+import { baseImageURL, truncate, scrollHorizontally } from "../Utils/utils";
+
 import { FaStar } from "react-icons/fa";
+
 import styles from "../../styles/Home/row.module.css";
-
-const baseImageURL = "https://image.tmdb.org/t/p/original";
-
-/**
- * @param {string} string
- * @param {integer} length
- */
-function truncate(string, length = 180) {
-  return string?.length > length ? string?.substring(0, length) + "..." : string;
-}
 
 function Row({ title, fetchURL, isLarge }) {
   const router = useRouter();
@@ -65,6 +59,7 @@ function Row({ title, fetchURL, isLarge }) {
           </h2>
         </div>
         <div className={styles.moviesContainer}>
+          <HorizontalScrollButton side="left" isNetflix={isLarge} />
           {!isLarge &&
             movies.map(
               (movie) =>
@@ -125,11 +120,13 @@ function Row({ title, fetchURL, isLarge }) {
                   </Link>
                 )
             )}
+
+          <HorizontalScrollButton side="right" isNetflix={isLarge} />
         </div>
       </section>
     )
   );
 }
 
-export { truncate, baseImageURL };
+export { truncate, baseImageURL, scrollHorizontally };
 export default Row;

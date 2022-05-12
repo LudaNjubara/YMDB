@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import styles from "../../styles/Reusable/footer.module.css";
+
 import { BiMovie } from "react-icons/bi";
 import {
   BsInstagram,
@@ -19,6 +19,8 @@ import {
   RiSearchFill,
   RiSpeedFill,
 } from "react-icons/ri";
+
+import styles from "../../styles/Reusable/footer.module.css";
 
 function Footer() {
   return (

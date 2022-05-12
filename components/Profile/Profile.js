@@ -3,10 +3,12 @@ import Image from "next/image";
 import { useSelector } from "react-redux";
 import { selectUser } from "../redux/userSlice";
 import { auth } from "../firebase";
+
 import Personal_Info from "./Personal_Info";
 import Watchlist from "./Watchlist";
 import Favourites from "./Favourites";
 import DangerZone from "./DangerZone";
+
 import styles from "../../styles/Profile/profile.module.css";
 
 function Profile() {

@@ -4,8 +4,10 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import Image from "next/image";
 import Link from "next/link";
 import uniqid from "uniqid";
-import { baseImageURL, truncate } from "../Home/Row";
+import { baseImageURL, truncate, currentYear, getListOfSelectableYears } from "../Utils/utils";
+
 import { FaStar, FaSearch } from "react-icons/fa";
+
 import styles from "../../styles/Movies/moviesData.module.css";
 
 function MoviesData() {
@@ -32,23 +34,10 @@ function MoviesData() {
     { id: 37, name: "Western" },
   ];
 
-  const currentYear = () => {
-    const date = new Date();
-    return date.getFullYear();
-  };
   const [genre, setGenre] = useState(null);
-  const [year, setYear] = useState(currentYear);
+  const [year, setYear] = useState(currentYear());
   let selectedYearOptionIndex = selectedYearOptionIndex || 0;
   let selectedGenreOptionIndex = selectedGenreOptionIndex || 0;
-
-  function getListOfSelectableYears() {
-    const listOfYears = [];
-
-    for (let i = currentYear(); i >= 1950; i--) {
-      listOfYears.push(i);
-    }
-    return listOfYears;
-  }
 
   const fetchMovies = async ({ pageParam = 1 }) =>
     await fetch(

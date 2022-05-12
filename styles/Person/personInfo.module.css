@@ -1,0 +1,321 @@
+.infoWrapper {
+  position: relative;
+  display: grid;
+  gap: 40px;
+  max-width: calc(var(--max-width) - 400px);
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto;
+  margin: 0 auto;
+  padding: 100px var(--padding-lg);
+}
+
+.article {
+  background: rgba(255, 255, 255, 0.18);
+  padding: 40px;
+  border-radius: 20px;
+}
+
+.articleTitle {
+  font-size: var(--font-size-h1);
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  padding-bottom: 25px;
+}
+
+/* Background Image Properties */
+
+.backgroundImageContainer {
+  position: fixed;
+  inset: 0;
+  filter: blur(40px) brightness(0.9);
+}
+
+.backgroundImage {
+  object-fit: cover;
+}
+
+/* Person Image Container Properties */
+
+.imageWrapper {
+  position: relative;
+  grid-column: 1 / 2;
+  overflow: hidden;
+  padding: unset;
+  min-height: 600px;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Person Main Info Container Properties */
+
+.mainInfoWrapper {
+  grid-column: 2 / 4;
+  display: flex;
+  gap: 40px;
+}
+
+/* Person Main Info Content Properties */
+
+.mainInfoContent {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  row-gap: 30px;
+}
+
+.mainInfoTitle {
+  font-size: var(--font-size-md);
+  font-weight: 300;
+  letter-spacing: 0.4px;
+  line-height: 0.9;
+  padding-bottom: 30px;
+  word-wrap: break-word;
+}
+
+.commonInfoContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.commonInfoItem {
+  padding: 7px 10px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+}
+
+.commonInfoItemIconContainer {
+  display: grid;
+  place-items: center;
+  padding: 0 3px;
+}
+
+.mainInfoSectionContainer {
+  position: relative;
+  padding: 5px 0;
+}
+
+.mainInfoSectionContainer::after {
+  content: "";
+  position: absolute;
+  bottom: -15px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 2px;
+}
+
+.mainInfoSectionContainer:last-child::after {
+  all: unset;
+}
+
+.mainInfoSectionTitle {
+  font-size: var(--font-size-default);
+  letter-spacing: 1px;
+  padding-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.biography {
+  max-height: 350px;
+  line-height: 1.4;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+}
+
+.biography::-webkit-scrollbar {
+  background: none;
+  width: 6px;
+}
+
+.biography::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 4px;
+}
+
+.biography::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Images Container Properties */
+
+.imagesWrapper {
+  grid-column: 1 / -1;
+}
+
+.imagesScrollableRow {
+  display: flex;
+  gap: 15px;
+  overflow-x: auto;
+}
+
+.imagesScrollableRow:hover > button {
+  opacity: 1;
+}
+
+.imagesScrollableRow::-webkit-scrollbar {
+  display: none;
+}
+
+.imageContainerHorizontal {
+  position: relative;
+  flex: 0 0 400px;
+  height: 250px;
+}
+
+.imageContainerVertical {
+  position: relative;
+  flex: 0 0 170px;
+  height: 250px;
+}
+
+.image {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+  border-radius: 15px;
+}
+
+/* Related Persons Container Properties */
+
+.relatedWrapper {
+  grid-column: 1 / -1;
+}
+
+.relatedScrollableRow {
+  display: flex;
+  gap: 15px;
+  overflow-x: auto;
+  padding-bottom: 15px;
+  scroll-snap-type: inline mandatory;
+}
+
+.relatedScrollableRow:hover > button {
+  opacity: 1;
+}
+
+.relatedScrollableRow::-webkit-scrollbar {
+  display: none;
+}
+
+.relatedContainer {
+  flex: 0 0 300px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  cursor: pointer;
+  outline: none;
+  transition: box-shadow 0.5s ease-out;
+  scroll-snap-align: start;
+}
+
+.relatedContainer:hover,
+.relatedContainer:focus {
+  box-shadow: 3px 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.relatedContainer:hover img,
+.article:focus img {
+  transform: scale(1.05);
+}
+
+.relatedImageContainer {
+  position: relative;
+  border-radius: 10px 10px 0 0;
+  overflow: hidden;
+  height: 140px;
+}
+
+.relatedImage {
+  width: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+.relatedContent {
+  padding: 20px;
+}
+
+.relatedTitleAndVoteAvg {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 20px;
+}
+
+.relatedTitle {
+  font-weight: 400;
+  font-size: var(--font-size-default);
+  max-width: 150px;
+  line-height: 1.1;
+  letter-spacing: 0.3px;
+}
+
+.relatedVoteContainer {
+  display: flex;
+  column-gap: 7px;
+}
+
+.relatedVoteAvg {
+  font-weight: 500;
+}
+
+.relatedVoteIcon {
+  fill: gold;
+}
+
+.relatedDescription {
+  font-weight: 300;
+  font-size: var(--font-size-sm);
+}
+
+/* Popular people */
+
+.popularWrapper {
+  grid-column: 1 / -1;
+}
+
+.popularScrollableRow {
+  display: flex;
+  gap: 15px;
+  overflow-x: auto;
+}
+
+.popularScrollableRow:hover > button {
+  opacity: 1;
+}
+
+.popularScrollableRow::-webkit-scrollbar {
+  display: none;
+}
+
+.popularCard {
+  flex: 0 0 200px;
+  cursor: pointer;
+}
+
+.popularImageContainer {
+  position: relative;
+  overflow: hidden;
+  border-radius: 15px;
+  min-height: 300px;
+}
+
+.popularImage {
+  border-radius: 15px;
+  object-fit: cover;
+}
+
+.popularName {
+  font-size: var(--font-size-default);
+  font-weight: 400;
+  letter-spacing: 0.4px;
+  margin-top: 5px;
+}

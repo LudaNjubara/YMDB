@@ -1,4 +1,5 @@
 import Head from "next/head";
+
 import Profile from "../components/Profile/Profile";
 
 function profile() {

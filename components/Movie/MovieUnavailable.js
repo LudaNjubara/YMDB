@@ -1,4 +1,5 @@
 import Image from "next/image";
+
 import styles from "../../styles/Movie/movieUnavailable.module.css";
 
 function MovieUnavailable() {

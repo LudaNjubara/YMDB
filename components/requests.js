@@ -1,5 +1,5 @@
 const requests = {
-  fetchTrending: `/trending/all/week?api_key=${process.env.API_KEY}&language=en-US`,
+  fetchTrending: `/trending/movie/week?api_key=${process.env.API_KEY}&language=en-US`,
   fetchNetflixOriginals: `/discover/tv?api_key=${process.env.API_KEY}&with_networks=213`,
   fetchUpcomingMovies: `/movie/upcoming?api_key=${process.env.API_KEY}&language=en-US&page=1`,
   fetchTopRated: `/movie/top_rated?api_key=${process.env.API_KEY}&language=en-US`,

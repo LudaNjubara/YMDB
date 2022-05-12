@@ -4,10 +4,13 @@ import Image from "next/image";
 import axios from "axios";
 import uniqid from "uniqid";
 import instance from "../../axios";
-import styles from "../../../styles/Reusable/navbar.module.css";
+import { baseImageURL, truncate } from "../../Utils/utils";
+
 import NavbarButton from "./NavbarButton";
-import { truncate, baseImageURL } from "../../Home/Row";
+
 import { BsStarFill, BsCalendar3 } from "react-icons/bs";
+
+import styles from "../../../styles/Reusable/navbar.module.css";
 
 function Navbar() {
   const [show, setShow] = useState(false);
@@ -34,7 +37,6 @@ function Navbar() {
             cancelToken: source.token,
           })
           .then((res) => {
-            console.log(res);
             setSearchResults(res.data.results);
           })
           .catch((err) => {
@@ -110,6 +112,8 @@ function Navbar() {
                 <article className={styles.articleSearchResults}>
                   <h3>Movies</h3>
                   {filteredResultsFinal?.movies.map((movie) => {
+                    if (!movie.poster_path || !movie.overview || !movie.genre_ids.length) return;
+
                     return (
                       <Link href={`/movies/${encodeURIComponent(movie.id)}`} key={uniqid()}>
                         <div className={styles.resultContainer} tabIndex="0">
@@ -132,8 +136,8 @@ function Navbar() {
                           <div className={styles.resultVoteAndDateContainer}>
                             <div className={styles.resultDateContainer}>
                               <p className={styles.resultDateText}>
-                                <BsCalendar3 className={styles.serieDateIcon} />
                                 {formatDate(movie.release_date)}
+                                <BsCalendar3 className={styles.serieDateIcon} />
                               </p>
                             </div>
                             <div className={styles.resultVoteContainer}>
@@ -153,6 +157,8 @@ function Navbar() {
                   <h3>Series</h3>
 
                   {filteredResultsFinal?.series.map((serie) => {
+                    if (!serie.poster_path || !serie.overview || !serie.genre_ids.length) return;
+
                     return (
                       <Link href={`/series/${encodeURIComponent(serie.id)}`} key={uniqid()}>
                         <div className={styles.resultContainer} tabIndex="0">
@@ -191,48 +197,34 @@ function Navbar() {
                   })}
                 </article>
               )}
-              {/* {filteredResultsFinal.people.length > 0 && (
+              {filteredResultsFinal.people.length > 0 && (
                 <article className={styles.articleSearchResults}>
                   <h3>People</h3>
                   {filteredResultsFinal?.people.map((person) => {
                     return (
-                      <Link href={`/series/${encodeURIComponent(serie.id)}`} key={uniqid()}>
+                      <Link href={`/people/${encodeURIComponent(person.id)}`} key={uniqid()}>
                         <div className={styles.resultContainer} tabIndex="0">
                           <div className={styles.resultImageContainer}>
                             <Image
                               className={styles.resultImage}
-                              src={`${baseImageURL}${serie.poster_path}`}
+                              src={`${baseImageURL}${person.profile_path}`}
                               placeholder="blur"
                               blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP87wMAAlABTQluYBcAAAAASUVORK5CYII="
-                              alt={serie.name || serie.original_name}
-                              width={120}
-                              height={200}
+                              alt={person.name}
+                              width={66}
+                              height={100}
                               objectFit="cover"
                             />
                           </div>
                           <div className={styles.resultContent}>
-                            <h4 className={styles.resultTitle}>{serie.name || serie.original_name}</h4>
-                            <p className={styles.resultDescription}>{truncate(serie.overview, 180)}</p>
-                          </div>
-                          <div className={styles.resultVoteAndDateContainer}>
-                            <div className={styles.resultDateContainer}>
-                              <p className={styles.resultDateText}>
-                                <BsCalendar3 className={styles.serieDateIcon} />
-                                {formatDate(serie.first_air_date)}
-                              </p>
-                            </div>
-                            <div className={styles.resultVoteContainer}>
-                              <p className={styles.resultVoteText}>
-                                {serie.vote_average} <BsStarFill className={styles.serieVoteIcon} />
-                              </p>
-                            </div>
+                            <h4 className={styles.resultTitle}>{person.name}</h4>
                           </div>
                         </div>
                       </Link>
                     );
                   })}
                 </article>
-              )} */}
+              )}
             </section>
           )}
         </div>

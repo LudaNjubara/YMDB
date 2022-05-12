@@ -4,6 +4,7 @@ import Head from "next/head";
 import axios from "axios";
 import rateLimit from "axios-rate-limit";
 import instance from "../axios";
+
 import MovieLoading from "./MovieLoading";
 import MovieUnavailable from "./MovieUnavailable";
 import MovieInfo from "./MovieInfo";
@@ -52,28 +53,28 @@ function Movie() {
             res.map((movieResult, index) => {
               switch (index) {
                 case 0:
-                  movieResults.movieDetails = movieResult.data;
+                  movieResults.details = movieResult.data;
                   break;
                 case 1:
-                  movieResults.movieCredits = movieResult.data;
+                  movieResults.credits = movieResult.data;
                   break;
                 case 2:
-                  movieResults.movieImages = movieResult.data;
+                  movieResults.images = movieResult.data;
                   break;
                 case 3:
-                  movieResults.movieKeywords = movieResult.data;
+                  movieResults.keywords = movieResult.data;
                   break;
                 case 4:
-                  movieResults.movieReviews = movieResult.data;
+                  movieResults.reviews = movieResult.data;
                   break;
                 case 5:
-                  movieResults.movieSimilar = movieResult.data;
+                  movieResults.similar = movieResult.data;
                   break;
                 case 6:
-                  movieResults.movieVideos = movieResult.data;
+                  movieResults.videos = movieResult.data;
                   break;
                 case 7:
-                  movieResults.movieWatchProviders = movieResult.data.results;
+                  movieResults.watchProviders = movieResult.data.results;
                   break;
                 default:
                   break;
@@ -99,16 +100,16 @@ function Movie() {
       <Head>
         <title>
           YMDB-
-          {movieResults?.movieDetails?.name ||
-            movieResults?.movieDetails?.title ||
-            movieResults?.movieDetails?.original_title}
+          {movieResults?.details?.name ||
+            movieResults?.details?.title ||
+            movieResults?.details?.original_title}
         </title>
       </Head>
       <main>
         {movieUnavailable ? (
           <MovieUnavailable />
         ) : movieLoaded ? (
-          <MovieInfo movieResults={movieResults} />
+          <MovieInfo movieResults={movieResults} movieId={movieId} />
         ) : (
           <MovieLoading />
         )}

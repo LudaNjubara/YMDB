@@ -5,7 +5,9 @@ import { useRouter } from "next/router";
 import { auth } from "../../firebase";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../redux/userSlice";
+
 import { BiCaretDown, BiLogOut, BiCog } from "react-icons/bi";
+
 import styles from "../../../styles/Reusable/navbar.module.css";
 
 const NavbarButton = () => {
