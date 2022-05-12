@@ -3,7 +3,7 @@ import moment from "moment";
 import { baseImageURL } from "../Utils/utils";
 import ImagesRow from "../Reusable/MovieSerie/ImagesRow";
 import SimilarRow from "../Reusable/MovieSerie/SimilarRow";
-import PopularPeople from "./popularPeople";
+import PopularPeople from "./PopularPeople";
 
 import styles from "../../styles/Person/personInfo.module.css";
 
