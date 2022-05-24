@@ -18,7 +18,7 @@ function Favourites({ favourites }) {
   const source = cancelToken.source();
 
   function fetchDataFromFavourites() {
-    if (favourites.movies && favourites.movies.length > 0) {
+    if (favourites?.movies && favourites?.movies.length > 0) {
       Promise.all(
         favourites.movies.map(
           async (movieId) =>
@@ -37,7 +37,7 @@ function Favourites({ favourites }) {
         });
     }
 
-    if (favourites.series && favourites.series.length > 0) {
+    if (favourites?.series && favourites?.series.length > 0) {
       Promise.all(
         favourites.series.map(
           async (serieId) =>

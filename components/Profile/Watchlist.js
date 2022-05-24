@@ -18,7 +18,7 @@ function Watchlist({ watchlists }) {
   const source = cancelToken.source();
 
   function fetchDataFromWatchlists() {
-    if (watchlists.movies && watchlists.movies.length > 0) {
+    if (watchlists?.movies && watchlists?.movies.length > 0) {
       Promise.all(
         watchlists.movies.map(
           async (movieId) =>
@@ -37,7 +37,7 @@ function Watchlist({ watchlists }) {
         });
     }
 
-    if (watchlists.series && watchlists.series.length > 0) {
+    if (watchlists?.series && watchlists?.series.length > 0) {
       Promise.all(
         watchlists.series.map(
           async (serieId) =>
