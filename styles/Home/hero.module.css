@@ -91,3 +91,54 @@
   font-size: var(--font-size-default);
   line-height: 1.3;
 }
+
+/* Error handling */
+
+.messageContainer {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  display: flex;
+  column-gap: 10px;
+  padding: 10px 15px;
+  border-radius: 5px;
+  transform: translateX(-50%);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+  z-index: 100;
+}
+
+.messageContainer.error {
+  background: rgb(180, 0, 0);
+}
+
+.messageContainer.success {
+  background: rgb(0, 180, 0);
+}
+
+.messageIconContainer {
+  padding-right: 10px;
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.messageIconSuccess {
+  fill: rgb(0, 212, 18);
+  width: 20px;
+  height: 20px;
+}
+
+.messageIconError {
+  fill: rgb(255, 0, 0);
+  width: 20px;
+  height: 20px;
+}
+
+.messageTextContainer {
+  flex-grow: 1;
+}
+
+.messageText {
+  font-size: var(--font-size-sm);
+  font-weight: 400;
+  letter-spacing: 0.4px;
+}

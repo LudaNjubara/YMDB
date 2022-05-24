@@ -1,7 +1,7 @@
 import Serie from "../../components/Serie/Serie";
 
-function movieId() {
+function serieId() {
   return <Serie />;
 }
 
-export default movieId;
+export default serieId;

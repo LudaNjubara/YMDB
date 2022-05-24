@@ -183,6 +183,7 @@
   font-size: var(--font-size-default);
   font-weight: 400;
   opacity: 0.5;
+  pointer-events: none;
 }
 
 /* Watchlist tab properties */

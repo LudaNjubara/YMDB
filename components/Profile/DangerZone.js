@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { auth, deleteUser, EmailAuthProvider, reauthenticateWithCredential } from "../firebase";
+import { doc, deleteDoc } from "firebase/firestore";
+import { auth, database, deleteUser, EmailAuthProvider, reauthenticateWithCredential } from "../firebase";
 
 import styles from "../../styles/Profile/profileNavSections.module.css";
 
@@ -41,29 +42,45 @@ function DangerZone() {
   }
 
   function deleteAccountOrDeleteStats(isStats = false) {
+    const passwordInput = document.getElementById("passwordPopupInput");
+    const userPassword = passwordInput.value;
+    const user = auth.currentUser;
+    const credential = EmailAuthProvider.credential(auth.currentUser.email, userPassword);
     const dangerZoneCountdownLine = document.querySelector(`.${styles.dangerZonePopupCountdownLine}`);
     dangerZoneCountdownLine.classList.remove(styles.countingDown);
     clearTimeout(popupTimeout);
 
+    if (!userPassword) return;
+
     if (isStats) {
-      // add removing of statistics from account
-      console.log("deleting account stats");
+      // removing of statistics from account
+
+      reauthenticateWithCredential(user, credential)
+        .then(() => {
+          deleteDoc(doc(database, "statistics", auth.currentUser.email))
+            .then(() => {
+              openOrCloseDangerZonePopup(true);
+              alert("Statistics data deleted");
+              /* window.location.reload(); */
+            })
+            .catch((error) => {
+              // An error happened.
+              alert("Error deleting account");
+              console.log(error);
+            });
+        })
+        .catch((error) => {
+          // An error happened.
+          alert("Error authenticating with given credentials");
+          console.log(error);
+        });
     } else {
-      const passwordInput = document.getElementById("passwordPopupInput");
-      const userPassword = passwordInput.value;
-
-      if (!userPassword) return;
-
-      const user = auth.currentUser;
-      const credential = EmailAuthProvider.credential(auth.currentUser.email, userPassword);
-
       reauthenticateWithCredential(user, credential)
         .then(() => {
           deleteUser(user)
             .then(() => {
               // Account deleted.
               alert("Account deleted");
-              console.log("Account deleted.");
             })
             .catch((error) => {
               // An error happened.

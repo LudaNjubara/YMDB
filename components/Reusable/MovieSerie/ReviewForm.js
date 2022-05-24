@@ -61,7 +61,7 @@ function ReviewForm({ styles, fromPage, id }) {
       doc(database, "statistics", user.email),
       {
         numOfComments: increment(1),
-        sumOfCommentLength: increment(userCommentInput.value.length),
+        sumOfCommentLength: increment(userCommentInput.value.split(" ").length),
         numOfVotes: increment(1),
         sumOfStars: increment(userRatingInput.value),
       },

@@ -5,10 +5,12 @@ import Link from "next/link";
 import uniqid from "uniqid";
 import { useSelector } from "react-redux";
 import { selectUser } from "../redux/userSlice";
-import { setDoc, doc, increment, arrayUnion } from "firebase/firestore";
+import { setDoc, doc, arrayUnion } from "firebase/firestore";
 import { database } from "../firebase";
 import axios from "../axios";
 import { truncate, baseImageURL } from "../Utils/utils";
+
+import { FaCheck, FaExclamation } from "react-icons/fa";
 
 import styles from "../../styles/Home/hero.module.css";
 
@@ -16,30 +18,22 @@ function Hero({ fetchURL }) {
   const router = useRouter();
   const user = useSelector(selectUser);
   const [movie, setMovie] = useState(null);
+  const [addToFavouritesSuccess, setAddToFavouritesSuccess] = useState(null);
 
   function addToFavourites(id) {
-    // update statistics
-    setDoc(
-      doc(database, "statistics", user.email),
-      {
-        numOfFavourites: increment(1),
-      },
-      { merge: true }
-    )
-      .then((doc) => {
-        console.log(doc);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-
     // add to favourites
     setDoc(doc(database, "favourites", user.email), { movies: arrayUnion(id) }, { merge: true })
-      .then((doc) => {
-        console.log(doc);
+      .then(() => {
+        setAddToFavouritesSuccess(true);
+        setTimeout(() => {
+          setAddToFavouritesSuccess(null);
+        }, 3000);
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
+        setAddToFavouritesSuccess(false);
+        setTimeout(() => {
+          setAddToFavouritesSuccess(null);
+        }, 3000);
       });
   }
 
@@ -70,35 +64,60 @@ function Hero({ fetchURL }) {
   }, [fetchURL]);
 
   return (
-    <section className={styles.hero}>
-      <article className={styles.heroContent}>
-        <h1 className={styles.heroTitle}> {movie?.name || movie?.title || movie?.original_name}</h1>
-        <div className={styles.heroButtonContainer}>
-          <button
-            type="button"
-            className={styles.heroButton}
-            onClick={() => initializeAddingToFavourites(movie.id)}
-          >
-            Add to favourites
-          </button>
-          <Link href={`/movies/${encodeURIComponent(movie?.id)}`} key={uniqid()}>
-            <a className={styles.heroButton}>Show info</a>
-          </Link>
+    <>
+      {addToFavouritesSuccess !== null && (
+        <div
+          className={`${styles.messageContainer} ${
+            addToFavouritesSuccess === true ? styles.success : styles.error
+          }`}
+        >
+          <div className={styles.messageIconContainer}>
+            {addToFavouritesSuccess === true ? (
+              <FaCheck className={styles.messageIconSuccess} />
+            ) : (
+              <FaExclamation className={styles.messageIconError} />
+            )}
+          </div>
+          <div className={styles.messageTextContainer}>
+            {addToFavouritesSuccess === true ? (
+              <p className={styles.messageText}>Your favourites have been updated!</p>
+            ) : (
+              <p className={styles.messageText}>Something went wrong. Please try again later.</p>
+            )}
+          </div>
         </div>
-        <p className={styles.heroDescription}>{truncate(movie?.overview, 338)}</p>
-      </article>
-      <article className={styles.heroImageContainer}>
-        <Image
-          src={`${baseImageURL}${movie?.backdrop_path}`}
-          alt={movie?.name}
-          className={styles.heroImage}
-          key={uniqid()}
-          width={1500}
-          height={900}
-          priority={true}
-        />
-      </article>
-    </section>
+      )}
+
+      <section className={styles.hero}>
+        <article className={styles.heroContent}>
+          <h1 className={styles.heroTitle}> {movie?.name || movie?.title || movie?.original_name}</h1>
+          <div className={styles.heroButtonContainer}>
+            <button
+              type="button"
+              className={styles.heroButton}
+              onClick={() => initializeAddingToFavourites(movie.id)}
+            >
+              Add to favourites
+            </button>
+            <Link href={`/movies/${encodeURIComponent(movie?.id)}`} key={uniqid()}>
+              <a className={styles.heroButton}>Show info</a>
+            </Link>
+          </div>
+          <p className={styles.heroDescription}>{truncate(movie?.overview, 338)}</p>
+        </article>
+        <article className={styles.heroImageContainer}>
+          <Image
+            src={`${baseImageURL}${movie?.backdrop_path}`}
+            alt={movie?.name}
+            className={styles.heroImage}
+            key={uniqid()}
+            width={1500}
+            height={900}
+            priority={true}
+          />
+        </article>
+      </section>
+    </>
   );
 }
 

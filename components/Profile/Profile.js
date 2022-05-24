@@ -147,7 +147,14 @@ function Profile() {
         </aside>
 
         <section className={styles.profileContent}>
-          {activeTab === "personal_info" && <Personal_Info user={user} statistics={statisticsData} />}
+          {activeTab === "personal_info" && (
+            <Personal_Info
+              user={user}
+              statistics={statisticsData}
+              watchlists={watchlistData}
+              favourites={favouritesData}
+            />
+          )}
           {activeTab === "watchlist" && <Watchlist watchlists={watchlistData} />}
           {activeTab === "favourites" && <Favourites favourites={favouritesData} />}
           {activeTab === "dangerZone" && <DangerZone />}

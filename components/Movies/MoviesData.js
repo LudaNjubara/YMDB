@@ -99,9 +99,9 @@ function MoviesData() {
             </select>
           </div>
 
-          <div className={styles.filterAndSortInnerContainer}>
+          {/* <div className={styles.filterAndSortInnerContainer}>
             <h3 className={styles.filterAndSortTitle}>Sort</h3>
-          </div>
+          </div> */}
 
           <button
             type="button"

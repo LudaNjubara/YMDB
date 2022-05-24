@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../redux/userSlice";
-import { setDoc, doc, increment, arrayUnion } from "firebase/firestore";
+import { setDoc, doc, arrayUnion } from "firebase/firestore";
 import { database } from "../../firebase";
 import { baseImageURL } from "../../Utils/utils";
 
@@ -17,22 +17,6 @@ function ImageAndUserActionsContainer({ styles, id, fromPage, results }) {
   const [addToFavouritesSuccess, setAddToFavouritesSuccess] = useState(null);
 
   function addToWatchlist(id) {
-    // update statistics
-    setDoc(
-      doc(database, "statistics", user.email),
-      {
-        numOfWatchlists: increment(1),
-      },
-      { merge: true }
-    )
-      .then((doc) => {
-        console.log(doc);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-
-    // add to watchlist
     setDoc(
       doc(database, "watchlists", user.email),
       fromPage === "movie" ? { movies: arrayUnion(id) } : { series: arrayUnion(id) },
@@ -53,21 +37,6 @@ function ImageAndUserActionsContainer({ styles, id, fromPage, results }) {
   }
 
   function addToFavourites(id) {
-    // update statistics
-    setDoc(
-      doc(database, "statistics", user.email),
-      {
-        numOfFavourites: increment(1),
-      },
-      { merge: true }
-    )
-      .then((doc) => {
-        console.log(doc);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-
     // add to favourites
     setDoc(
       doc(database, "favourites", user.email),
