@@ -31,6 +31,57 @@
   padding-bottom: 25px;
 }
 
+/* Error handling */
+
+.messageContainer {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  display: flex;
+  column-gap: 10px;
+  padding: 10px 15px;
+  border-radius: 5px;
+  transform: translateX(-50%);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+  z-index: 100;
+}
+
+.messageContainer.error {
+  background: rgb(180, 0, 0);
+}
+
+.messageContainer.success {
+  background: rgb(0, 180, 0);
+}
+
+.messageIconContainer {
+  padding-right: 10px;
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.messageIconSuccess {
+  fill: rgb(0, 212, 18);
+  width: 20px;
+  height: 20px;
+}
+
+.messageIconError {
+  fill: rgb(255, 0, 0);
+  width: 20px;
+  height: 20px;
+}
+
+.messageTextContainer {
+  flex-grow: 1;
+}
+
+.messageText {
+  font-size: var(--font-size-sm);
+  font-weight: 400;
+  letter-spacing: 0.4px;
+}
+
 /* Background image properties */
 
 .backgroundImageContainer {
@@ -728,10 +779,17 @@
   position: relative;
   flex-grow: 0;
   flex-shrink: 0;
+  max-height: 200px;
+  height: auto;
   background: rgba(255, 255, 255, 0.3);
   border-radius: 15px;
   padding: 30px 30px 50px;
   overflow: hidden;
+  transition: max-height 0.5s ease-in-out;
+}
+
+.commentContainer.expandedComment {
+  max-height: 1200px;
 }
 
 .commentInfoContainer {
@@ -803,6 +861,7 @@
   padding: 8px 15px;
   font-size: var(--font-size-default);
   background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
   border: none;
   outline: none;
   cursor: pointer;
@@ -902,17 +961,6 @@
   width: 15px;
   height: 15px;
   fill: gold;
-}
-
-.customRatingInput {
-  margin: 0 5px;
-  width: 60px;
-  font-size: var(--font-size-h3);
-  font-weight: 600;
-  background: none;
-  border: none;
-  outline: none;
-  border-bottom: 2px solid rgba(255, 255, 255, 0.3);
 }
 
 .formPostClearButtonContainer {

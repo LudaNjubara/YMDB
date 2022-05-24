@@ -66,7 +66,12 @@ function SerieInfo({ serieResults, serieId }) {
       {/* Serie Info Wrapper */}
       <section className={reusableStyles.infoWrapper}>
         <article className={`${reusableStyles.imageAndUserActionsContainer} ${reusableStyles.article}`}>
-          <ImageAndUserActionsContainer styles={reusableStyles} results={serieResults} />
+          <ImageAndUserActionsContainer
+            styles={reusableStyles}
+            fromPage="serie"
+            id={serieId}
+            results={serieResults}
+          />
         </article>
 
         {/* Main Info */}
@@ -191,13 +196,13 @@ function SerieInfo({ serieResults, serieId }) {
           <div className={`${reusableStyles.commentsWrapper} ${reusableStyles.article}`}>
             <h1 className={reusableStyles.articleTitle}>User Reviews</h1>
 
-            <CommentsContainer styles={reusableStyles} results={serieResults} />
+            <CommentsContainer styles={reusableStyles} fromPage="serie" id={serieId} results={serieResults} />
           </div>
 
           <div className={`${reusableStyles.reviewFormWrapper} ${reusableStyles.article}`}>
             <h1 className={reusableStyles.articleTitle}>Share your thoughts</h1>
 
-            <ReviewForm styles={reusableStyles} id={serieId} />
+            <ReviewForm styles={reusableStyles} fromPage="serie" id={serieId} />
           </div>
         </article>
       </section>

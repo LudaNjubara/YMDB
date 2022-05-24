@@ -222,6 +222,9 @@
 .showUserOptions {
   opacity: 1;
   transform: translate(-50%, 0);
+}
+
+.showUserOptions > :is(div, a) {
   pointer-events: all;
 }
 

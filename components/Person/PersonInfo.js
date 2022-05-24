@@ -91,7 +91,7 @@ function PersonInfo({ personResults }) {
         <article className={`${styles.relatedWrapper} ${styles.article}`}>
           <h1 className={styles.articleTitle}>Movies by {personResults?.details?.name}</h1>
 
-          <SimilarRow styles={styles} results={personResults} isFromPersonPage />
+          <SimilarRow styles={styles} type="movie" results={personResults} isFromPersonPage />
         </article>
 
         {/* Popular people */}

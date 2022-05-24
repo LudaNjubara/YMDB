@@ -82,7 +82,12 @@ function MovieInfo({ movieResults, movieId }) {
       {/* Movie Info Wrapper */}
       <section className={reusableStyles.infoWrapper}>
         <article className={`${reusableStyles.imageAndUserActionsContainer} ${reusableStyles.article}`}>
-          <ImageAndUserActionsContainer styles={reusableStyles} results={movieResults} />
+          <ImageAndUserActionsContainer
+            styles={reusableStyles}
+            id={movieId}
+            fromPage="movie"
+            results={movieResults}
+          />
         </article>
 
         {/* Main Info */}
@@ -209,13 +214,13 @@ function MovieInfo({ movieResults, movieId }) {
           <div className={`${reusableStyles.commentsWrapper} ${reusableStyles.article}`}>
             <h1 className={reusableStyles.articleTitle}>User Reviews</h1>
 
-            <CommentsContainer styles={reusableStyles} results={movieResults} />
+            <CommentsContainer styles={reusableStyles} fromPage="movie" id={movieId} results={movieResults} />
           </div>
 
           <div className={`${reusableStyles.reviewFormWrapper} ${reusableStyles.article}`}>
             <h1 className={reusableStyles.articleTitle}>Share your thoughts</h1>
 
-            <ReviewForm styles={reusableStyles} id={movieId} />
+            <ReviewForm styles={reusableStyles} fromPage="movie" id={movieId} />
           </div>
         </article>
       </section>

@@ -43,7 +43,7 @@ const NavbarButton = () => {
       >
         <div className={styles.profileImageContainer}>
           <Image
-            src={`${user?.photoURL || auth.currentUser.photoURL || "/defaultUser.png"}`}
+            src={`${user?.photoURL || auth.currentUser?.photoURL || "/defaultUser.png"}`}
             width={30}
             height={30}
             alt="Profile image"
@@ -64,13 +64,6 @@ const NavbarButton = () => {
               <span className={styles.userOptionText}>Preferences</span>
             </a>
           </Link>
-
-          {/* <Link href="/login">
-            <a className={styles.userOptionContainer}>
-              <BiCaretDown className={styles.userOptionIcon} />
-              <span className={styles.userOptionText}>Whatever</span>
-            </a>
-          </Link> */}
 
           <div
             className={styles.userOptionContainer}

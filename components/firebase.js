@@ -9,10 +9,10 @@ import {
   EmailAuthProvider,
   reauthenticateWithCredential,
 } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
+import { getFirestore, collection, addDoc } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAr3VMPs7aheoIkBQRNXj0bT87BOoFemgw",
+  apiKey: process.env.FIREBASE_API_KEY,
   authDomain: "ymdb-c2e08.firebaseapp.com",
   projectId: "ymdb-c2e08",
   storageBucket: "ymdb-c2e08.appspot.com",
@@ -28,6 +28,9 @@ const auth = getAuth();
 
 export {
   auth,
+  database,
+  collection,
+  addDoc,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   updateProfile,
@@ -35,4 +38,3 @@ export {
   EmailAuthProvider,
   reauthenticateWithCredential,
 };
-export default database;

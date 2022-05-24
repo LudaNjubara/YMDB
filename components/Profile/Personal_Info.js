@@ -11,7 +11,7 @@ import { FaEdit } from "react-icons/fa";
 
 import styles from "../../styles/Profile/profileNavSections.module.css";
 
-function Personal_Info({ user }) {
+function Personal_Info({ user, statistics }) {
   const [updateProfileUsernameButtonDisabled, setUpdateProfileUsernameButtonDisabled] = useState(true);
   const [updateProfileImageButtonDisabled, setUpdateProfileImageButtonDisabled] = useState(true);
   const [previewProfileImage, setPreviewProfileImage] = useState(null);
@@ -240,18 +240,63 @@ function Personal_Info({ user }) {
             <div className={styles.statisticsContainer}>
               <div className={styles.statisticsItem}>
                 <h4 className={styles.statisticsItemTitle}>Number of reviews</h4>
+                <p className={styles.statisticsItemValue}>
+                  {statistics.numOfComments ? (
+                    statistics.numOfComments
+                  ) : (
+                    <span className={styles.statisticsItemNoData}>No data</span>
+                  )}
+                </p>
+              </div>
+              <div className={styles.statisticsItem}>
+                <h4 className={styles.statisticsItemTitle}>Number of votes</h4>
+                <p className={styles.statisticsItemValue}>
+                  {statistics.numOfVotes ? (
+                    statistics.numOfVotes
+                  ) : (
+                    <span className={styles.statisticsItemNoData}>No data</span>
+                  )}
+                </p>
               </div>
               <div className={styles.statisticsItem}>
                 <h4 className={styles.statisticsItemTitle}>Average length of reviews</h4>
-              </div>
-              <div className={styles.statisticsItem}>
-                <h4 className={styles.statisticsItemTitle}>Number of Watchlist movies</h4>
-              </div>
-              <div className={styles.statisticsItem}>
-                <h4 className={styles.statisticsItemTitle}>Number of Favourite movies</h4>
+                <p className={styles.statisticsItemValue}>
+                  {statistics.sumOfCommentLength && statistics.numOfComments ? (
+                    statistics.sumOfCommentLength / statistics.numOfComments
+                  ) : (
+                    <span className={styles.statisticsItemNoData}>No data</span>
+                  )}
+                </p>
               </div>
               <div className={styles.statisticsItem}>
                 <h4 className={styles.statisticsItemTitle}>Average rating</h4>
+                <p className={styles.statisticsItemValue}>
+                  {statistics.numOfVotes && statistics.sumOfStars ? (
+                    (statistics.numOfVotes / statistics.sumOfStars).toFixed(2)
+                  ) : (
+                    <span className={styles.statisticsItemNoData}>No data</span>
+                  )}
+                </p>
+              </div>
+              <div className={styles.statisticsItem}>
+                <h4 className={styles.statisticsItemTitle}>Number of Watchlist movies</h4>
+                <p className={styles.statisticsItemValue}>
+                  {statistics.numOfWatchlists ? (
+                    statistics.numOfWatchlists
+                  ) : (
+                    <span className={styles.statisticsItemNoData}>No data</span>
+                  )}
+                </p>
+              </div>
+              <div className={styles.statisticsItem}>
+                <h4 className={styles.statisticsItemTitle}>Number of Favourite movies</h4>
+                <p className={styles.statisticsItemValue}>
+                  {statistics.numOfFavourites ? (
+                    statistics.numOfFavourites
+                  ) : (
+                    <span className={styles.statisticsItemNoData}>No data</span>
+                  )}
+                </p>
               </div>
             </div>
           </div>

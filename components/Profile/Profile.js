@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
+import { getDoc, doc } from "firebase/firestore";
 import { useSelector } from "react-redux";
 import { selectUser } from "../redux/userSlice";
-import { auth } from "../firebase";
+import { auth, database } from "../firebase";
 
 import Personal_Info from "./Personal_Info";
 import Watchlist from "./Watchlist";
@@ -14,6 +15,9 @@ import styles from "../../styles/Profile/profile.module.css";
 function Profile() {
   const user = useSelector(selectUser);
   const [activeTab, setActiveTab] = useState("personal_info");
+  const [statisticsData, setStatisticsData] = useState({});
+  const [watchlistData, setWatchlistData] = useState({});
+  const [favouritesData, setFavouritesData] = useState({});
   const profileNavButtons = document.querySelectorAll(`.${styles.profileNavigationButton}`);
 
   function changeActiveTab(targetElement) {
@@ -25,6 +29,53 @@ function Profile() {
 
     targetElement.classList.add(styles.active);
   }
+
+  function getUserStatistics() {
+    const userStatisticsRef = doc(database, "statistics", user.email);
+    const userStatistics = getDoc(userStatisticsRef)
+      .then((statisticsData) => {
+        setStatisticsData(statisticsData.data());
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  function getUserWatchlist() {
+    const userWatchlistRef = doc(database, "watchlists", user.email);
+    const userWatchlist = getDoc(userWatchlistRef)
+      .then((watclistData) => {
+        setWatchlistData(watclistData.data());
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  function getUserFavourites() {
+    const userFavouritesRef = doc(database, "favourites", user.email);
+    const userFavourites = getDoc(userFavouritesRef)
+      .then((favouritesData) => {
+        setFavouritesData(favouritesData.data());
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  useEffect(() => {
+    if (user) {
+      getUserStatistics();
+      getUserWatchlist();
+      getUserFavourites();
+    }
+
+    return () => {
+      setStatisticsData({});
+      setWatchlistData({});
+      setFavouritesData({});
+    };
+  }, [user]);
 
   return (
     <main className={styles.profileWrapper}>
@@ -96,9 +147,9 @@ function Profile() {
         </aside>
 
         <section className={styles.profileContent}>
-          {activeTab === "personal_info" && <Personal_Info user={user} />}
-          {activeTab === "watchlist" && <Watchlist />}
-          {activeTab === "favourites" && <Favourites />}
+          {activeTab === "personal_info" && <Personal_Info user={user} statistics={statisticsData} />}
+          {activeTab === "watchlist" && <Watchlist watchlists={watchlistData} />}
+          {activeTab === "favourites" && <Favourites favourites={favouritesData} />}
           {activeTab === "dangerZone" && <DangerZone />}
         </section>
       </div>
