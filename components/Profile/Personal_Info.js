@@ -48,13 +48,14 @@ function Personal_Info({ user, statistics, watchlists, favourites }) {
         })
           .then(() => {
             // Profile updated!
-            console.log("Profile updated!");
             dispatch(
               login({
                 ...user,
                 photoURL: secure_url,
               })
             );
+
+            setUpdateProfileImageButtonDisabled(true);
           })
           .catch((error) => {
             // An error occurred
@@ -212,6 +213,8 @@ function Personal_Info({ user, statistics, watchlists, favourites }) {
                             displayName: newUsername,
                           })
                         );
+
+                        setUpdateProfileUsernameButtonDisabled(true);
                       })
                       .catch((error) => {
                         // An error occurred
@@ -262,7 +265,7 @@ function Personal_Info({ user, statistics, watchlists, favourites }) {
                 <h4 className={styles.statisticsItemTitle}>Avg. review word count</h4>
                 <p className={styles.statisticsItemValue}>
                   {statistics?.sumOfCommentLength && statistics?.numOfComments ? (
-                    statistics.sumOfCommentLength / statistics.numOfComments
+                    (statistics.sumOfCommentLength / statistics.numOfComments).toFixed(0)
                   ) : (
                     <span className={styles.statisticsItemNoData}>No data</span>
                   )}

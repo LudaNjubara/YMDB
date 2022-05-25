@@ -42,14 +42,22 @@ function SerieInfo({ serieResults, serieId }) {
 
       {/* Trailer Popup */}
       <section className={`${showTrailerPopup && reusableStyles.show} ${reusableStyles.trailerPopup}`}>
-        {serieResults?.videos?.results?.filter((video) =>
-          video?.name?.toLowerCase().includes("official trailer")
+        {serieResults?.videos?.results?.filter(
+          (video) =>
+            video?.name?.toLowerCase().match(/"official"|"trailer"/) ||
+            video?.name?.toLowerCase().includes("final trailer") ||
+            video?.name?.toLowerCase().includes("main trailer") ||
+            video?.name?.toLowerCase().includes("trailer")
         ) ? (
           <iframe
             className={reusableStyles.trailerVideo}
             src={`https://www.youtube.com/embed/${
-              serieResults?.videos?.results?.filter((video) =>
-                video?.name?.toLowerCase().includes("official trailer")
+              serieResults?.videos?.results?.filter(
+                (video) =>
+                  video?.name?.toLowerCase().match(/"official"|"trailer"/) ||
+                  video?.name?.toLowerCase().includes("final trailer") ||
+                  video?.name?.toLowerCase().includes("main trailer") ||
+                  video?.name?.toLowerCase().includes("trailer")
               )[0]?.key
             }`}
             title={`${serieResults?.details?.name || serieResults?.details?.original_name} Official Trailer`}
