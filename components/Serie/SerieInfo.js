@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import moment from "moment";
+import { database } from "../firebase";
+import { getDoc, updateDoc, doc, setDoc, increment, Timestamp } from "firebase/firestore";
 import { baseImageURL, formatDuration } from "../Utils/utils";
 
 import ImageAndUserActionsContainer from "../Reusable/MovieSerie/ImageAndUserActionsContainer";
@@ -22,6 +24,58 @@ function SerieInfo({ serieResults, serieId }) {
   const [showTrailerPopup, setShowTrailerPopup] = useState(false);
   const [showImagesPopup, setShowImagesPopup] = useState(false);
   const duration = serieResults?.details?.episode_run_time[0];
+
+  async function handleStatistics() {
+    const docSnap = await getDoc(doc(database, "pageStatistics/seriesData/allViewedSeries", serieId));
+
+    if (docSnap.exists()) {
+      updateDoc(doc(database, `pageStatistics/seriesData/allViewedSeries/${serieId}`), {
+        numOfViews: increment(1),
+      })
+        .then((doc) => {
+          console.log(doc);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      setDoc(doc(database, `pageStatistics/seriesData/allViewedSeries/${serieId}`), {
+        id: serieId,
+        numOfViews: 1,
+        dateFirstViewed: Timestamp.fromDate(new Date()),
+      })
+        .then((doc) => {
+          console.log(doc);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+
+    setDoc(
+      doc(database, "pageStatistics", "views"),
+      {
+        numOfViewedSeries: increment(1),
+      },
+      { merge: true }
+    )
+      .then((doc) => {
+        console.log(doc);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  useEffect(() => {
+    handleStatistics();
+
+    return () => {
+      setShowBackgroundDarkener(false);
+      setShowTrailerPopup(false);
+      setShowImagesPopup(false);
+    };
+  }, []);
 
   return (
     <>

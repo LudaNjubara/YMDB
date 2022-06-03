@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import moment from "moment";
+import { database } from "../firebase";
+import { doc, getDoc, updateDoc, setDoc, increment, Timestamp } from "firebase/firestore";
 import { baseImageURL, formatDuration } from "../Utils/utils";
 
 import ImageAndUserActionsContainer from "../Reusable/MovieSerie/ImageAndUserActionsContainer";
@@ -22,6 +24,58 @@ function MovieInfo({ movieResults, movieId }) {
   const [showTrailerPopup, setShowTrailerPopup] = useState(false);
   const [showImagesPopup, setShowImagesPopup] = useState(false);
   const movieDuration = movieResults?.details?.runtime;
+
+  async function handleStatistics() {
+    const docSnap = await getDoc(doc(database, "pageStatistics/moviesData/allViewedMovies", movieId));
+
+    if (docSnap.exists()) {
+      updateDoc(doc(database, `pageStatistics/moviesData/allViewedMovies/${movieId}`), {
+        numOfViews: increment(1),
+      })
+        .then((doc) => {
+          console.log(doc);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      setDoc(doc(database, `pageStatistics/moviesData/allViewedMovies/${movieId}`), {
+        id: movieId,
+        numOfViews: 1,
+        dateFirstViewed: Timestamp.fromDate(new Date()),
+      })
+        .then((doc) => {
+          console.log(doc);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+
+    setDoc(
+      doc(database, "pageStatistics", "views"),
+      {
+        numOfViewedMovies: increment(1),
+      },
+      { merge: true }
+    )
+      .then((doc) => {
+        console.log(doc);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  useEffect(() => {
+    handleStatistics();
+
+    return () => {
+      setShowBackgroundDarkener(false);
+      setShowTrailerPopup(false);
+      setShowImagesPopup(false);
+    };
+  }, []);
 
   return (
     <>

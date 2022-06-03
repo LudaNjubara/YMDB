@@ -16,6 +16,11 @@ function ViewAll() {
             View all series
           </button>
         </Link>
+        <Link href="/stats">
+          <button type="button" className={styles.viewAllButton}>
+            View Trending stats
+          </button>
+        </Link>
       </div>
     </section>
   );

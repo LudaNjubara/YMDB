@@ -127,7 +127,7 @@ function Footer() {
         </section>
       </div>
       <div className={styles.footerBgContainer}>
-        <Image src="/footer_bg.svg" layout="fill" className={styles.footerWave} />
+        <Image src="/footer_bg.svg" priority={true} layout="fill" className={styles.footerWave} />
       </div>
       <div className={styles.footerBgIconsContainer}>
         <RiTvFill className={styles.footerBgIcon} />

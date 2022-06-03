@@ -50,17 +50,19 @@ function Hero({ fetchURL }) {
     addToFavourites(id);
   }
 
-  useEffect(() => {
-    async function fetchMovieData() {
-      const req = await axios.get(fetchURL);
-      const randomMovieIndex = Math.floor(Math.random() * req.data.results.length);
-      setMovie(req.data.results[randomMovieIndex]);
+  async function fetchMovieData() {
+    const req = await axios.get(fetchURL);
+    const randomMovieIndex = Math.floor(Math.random() * req.data.results.length);
+    setMovie(req.data.results[randomMovieIndex]);
+  }
 
-      return () => {
-        setMovie(null);
-      };
-    }
+  useEffect(() => {
     fetchMovieData();
+
+    return () => {
+      setMovie(null);
+      setAddToFavouritesSuccess(null);
+    };
   }, [fetchURL]);
 
   return (

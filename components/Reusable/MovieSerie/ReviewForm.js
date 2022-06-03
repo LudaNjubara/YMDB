@@ -35,6 +35,7 @@ function ReviewForm({ styles, fromPage, id }) {
   }, []);
 
   function postComment(userCommentInput, userRatingInput) {
+    // Add comment
     addDoc(collection(database, `${fromPage === "movie" ? "movies" : "series"}/${id}/reviews`), {
       comment: userCommentInput.value || null,
       rating: userRatingInput.value || "N/A",
@@ -43,10 +44,26 @@ function ReviewForm({ styles, fromPage, id }) {
       date: moment(new Date()).format("Do MMMM YYYY"),
     })
       .then(() => {
-        setPostCommentSuccess(true);
-        setTimeout(() => {
-          setPostCommentSuccess(null);
-        }, 3000);
+        // Increment total num of comments for this movie/serie
+        setDoc(
+          doc(database, `${fromPage === "movie" ? "movies" : "series"}/${id}`),
+          {
+            numOfReviews: increment(1),
+          },
+          { merge: true }
+        )
+          .then(() => {
+            setPostCommentSuccess(true);
+            setTimeout(() => {
+              setPostCommentSuccess(null);
+            }, 3000);
+          })
+          .catch(() => {
+            setPostCommentSuccess(false);
+            setTimeout(() => {
+              setPostCommentSuccess(null);
+            }, 3000);
+          });
       })
       .catch(() => {
         setPostCommentSuccess(false);

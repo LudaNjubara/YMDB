@@ -1,0 +1,192 @@
+/* General */
+.statsWrapper {
+  padding: 200px var(--padding-lg) 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.statChartSection {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  flex: 0 0 auto;
+  background-color: var(--dark-blue-color);
+  padding: 30px;
+  border-radius: 15px;
+}
+
+.statChartArticleTitle {
+  font-size: var(--font-size-h2);
+  font-weight: 500;
+  letter-spacing: 0.4px;
+  padding-bottom: 25px;
+}
+
+.statChartArticleTitle_small {
+  font-size: var(--font-size-h3);
+  font-weight: 500;
+  letter-spacing: 0.4px;
+  padding-bottom: 15px;
+}
+
+/* Most Commented */
+.mostCommentedArticle > canvas {
+  max-height: 550px;
+}
+
+/* No data message */
+.noDataMessage {
+  width: fit-content;
+  opacity: 0.4;
+  margin: 0 auto;
+  padding-bottom: 25px;
+  font-size: var(--font-size-h3);
+}
+
+/* ChooseTimeAgo */
+
+.chooseTimeAgoContainer {
+  width: fit-content;
+  padding: 2px;
+  border-radius: 30px;
+  background: linear-gradient(to right, var(--blue-darker-color), var(--purple-darker-color));
+}
+
+.chooseTimeAgoButtonsContainer {
+  position: relative;
+  display: inline-flex;
+  column-gap: 15px;
+  width: fit-content;
+  padding: 5px;
+  border-radius: 30px;
+  background-color: var(--dark-blue-color);
+}
+
+.backgroundPill {
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  width: 200px;
+  padding: 17px 20px;
+  border-radius: 30px;
+  background-color: var(--blue-darker-color);
+  transform: translateY(-50%);
+  box-shadow: 0 0 7px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.3s linear;
+}
+
+.backgroundPill.monthActive {
+  transform: translateY(-50%) translateX(215px);
+  background-color: var(--purple-darker-color);
+}
+
+.chooseTimeAgoButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  padding: 7px 20px;
+  border-radius: 30px;
+  font-weight: 400;
+  font-size: var(--font-size-default);
+  background: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: background 0.3s ease-out;
+  z-index: 1;
+}
+
+.chooseTimeAgoButton:hover,
+.chooseTimeAgoButton:focus {
+  background: rgba(0, 47, 255, 0.05);
+}
+
+/* Top 10 */
+
+.relatedScrollableRow {
+  display: flex;
+  gap: 15px;
+  overflow-x: auto;
+  padding-bottom: 15px;
+  scroll-snap-type: inline mandatory;
+  scrollbar-width: none;
+}
+
+.relatedScrollableRow:hover > button {
+  opacity: 1;
+}
+
+.relatedScrollableRow::-webkit-scrollbar {
+  display: none;
+}
+
+.relatedContainer {
+  flex: 0 0 300px;
+  background: var(--blue-darker-color);
+  border-radius: 10px;
+  cursor: pointer;
+  outline: none;
+  transition: box-shadow 0.5s ease-out;
+  scroll-snap-align: start;
+}
+
+.relatedContainer:hover,
+.relatedContainer:focus {
+  box-shadow: 3px 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.relatedContainer:hover img,
+.article:focus img {
+  transform: scale(1.05);
+}
+
+.relatedImageContainer {
+  position: relative;
+  border-radius: 10px 10px 0 0;
+  overflow: hidden;
+  height: 140px;
+}
+
+.relatedImage {
+  width: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+.relatedContent {
+  padding: 20px;
+}
+
+.relatedTitleAndVoteAvg {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 20px;
+}
+
+.relatedTitle {
+  font-weight: 400;
+  font-size: var(--font-size-default);
+  max-width: 150px;
+  line-height: 1.1;
+  letter-spacing: 0.3px;
+}
+
+.relatedVoteContainer {
+  display: flex;
+  column-gap: 7px;
+}
+
+.relatedVoteAvg {
+  font-weight: 500;
+}
+
+.relatedVoteIcon {
+  fill: gold;
+}
+
+.relatedDescription {
+  font-weight: 300;
+  font-size: var(--font-size-sm);
+}

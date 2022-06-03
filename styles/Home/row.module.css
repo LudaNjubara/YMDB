@@ -50,6 +50,10 @@
   transition: box-shadow 0.3s ease, filter 0.3s ease;
 }
 
+.viewAllButton:nth-child(2) {
+  background: linear-gradient(to right, var(--blue-darker-color), var(--purple-darker-color));
+}
+
 .viewAllButton:last-child {
   background-color: var(--purple-darker-color);
 }

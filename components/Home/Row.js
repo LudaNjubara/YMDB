@@ -6,7 +6,7 @@ import uniqid from "uniqid";
 import axios from "axios";
 import instance from "../axios";
 import HorizontalScrollButton from "../Reusable/HorizontalScrollButtons";
-import { baseImageURL, truncate, scrollHorizontally } from "../Utils/utils";
+import { baseImageURL, truncate } from "../Utils/utils";
 
 import { FaStar } from "react-icons/fa";
 
@@ -127,6 +127,4 @@ function Row({ title, fetchURL, isLarge }) {
     )
   );
 }
-
-export { truncate, baseImageURL, scrollHorizontally };
 export default Row;
