@@ -31,6 +31,7 @@ function SerieInfo({ serieResults, serieId }) {
     if (docSnap.exists()) {
       updateDoc(doc(database, `pageStatistics/seriesData/allViewedSeries/${serieId}`), {
         numOfViews: increment(1),
+        dateLastViewed: Timestamp.fromDate(new Date()),
       })
         .then((doc) => {
           console.log(doc);
@@ -42,7 +43,7 @@ function SerieInfo({ serieResults, serieId }) {
       setDoc(doc(database, `pageStatistics/seriesData/allViewedSeries/${serieId}`), {
         id: serieId,
         numOfViews: 1,
-        dateFirstViewed: Timestamp.fromDate(new Date()),
+        dateLastViewed: Timestamp.fromDate(new Date()),
       })
         .then((doc) => {
           console.log(doc);

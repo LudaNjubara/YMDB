@@ -71,7 +71,7 @@ function Stats() {
     const moviesQuery = query(
       collection(database, "pageStatistics/moviesData/allViewedMovies"),
       where(
-        "dateFirstViewed",
+        "dateLastViewed",
         ">=",
         Timestamp.fromDate(
           moment()
@@ -79,7 +79,7 @@ function Stats() {
             .toDate()
         )
       ),
-      orderBy("dateFirstViewed", "desc"),
+      orderBy("dateLastViewed", "desc"),
       orderBy("numOfViews", "desc"),
       limit(10)
     );
@@ -95,7 +95,7 @@ function Stats() {
     const seriesQuery = query(
       collection(database, "pageStatistics/seriesData/allViewedSeries"),
       where(
-        "dateFirstViewed",
+        "dateLastViewed",
         ">=",
         Timestamp.fromDate(
           moment()
@@ -103,7 +103,7 @@ function Stats() {
             .toDate()
         )
       ),
-      orderBy("dateFirstViewed", "desc"),
+      orderBy("dateLastViewed", "desc"),
       orderBy("numOfViews", "desc"),
       limit(10)
     );

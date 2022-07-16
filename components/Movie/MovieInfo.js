@@ -22,7 +22,6 @@ import reusableStyles from "../../styles/Reusable/movieSerie.module.css";
 function MovieInfo({ movieResults, movieId }) {
   const [showBackgroundDarkener, setShowBackgroundDarkener] = useState(false);
   const [showTrailerPopup, setShowTrailerPopup] = useState(false);
-  const [showImagesPopup, setShowImagesPopup] = useState(false);
   const movieDuration = movieResults?.details?.runtime;
 
   async function handleStatistics() {
@@ -31,6 +30,7 @@ function MovieInfo({ movieResults, movieId }) {
     if (docSnap.exists()) {
       updateDoc(doc(database, `pageStatistics/moviesData/allViewedMovies/${movieId}`), {
         numOfViews: increment(1),
+        dateLastViewed: Timestamp.fromDate(new Date()),
       })
         .then((doc) => {
           console.log(doc);
@@ -42,7 +42,7 @@ function MovieInfo({ movieResults, movieId }) {
       setDoc(doc(database, `pageStatistics/moviesData/allViewedMovies/${movieId}`), {
         id: movieId,
         numOfViews: 1,
-        dateFirstViewed: Timestamp.fromDate(new Date()),
+        dateLastViewed: Timestamp.fromDate(new Date()),
       })
         .then((doc) => {
           console.log(doc);

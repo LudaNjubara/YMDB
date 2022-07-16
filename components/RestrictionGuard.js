@@ -5,6 +5,7 @@ import { auth } from "./firebase";
 function RestrictionGuard({ children }) {
   const router = useRouter();
   const [authorized, setAuthorized] = useState(false);
+  const privatePaths = ["/profile"];
 
   useEffect(() => {
     // on initial load - run auth check
@@ -21,15 +22,12 @@ function RestrictionGuard({ children }) {
     return () => {
       router.events.off("routeChangeStart", hideContent);
       router.events.off("routeChangeComplete", authCheck);
-      setAuthorized(false);
     };
   }, []);
 
   function authCheck(url) {
     // redirect user to login if accessing a restricted page without logging in first
-    const privatePaths = ["/profile"];
     const path = url.split("?")[0];
-
     auth.onAuthStateChanged((user) => {
       if (!user && privatePaths.includes(path)) {
         setAuthorized(false);

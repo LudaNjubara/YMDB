@@ -17,7 +17,7 @@ import styles from "../../styles/Home/hero.module.css";
 function Hero({ fetchURL }) {
   const router = useRouter();
   const user = useSelector(selectUser);
-  const [movie, setMovie] = useState(null);
+  const [movie, setMovie] = useState({});
   const [addToFavouritesSuccess, setAddToFavouritesSuccess] = useState(null);
 
   function addToFavourites(id) {
@@ -60,7 +60,7 @@ function Hero({ fetchURL }) {
     fetchMovieData();
 
     return () => {
-      setMovie(null);
+      setMovie({});
       setAddToFavouritesSuccess(null);
     };
   }, [fetchURL]);
