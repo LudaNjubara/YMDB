@@ -101,7 +101,7 @@ function Favourites({ favourites }) {
                           </h3>
                           <div className={styles.watchlistAndFavouritesVoteContainer}>
                             <span className={styles.watchlistAndFavouritesVoteAvg}>
-                              {movie?.vote_average}
+                              {movie?.vote_average.toFixed(1)}
                             </span>
                             <FaStar className={styles.watchlistAndFavouritesVoteIcon} />
                           </div>
@@ -136,7 +136,7 @@ function Favourites({ favourites }) {
                           </h3>
                           <div className={styles.watchlistAndFavouritesVoteContainer}>
                             <span className={styles.watchlistAndFavouritesVoteAvg}>
-                              {serie?.vote_average}
+                              {serie?.vote_average.toFixed(1)}
                             </span>
                             <FaStar className={styles.watchlistAndFavouritesVoteIcon} />
                           </div>

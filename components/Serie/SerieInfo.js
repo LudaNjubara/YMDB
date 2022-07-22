@@ -170,7 +170,7 @@ function SerieInfo({ serieResults, serieId }) {
               <span className={reusableStyles.durationContainer}>{formatDuration(duration)}</span>
             </div>
             <span className={reusableStyles.mainInfoAvgVote}>
-              {serieResults?.details?.vote_average ? serieResults?.details?.vote_average : "N/A"}
+              {serieResults?.details?.vote_average ? serieResults?.details?.vote_average.toFixed(1) : "N/A"}
               <BsStarFill className={reusableStyles.mainInfoAvgVoteIcon} />
               <br />
               <span className={reusableStyles.mainInfoVoteCount}>

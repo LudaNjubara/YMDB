@@ -86,7 +86,8 @@
 
 .backgroundImageContainer {
   position: fixed;
-  inset: 0;
+  height: 100vh;
+  width: 100vw;
   filter: blur(40px) brightness(0.9);
 }
 

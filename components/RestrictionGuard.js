@@ -22,6 +22,7 @@ function RestrictionGuard({ children }) {
     return () => {
       router.events.off("routeChangeStart", hideContent);
       router.events.off("routeChangeComplete", authCheck);
+      setAuthorized(false);
     };
   }, []);
 
@@ -30,7 +31,6 @@ function RestrictionGuard({ children }) {
     const path = url.split("?")[0];
     auth.onAuthStateChanged((user) => {
       if (!user && privatePaths.includes(path)) {
-        setAuthorized(false);
         router.push({
           pathname: "/login",
           query: { returnUrl: router.asPath },

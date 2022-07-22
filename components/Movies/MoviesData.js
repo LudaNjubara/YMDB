@@ -110,10 +110,8 @@ function MoviesData() {
               const yearSelect = document.getElementById("yearSelectId");
               const genreSelect = document.getElementById("genreSelectId");
 
-              console.log(selectedYearOptionIndex);
               selectedYearOptionIndex = yearSelect.selectedIndex;
               selectedGenreOptionIndex = genreSelect.selectedIndex;
-              console.log(selectedYearOptionIndex);
 
               setYear(yearSelect.value);
               setGenre(genreSelect.value);

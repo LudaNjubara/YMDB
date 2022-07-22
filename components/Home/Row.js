@@ -81,7 +81,7 @@ function Row({ title, fetchURL, isLarge }) {
                           </h3>
                           <div className={styles.movieVoteContainer}>
                             <span className={styles.movieVoteAvg}>
-                              {movie?.vote_average ? movie?.vote_average : "N/A"}
+                              {movie?.vote_average ? movie?.vote_average.toFixed(1) : "N/A"}
                             </span>
                             <FaStar className={styles.movieVoteIcon} />
                           </div>
@@ -111,7 +111,7 @@ function Row({ title, fetchURL, isLarge }) {
                           {movie?.name || movie?.title || movie?.original_name}
                         </h3>
                         <div className={styles.movieVoteContainer}>
-                          <span className={styles.movieVoteAvg}>{movie?.vote_average}</span>
+                          <span className={styles.movieVoteAvg}>{movie?.vote_average.toFixed(1)}</span>
                           <FaStar className={styles.movieVoteIcon} />
                         </div>
                       </div>

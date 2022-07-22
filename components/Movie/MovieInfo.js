@@ -73,7 +73,6 @@ function MovieInfo({ movieResults, movieId }) {
     return () => {
       setShowBackgroundDarkener(false);
       setShowTrailerPopup(false);
-      setShowImagesPopup(false);
     };
   }, []);
 
@@ -129,7 +128,7 @@ function MovieInfo({ movieResults, movieId }) {
             allowFullScreen
           ></iframe>
         ) : (
-          "Sorry, there is no trailer for this movie at the moment"
+          <p>Sorry, there is no trailer for this movie at the moment</p>
         )}
       </section>
 
@@ -179,7 +178,7 @@ function MovieInfo({ movieResults, movieId }) {
               <span id="durationContainer">{formatDuration(movieDuration)}</span>
             </span>
             <span className={reusableStyles.mainInfoAvgVote}>
-              {movieResults?.details?.vote_average ? movieResults?.details?.vote_average : "N/A"}
+              {movieResults?.details?.vote_average ? movieResults?.details?.vote_average.toFixed(1) : "N/A"}
               <BsStarFill className={reusableStyles.mainInfoAvgVoteIcon} />
               <br />
               <span className={reusableStyles.mainInfoVoteCount}>
@@ -206,11 +205,12 @@ function MovieInfo({ movieResults, movieId }) {
                   e.preventDefault();
 
                   const trailerVideo = document.querySelector(`.${reusableStyles.trailerVideo}`);
-                  let trailerVideoSrc = trailerVideo.src;
-                  trailerVideo.src = trailerVideoSrc;
 
                   setShowBackgroundDarkener(false);
                   setShowTrailerPopup(false);
+
+                  trailerVideo.remove();
+                  trailerPopup.appendChild(trailerVideo);
 
                   trailerPopup.removeEventListener("click", null);
                 });
