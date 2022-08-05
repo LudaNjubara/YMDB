@@ -69,7 +69,7 @@ function Row({ title, fetchURL, isLarge }) {
                       <div className={styles.movieImageContainer}>
                         <Image
                           src={`${baseImageURL}${movie?.backdrop_path}`}
-                          alt={movie?.name}
+                          alt={movie?.name || movie?.title || movie?.original_title}
                           className={styles.movieImage}
                           layout="fill"
                         />
@@ -101,7 +101,7 @@ function Row({ title, fetchURL, isLarge }) {
                       <div className={styles.movieImageContainer}>
                         <Image
                           src={`${baseImageURL}${movie?.poster_path}`}
-                          alt={movie?.name}
+                          alt={movie?.name || movie?.title || movie?.original_title}
                           className={styles.movieImage}
                           layout="fill"
                         />
