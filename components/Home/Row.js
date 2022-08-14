@@ -86,7 +86,9 @@ function Row({ title, fetchURL, isLarge }) {
                             <FaStar className={styles.movieVoteIcon} />
                           </div>
                         </div>
-                        <p className={styles.movieDescription}>{truncate(movie?.overview)}</p>
+                        <p className={styles.movieDescription}>
+                          {/* truncate(movie?.overview) */ movie?.overview}
+                        </p>
                       </div>
                     </article>
                   </Link>
@@ -115,7 +117,7 @@ function Row({ title, fetchURL, isLarge }) {
                           <FaStar className={styles.movieVoteIcon} />
                         </div>
                       </div>
-                      <p className={styles.movieDescription}>{truncate(movie?.overview, 338)}</p>
+                      <p className={styles.movieDescription}>{truncate(movie?.overview, 333)}</p>
                     </article>
                   </Link>
                 )

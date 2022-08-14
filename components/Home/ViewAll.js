@@ -8,17 +8,17 @@ function ViewAll() {
       <div className={styles.viewAllButtonsContainer}>
         <Link href="/movies">
           <button type="button" className={styles.viewAllButton}>
-            View all movies
+            All movies
           </button>
         </Link>
         <Link href="/series">
           <button type="button" className={styles.viewAllButton}>
-            View all series
+            All series
           </button>
         </Link>
         <Link href="/stats">
           <button type="button" className={styles.viewAllButton}>
-            View Trending stats
+            Trending stats
           </button>
         </Link>
       </div>

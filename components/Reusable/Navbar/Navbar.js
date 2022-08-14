@@ -9,11 +9,13 @@ import { baseImageURL, truncate } from "../../Utils/utils";
 import NavbarButton from "./NavbarButton";
 
 import { BsStarFill, BsCalendar3 } from "react-icons/bs";
+import { MdSearch, MdSearchOff } from "react-icons/md";
 
 import styles from "../../../styles/Reusable/navbar.module.css";
 
 function Navbar() {
   const [show, setShow] = useState(false);
+  const [showCancelSearchIcon, setShowCancelSearchIcon] = useState(false);
   const [isMounted, setIsMounted] = useState(true);
   const [searchResults, setSearchResults] = useState(null);
   const [filteredResultsFinal, setFilteredResultsFinal] = useState(null);
@@ -55,6 +57,17 @@ function Navbar() {
     const year = newDate.getFullYear();
     return year;
   }
+
+  const openSearchInput = () => {
+    const searchWrapper = document.querySelector(`.${styles.searchWrapper}`);
+
+    searchWrapper.classList.toggle(styles.open);
+    searchWrapper.classList.contains(styles.open)
+      ? setShowCancelSearchIcon(true)
+      : setShowCancelSearchIcon(false);
+
+    searchInputRef.current.focus();
+  };
 
   useEffect(() => {
     if (isMounted) {
@@ -101,11 +114,13 @@ function Navbar() {
         <div className={styles.searchWrapper}>
           <input
             type="text"
+            id="searchInput"
             className={styles.searchInput}
             placeholder="Search your favourite movies..."
             ref={searchInputRef}
             onChange={() => search(searchInputRef.current.value)}
           />
+
           {searchResults && (
             <section className={styles.searchResultsContainer}>
               {filteredResultsFinal.movies.length > 0 && (
@@ -229,7 +244,16 @@ function Navbar() {
           )}
         </div>
 
-        <div className={styles.userActionContainer}>{<NavbarButton />}</div>
+        <div className={styles.userActionContainer}>
+          <button type="button" className={styles.searchButton} onClick={openSearchInput}>
+            {showCancelSearchIcon ? (
+              <MdSearchOff className={styles.searchButtonIcon} />
+            ) : (
+              <MdSearch className={styles.searchButtonIcon} />
+            )}
+          </button>
+          {<NavbarButton />}
+        </div>
       </div>
     </header>
   );

@@ -113,8 +113,7 @@ function Hero({ fetchURL }) {
             alt={movie?.name}
             className={styles.heroImage}
             key={uniqid()}
-            width={1500}
-            height={900}
+            layout="fill"
             priority={true}
           />
         </article>
