@@ -281,7 +281,7 @@ function ReviewForm({ styles, fromPage, id }) {
             Post
           </button>
           <button type="reset" className={styles.formPostClearButton}>
-            Clear form
+            Clear
           </button>
         </div>
       </form>

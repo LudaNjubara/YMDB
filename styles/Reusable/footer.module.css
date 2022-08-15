@@ -24,6 +24,7 @@
 .footerBgIconsContainer {
   position: absolute;
   inset: 0;
+  overflow-x: hidden;
 }
 
 .footerBgIcon {
@@ -226,6 +227,18 @@
   line-height: 2;
 }
 
+/* Media query for desktops */
+@media screen and (max-width: 1200px) {
+}
+
+/* Media query for laptops */
+@media screen and (max-width: 992px) {
+}
+
+/* Media query for tablets */
+@media screen and (max-width: 768px) {
+}
+
 /* Media query for mobile phones */
 @media screen and (max-width: 576px) {
   .joinUsButton {
@@ -270,16 +283,4 @@
     line-height: 1.5;
     font-size: var(--font-size-sm);
   }
-}
-
-/* Media query for tablets */
-@media screen and (max-width: 768px) {
-}
-
-/* Media query for laptops */
-@media screen and (max-width: 992px) {
-}
-
-/* Media query for desktops */
-@media screen and (max-width: 1200px) {
 }

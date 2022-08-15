@@ -120,7 +120,7 @@ function ImageAndUserActionsContainer({ styles, id, fromPage, results }) {
           onClick={() => initializeAdding("watchlist")}
         >
           <BsBookmarkFill className={styles.userActionIcon} />
-          Add to Watchlist
+          <span className={styles.userActionButtonText}>Add to Watchlist</span>
         </button>
         <button
           type="button"
@@ -128,7 +128,7 @@ function ImageAndUserActionsContainer({ styles, id, fromPage, results }) {
           onClick={() => initializeAdding("favourites")}
         >
           <BsStarFill className={styles.userActionIcon} />
-          Add to Favourites
+          <span className={styles.userActionButtonText}>Add to Favourites</span>
         </button>
       </div>
     </>

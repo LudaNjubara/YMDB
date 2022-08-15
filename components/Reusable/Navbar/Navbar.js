@@ -62,11 +62,13 @@ function Navbar() {
     const searchWrapper = document.querySelector(`.${styles.searchWrapper}`);
 
     searchWrapper.classList.toggle(styles.open);
-    searchWrapper.classList.contains(styles.open)
-      ? setShowCancelSearchIcon(true)
-      : setShowCancelSearchIcon(false);
-
-    searchInputRef.current.focus();
+    if (searchWrapper.classList.contains(styles.open)) {
+      setShowCancelSearchIcon(true);
+      searchInputRef.current.focus();
+    } else {
+      searchInputRef.current.blur();
+      setShowCancelSearchIcon(false);
+    }
   };
 
   useEffect(() => {
@@ -139,8 +141,7 @@ function Navbar() {
                               placeholder="blur"
                               blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP87wMAAlABTQluYBcAAAAASUVORK5CYII="
                               alt={movie.name || movie.title || movie.original_title}
-                              width={120}
-                              height={200}
+                              layout="fill"
                               objectFit="cover"
                             />
                           </div>

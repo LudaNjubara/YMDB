@@ -171,7 +171,7 @@
   position: absolute;
   bottom: 0;
   left: 0;
-  right: 0;
+  width: 100%;
 }
 
 .userActionButton {
@@ -184,7 +184,8 @@
   background: rgba(255, 255, 255, 0.18);
   backdrop-filter: blur(15px);
   width: 50%;
-  padding: 10px 30px;
+  padding: 10px 5px;
+  line-height: 0.95;
   border: none;
   cursor: pointer;
   outline: none;
@@ -397,7 +398,7 @@
   height: 35px;
 }
 
-/* Movie Cast & Crew Properties */
+/* Cast & Crew Properties */
 
 .castWatchKeywordsWrapper {
   grid-column: 1 / -1;
@@ -626,13 +627,13 @@
 
 .imageContainerHorizontal {
   position: relative;
-  flex: 0 0 400px;
+  flex: 0 0 430px;
   height: 250px;
 }
 
 .imageContainerVertical {
   position: relative;
-  flex: 0 0 170px;
+  flex: 0 0 150px;
   height: 250px;
 }
 
@@ -716,6 +717,12 @@
   max-width: 150px;
   line-height: 1.1;
   letter-spacing: 0.3px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
 .relatedVoteContainer {
@@ -734,6 +741,12 @@
 .relatedDescription {
   font-weight: 300;
   font-size: var(--font-size-sm);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  line-clamp: 5;
+  -webkit-box-orient: vertical;
 }
 
 /* Comments & Review Form Wrapper properties */
@@ -995,4 +1008,195 @@
 .formPostClearButton:last-child:hover,
 .formPostClearButton:last-child:focus {
   background: rgba(255, 25, 0, 0.5);
+}
+
+/* Media query for desktops */
+@media screen and (max-width: 1200px) {
+}
+
+/* Media query for laptops */
+@media screen and (max-width: 992px) {
+  /* General properties */
+  .infoWrapper {
+    padding: 100px var(--padding-md) 0;
+    gap: 20px;
+  }
+
+  .article {
+    padding: var(--padding-md);
+  }
+
+  /* Image and User actions Properties */
+  .userActionButton {
+    row-gap: 5px;
+    font-weight: 400;
+    padding: 14px 5px;
+  }
+
+  .userActionButtonText {
+    display: none;
+  }
+
+  /* Main Info Wrapper Properties */
+  .mainInfoWrapper {
+    flex-direction: column;
+  }
+
+  /* Main Info Content Properties */
+  .mainInfoContent {
+    row-gap: 20px;
+  }
+
+  .mainInfoTitle {
+    font-size: var(--font-size-md);
+    padding-bottom: 10px;
+  }
+
+  /* Main Info Aside Properties */
+  .mainInfoAvgVote {
+    font-size: var(--font-size-md);
+    line-height: 0.4;
+  }
+
+  /* Cast & Crew Properties */
+  .castWatchKeywordsWrapper {
+    gap: 20px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
+  }
+
+  .castAndCrewWrapper {
+    grid-column: 1 / 4;
+    grid-row: unset;
+  }
+
+  .whereToWatchWrapper {
+    grid-column: 1 / 3;
+    grid-row: unset;
+  }
+
+  .keywordsWrapper {
+    grid-column: 3 / 4;
+    grid-row: unset;
+  }
+
+  /* Keyword properties */
+  .keywordsContainer {
+    gap: 15px;
+    max-height: 250px;
+  }
+
+  /* Comments & Review Form Wrapper properties */
+  .commentsAndReviewFormWrapper {
+    justify-content: unset;
+    flex-direction: column;
+  }
+
+  .commentsWrapper,
+  .reviewFormWrapper {
+    flex-basis: unset;
+  }
+
+  /* Comments properties */
+  .commentsContainer {
+    overscroll-behavior-y: initial;
+    max-height: 550px;
+  }
+
+  /* Review Form properties */
+
+  .reviewForm {
+    row-gap: 50px;
+  }
+
+  .userCommentInput {
+    height: 220px;
+    padding: 20px;
+  }
+}
+
+/* Media query for tablets */
+@media screen and (max-width: 768px) {
+  /* General Properties */
+  .infoWrapper {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .article {
+    padding: var(--padding-lg) var(--padding-md);
+    border-radius: 10px;
+  }
+
+  /* Image and User actions Properties */
+  .imageAndUserActionsContainer {
+    min-height: 75vh;
+    max-height: 650px;
+  }
+
+  .userActionButtonText {
+    display: initial;
+  }
+}
+
+/* Media query for mobile phones */
+@media screen and (max-width: 576px) {
+  /* General Properties */
+  .infoWrapper {
+    padding: 100px var(--padding-sm) 0;
+  }
+
+  .article {
+    padding: var(--padding-md) var(--padding-sm);
+    grid-column: unset;
+    grid-row: unset;
+  }
+
+  /* Image and User actions Properties */
+  .userActionButtonText {
+    display: initial;
+  }
+
+  /*  Main Info Content Properties */
+  .mainInfoTitle {
+    font-size: var(--font-size-h1);
+    padding-bottom: 20px;
+  }
+
+  /* Cast & Crew Properties */
+  .castWatchKeywordsWrapper {
+    grid-template-columns: unset;
+    grid-template-rows: unset;
+    grid-auto-flow: row;
+  }
+
+  /* Cast Row properties */
+  .castAndCrewRow + .castAndCrewRow {
+    margin-top: 30px;
+  }
+
+  .castAndCrewCard {
+    flex: 0 0 130px;
+  }
+
+  /* Images properties */
+  .imageContainerHorizontal {
+    flex: 0 0 390px;
+    height: 230px;
+  }
+
+  .imageContainerVertical {
+    flex: 0 0 150px;
+    height: 230px;
+  }
+
+  /* Related movies/series properties */
+  .relatedContainer {
+    flex: 0 0 270px;
+  }
+
+  .relatedDescription {
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
+  }
 }
