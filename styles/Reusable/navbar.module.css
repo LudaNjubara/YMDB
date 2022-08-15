@@ -28,6 +28,8 @@
 
 /* Logo properties */
 .logo {
+  display: flex;
+  gap: 2px;
   font-size: var(--font-size-h1);
   font-weight: 600;
 }

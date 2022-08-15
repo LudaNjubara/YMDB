@@ -84,12 +84,20 @@
   flex-direction: column;
 }
 
-.footerLogo {
+.footerLogoWrapper {
+  display: flex;
+  flex-direction: column;
   padding: 5px;
-  font-size: var(--font-size-h1);
-  font-weight: 600;
   line-height: 0.5;
   width: fit-content;
+}
+
+.footerLogo {
+  display: flex;
+  gap: 2px;
+  font-size: var(--font-size-h1);
+  font-weight: 600;
+  line-height: initial;
 }
 
 .footerLogoText {

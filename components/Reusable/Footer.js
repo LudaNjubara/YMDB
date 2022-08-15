@@ -28,8 +28,12 @@ function Footer() {
       <div className={styles.footerContainer}>
         <section className={styles.footerJoinUsContainer}>
           <Link href="/">
-            <a className={styles.footerLogo}>
-              YMDB <br /> <span className={styles.footerLogoText}>Your Movie DataBase</span>
+            <a className={styles.footerLogoWrapper}>
+              <span className={styles.footerLogo}>
+                <Image src="/logo.svg" width="27" height="27" alt="Footer Logo" />
+                MDB
+              </span>
+              <span className={styles.footerLogoText}>Your Movie Database</span>
             </a>
           </Link>
           <div className={styles.footerJoinUsContainerInner}>

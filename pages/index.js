@@ -16,6 +16,8 @@ export default function Home() {
           name="description"
           content="Browse all the movies and TV Shows. Make your account for free, create your watchlists, mark your favourites and find out all important info about any movie, TV Show or person, in a glimpse."
         />
+        {/* icon */}
+        <link rel="icon" href="/logo.svg" />
       </Head>
 
       <Hero fetchURL={requests.fetchTrending} />

@@ -110,7 +110,10 @@ function Navbar() {
     <header className={`${styles.header} ${show && styles.show}`}>
       <div className={styles.headerContainer}>
         <Link href="/">
-          <a className={styles.logo}>YMDB</a>
+          <a className={styles.logo}>
+            <Image src="/logo.svg" width="27" height="27" alt="Logo" />
+            MDB
+          </a>
         </Link>
 
         <div className={styles.searchWrapper}>
