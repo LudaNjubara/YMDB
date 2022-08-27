@@ -10,6 +10,9 @@ import Watchlist from "./Watchlist";
 import Favourites from "./Favourites";
 import DangerZone from "./DangerZone";
 
+import { BsStarFill, BsBookmarkFill } from "react-icons/bs";
+import { MdSpaceDashboard } from "react-icons/md";
+import { FaBiohazard } from "react-icons/fa";
 import styles from "../../styles/Profile/profile.module.css";
 
 function Profile() {
@@ -103,7 +106,8 @@ function Profile() {
                   }}
                   className={`${styles.profileNavigationButton} ${styles.active}`}
                 >
-                  Personal info
+                  <MdSpaceDashboard className={styles.profileNavigationButtonIcon} />
+                  <span className={styles.profileNavigationButtonText}>Personal Info</span>
                 </button>
               </li>
               <li className={styles.profileNavigationItem}>
@@ -115,7 +119,8 @@ function Profile() {
                   }}
                   className={styles.profileNavigationButton}
                 >
-                  Your Watchlist
+                  <BsBookmarkFill className={styles.profileNavigationButtonIcon} />
+                  <span className={styles.profileNavigationButtonText}>Watchlist</span>
                 </button>
               </li>
               <li className={styles.profileNavigationItem}>
@@ -127,7 +132,8 @@ function Profile() {
                   }}
                   className={styles.profileNavigationButton}
                 >
-                  Your Favourites
+                  <BsStarFill className={styles.profileNavigationButtonIcon} />
+                  <span className={styles.profileNavigationButtonText}>Favourites</span>
                 </button>
               </li>
               <li className={styles.profileNavigationItem}>
@@ -139,7 +145,8 @@ function Profile() {
                   }}
                   className={styles.profileNavigationButton}
                 >
-                  Danger zone
+                  <FaBiohazard className={styles.profileNavigationButtonIcon} />
+                  <span className={styles.profileNavigationButtonText}>Danger Zone</span>
                 </button>
               </li>
             </ul>

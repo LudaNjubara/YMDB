@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Head from "next/head";
 import { auth } from "../components/firebase";
 import { Provider, useDispatch } from "react-redux";
 import { login, logout } from "../components/redux/userSlice";
@@ -36,6 +37,10 @@ export default function AppWrapper({ Component, pageProps }) {
     }, [dispatch]);
     return (
       <>
+        <Head>
+          {/* icon */}
+          <link rel="icon" href="/logo.svg" />
+        </Head>
         <QueryClientProvider client={queryClient}>
           <Navbar />
           <RestrictionGuard>

@@ -91,8 +91,7 @@ function Watchlist({ watchlists }) {
                             src={`${baseImageURL}${movie.poster_path}`}
                             alt={movie.name}
                             className={styles.watchlistAndFavouritesImage}
-                            width={200}
-                            height={310}
+                            layout="fill"
                           />
                         </div>
                         <div className={styles.watchlistAndFavouritesTitleAndVoteAvg}>
@@ -126,8 +125,7 @@ function Watchlist({ watchlists }) {
                             src={`${baseImageURL}${serie.poster_path}`}
                             alt={serie.name}
                             className={styles.watchlistAndFavouritesImage}
-                            width={200}
-                            height={310}
+                            layout="fill"
                           />
                         </div>
                         <div className={styles.watchlistAndFavouritesTitleAndVoteAvg}>

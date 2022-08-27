@@ -1,5 +1,17 @@
 /* General Properties */
 
+.article :is(h1, h2) {
+  text-shadow: 2px 4px 6px rgba(0, 0, 0, 0.15);
+}
+
+.article :is(label, button, span, p, h3, h4, h5, h6) {
+  text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.article label :is(img, svg) {
+  filter: drop-shadow(1px 2px 2px rgba(0, 0, 0, 0.06));
+}
+
 .infoWrapper {
   position: relative;
   display: grid;
@@ -799,13 +811,13 @@
   height: auto;
   background: rgba(255, 255, 255, 0.3);
   border-radius: 15px;
-  padding: 30px 30px 50px;
+  padding: var(--padding-md) var(--padding-md) var(--padding-lg);
   overflow: hidden;
-  transition: max-height 0.5s ease-in-out;
+  transition: max-height 0.7s cubic-bezier(0.19, 0.07, 0, 1.01);
 }
 
 .commentContainer.expandedComment {
-  max-height: 1200px;
+  max-height: 2000px;
 }
 
 .commentInfoContainer {
@@ -1198,5 +1210,65 @@
   .relatedDescription {
     -webkit-line-clamp: 4;
     line-clamp: 4;
+  }
+
+  /* Comments properties */
+
+  .commentsContainer {
+    row-gap: 20px;
+  }
+
+  .commentContainer {
+    max-height: 250px;
+    padding: var(--padding-sm) var(--padding-sm) var(--padding-md);
+    overflow: hidden;
+    transition: max-height 0.7s cubic-bezier(0.19, 0.07, 0, 1.01);
+  }
+
+  .commentContainer.expandedComment {
+    max-height: 2000px;
+  }
+
+  .commentInfoContainer {
+    padding-bottom: 15px;
+  }
+
+  .userInfoContainer {
+    grid-template-columns: 40px 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+
+  .userImage {
+    object-fit: cover;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+  }
+
+  .userUsername {
+    font-size: var(--font-size-h4);
+  }
+
+  .commentDate {
+    font-size: var(--font-size-xs);
+  }
+
+  .userVoteContainer {
+    font-size: var(--font-size-h3);
+  }
+
+  .commentAvgVoteIcon {
+    width: 15px;
+    height: 15px;
+  }
+
+  .userComment {
+    font-size: var(--font-size-sm);
+    line-height: 1.25;
+  }
+
+  .expandShrinkCommentButton {
+    padding: 5px 15px;
+    font-size: var(--font-size-sm);
   }
 }

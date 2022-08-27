@@ -35,7 +35,7 @@ function SimilarRow({ styles, type, results, isFromPersonPage }) {
                           <h3 className={styles.relatedTitle}>
                             {movie?.name || movie?.title || movie?.original_title}
                           </h3>
-                          <div className={styles.movieVoteContainer}>
+                          <div className={styles.relatedVoteContainer}>
                             <span className={styles.relatedVoteAvg}>
                               {movie?.vote_average ? movie?.vote_average.toFixed(1) : "N/A"}
                             </span>
@@ -76,7 +76,7 @@ function SimilarRow({ styles, type, results, isFromPersonPage }) {
                         <h3 className={styles.relatedTitle}>
                           {movie?.name || movie?.title || movie?.original_title}
                         </h3>
-                        <div className={styles.movieVoteContainer}>
+                        <div className={styles.relatedVoteContainer}>
                           <span className={styles.relatedVoteAvg}>
                             {movie?.vote_average ? movie?.vote_average.toFixed(1) : "N/A"}
                           </span>

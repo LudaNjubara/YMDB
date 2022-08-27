@@ -14,6 +14,7 @@
 
 /* Profile Aside Properties */
 .profileAside {
+  order: 1;
   flex-basis: 350px;
   display: flex;
   flex-direction: column;
@@ -24,7 +25,6 @@
 }
 
 /* Aside - User Main info properties */
-
 .userMainInfo {
   display: flex;
   flex-direction: column;
@@ -53,7 +53,6 @@
 }
 
 /* Aside - Navigation properties */
-
 .profileNavigation {
   flex-grow: 1;
 }
@@ -82,19 +81,33 @@
 }
 
 .profileNavigationButton {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   padding: 8px 10px;
-  font-size: var(--font-size-sm);
   background: none;
   border: 3px solid transparent;
-  letter-spacing: 0.4px;
   cursor: pointer;
-  transition: background 0.1s;
+  transition: background 0.1s linear, border 0.5s linear;
 }
 
-.active {
+.profileNavigationButton.active {
   border: 3px solid rgba(255, 255, 255, 0.2);
+}
+
+.profileNavigationButtonText {
+  font-size: var(--font-size-sm);
+  letter-spacing: 0.4px;
+  pointer-events: none;
+}
+
+.profileNavigationButtonIcon {
+  display: none;
+  width: 18px;
+  height: 18px;
+  fill: white;
+  pointer-events: none;
 }
 
 .profileNavigationButton:hover {
@@ -103,6 +116,7 @@
 
 /* Profile Content Properties */
 .profileContent {
+  order: 2;
   flex-basis: 100%;
   padding: var(--padding-md);
   overflow-y: auto;
@@ -111,4 +125,128 @@
 
 .profileContent::-webkit-scrollbar {
   display: none;
+}
+
+/* Media query for desktops */
+@media screen and (max-width: 1200px) {
+}
+
+/* Media query for laptops */
+@media screen and (max-width: 992px) {
+  .profileWrapper {
+    padding: 100px var(--padding-md) 0;
+  }
+
+  /* Profile Aside Properties */
+  .profileAside {
+    flex-basis: 320px;
+    gap: 40px;
+  }
+}
+
+/* Media query for tablets */
+@media screen and (max-width: 768px) {
+  /* Profile Aside Properties */
+  .profileAside {
+    align-items: center;
+    flex-basis: 100px;
+    gap: 40px;
+    padding: 0 var(--padding-sm);
+  }
+
+  /* Aside - User Main info properties */
+  .profileUsername {
+    display: none;
+  }
+
+  /* Aside - Navigation Properties */
+  .profileNavigationItem {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+
+  .profileNavigationButton {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+
+  .profileNavigationButtonIcon {
+    display: initial;
+  }
+
+  .profileNavigationButtonText {
+    display: none;
+  }
+
+  /* Profile Content Properties */
+  .profileContent {
+    padding: var(--padding-md) var(--padding-sm);
+  }
+}
+
+/* Media query for mobile phones */
+@media screen and (max-width: 576px) {
+  .profileWrapper {
+    height: 100vh;
+    padding: unset;
+  }
+
+  .profileContainer {
+    flex-direction: column;
+    width: 100%;
+    max-width: unset;
+    height: 100%;
+    min-height: 600px;
+    max-height: unset;
+    margin: unset;
+    padding-top: 80px;
+    border-radius: 0 0 15px 15px;
+  }
+
+  /* Profile Aside Properties */
+  .profileAside {
+    order: 2;
+    flex-direction: row;
+    flex-basis: initial;
+    gap: unset;
+    margin: unset;
+    padding: var(--padding-xs) var(--padding-sm);
+    border-radius: 15px;
+    border: none;
+    box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Aside - User Main info properties */
+  .userMainInfo {
+    display: none;
+  }
+
+  /* Aside - Navigation properties */
+  .profileNavigationList {
+    flex-direction: row;
+    height: initial;
+  }
+
+  .profileNavigationItem {
+    width: 40px;
+    height: 40px;
+  }
+
+  .profileNavigationItem:last-child {
+    margin-top: unset;
+    margin-left: auto;
+  }
+
+  .profileNavigationButton {
+    width: 40px;
+    height: 40px;
+  }
+
+  /* Profile Content Properties */
+  .profileContent {
+    order: 1;
+    overscroll-behavior-y: auto;
+  }
 }
