@@ -17,7 +17,7 @@
 .moviesContainer {
   display: grid;
   gap: 15px;
-  grid-template-columns: repeat(auto-fill, 200px);
+  grid-template-columns: repeat(auto-fill, minmax(min(170px, 100%), 1fr));
   overscroll-behavior-y: contain;
   scrollbar-width: none;
 }
@@ -57,6 +57,8 @@
 
 .movieArticle .movieImageContainer {
   position: relative;
+  width: 100%;
+  height: 100%;
   border-radius: 5px;
   overflow: hidden;
 }
@@ -205,4 +207,91 @@
 .filterAndSortButton:hover,
 .filterAndSortButton:focus {
   filter: brightness(1.15);
+}
+
+/* Media query for desktops */
+@media screen and (max-width: 1200px) {
+}
+
+/* Media query for laptops */
+@media screen and (max-width: 992px) {
+  /* Main Container Properties */
+  .movieDataContainer {
+    padding: 150px var(--padding-md);
+  }
+}
+
+/* Media query for tablets */
+@media screen and (max-width: 768px) {
+  /* Main Container Properties */
+  .movieDataContainer {
+    flex-direction: column;
+    gap: 30px;
+    padding: 150px var(--padding-md) 0;
+  }
+
+  /* Filter And Sort Container Properties */
+  .filterAndSortContainer {
+    flex-direction: row;
+    gap: 10px;
+    height: auto;
+    max-width: unset;
+    flex-wrap: wrap;
+  }
+
+  .filterAndSortInnerContainer {
+    align-items: center;
+    flex-direction: row;
+    padding: 10px 20px;
+  }
+
+  .filterAndSortButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 10px 40px;
+    font-size: var(--font-size-sm);
+    background: var(--purple-color);
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: filter 0.2s;
+  }
+}
+
+/* Media query for mobile phones */
+@media screen and (max-width: 576px) {
+  /* Main Container Properties */
+  .movieDataContainer {
+    padding: 100px var(--padding-sm) 0;
+  }
+
+  .moviesContainer {
+    gap: 10px;
+    grid-template-columns: repeat(auto-fill, minmax(min(140px, 100%), 1fr));
+    overscroll-behavior-y: auto;
+  }
+
+  .movieArticle {
+    height: 280px;
+  }
+
+  /* Filter And Sort Container Properties */
+
+  .filterAndSortInnerContainer {
+    width: 100%;
+    justify-content: space-between;
+    flex-direction: row;
+    padding: 10px 20px;
+  }
+
+  .filterAndSortButton {
+    width: 100%;
+  }
+
+  .filterAndSortSelect {
+    padding: 7px 25px;
+  }
 }

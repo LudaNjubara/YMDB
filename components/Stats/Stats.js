@@ -270,7 +270,7 @@ function Stats() {
               },
             },
           },
-          cutout: "35%",
+          cutout: "50%",
           responsive: true,
         };
     }
@@ -400,7 +400,7 @@ function Stats() {
                                   <FaStar className={styles.relatedVoteIcon} />
                                 </div>
                               </div>
-                              <p className={styles.relatedDescription}>{truncate(movie?.overview)}</p>
+                              <p className={styles.relatedDescription}>{movie?.overview}</p>
                             </div>
                           </article>
                         </Link>
@@ -439,7 +439,7 @@ function Stats() {
                                   <FaStar className={styles.relatedVoteIcon} />
                                 </div>
                               </div>
-                              <p className={styles.relatedDescription}>{truncate(serie?.overview)}</p>
+                              <p className={styles.relatedDescription}>{serie?.overview}</p>
                             </div>
                           </article>
                         </Link>

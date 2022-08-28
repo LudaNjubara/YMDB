@@ -164,3 +164,55 @@
 .formChangeToRegisterButton:focus {
   filter: brightness(150%);
 }
+
+/* Media query for desktops */
+@media screen and (max-width: 1200px) {
+}
+
+/* Media query for laptops */
+@media screen and (max-width: 992px) {
+}
+
+/* Media query for tablets */
+@media screen and (max-width: 768px) {
+  .formsContainer {
+    margin: 150px auto;
+    width: 90%;
+    height: 420px;
+    padding: unset;
+  }
+
+  .loginContainer,
+  .registerContainer {
+    padding: var(--padding-lg) var(--padding-lg);
+  }
+}
+
+/* Media query for mobile phones */
+@media screen and (max-width: 576px) {
+  .loginContainer,
+  .registerContainer {
+    padding: var(--padding-lg) var(--padding-md);
+  }
+
+  .form {
+    row-gap: 15px;
+  }
+
+  .formTitle {
+    font-size: var(--font-size-h2);
+    font-weight: 500;
+  }
+
+  .formInput {
+    font-size: var(--font-size-xs);
+    font-weight: 400;
+    letter-spacing: 0.7px;
+    padding: var(--padding-sm) var(--padding-md);
+  }
+
+  .formButton {
+    margin-top: 15px;
+    padding: 12px 40px;
+  }
+}

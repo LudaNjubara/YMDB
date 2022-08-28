@@ -282,7 +282,7 @@
 .dangerZoneContainer {
   display: grid;
   gap: 20px;
-  grid-template-columns: repeat(auto-fit, 300px);
+  grid-template-columns: repeat(auto-fit, minmax(min(230px, 100%), 1fr));
 }
 
 .dangerZoneItem {
@@ -404,14 +404,25 @@
 
 /* Media query for tablets */
 @media screen and (max-width: 768px) {
+  /* Stats settings */
   .statisticsItemValue {
     font-size: var(--font-size-h1);
+  }
+
+  /* Watchlist tab properties */
+  .watchlistAndFavouritesContainer {
+    grid-template-columns: repeat(auto-fill, minmax(min(130px, 100%), 1fr));
   }
 }
 
 /* Media query for mobile phones */
 @media screen and (max-width: 576px) {
   /* Stats settings */
+  .statisticsContainer {
+    grid-template-columns: repeat(auto-fit, minmax(min(145px, 100%), 1fr));
+    gap: 10px;
+  }
+
   .statisticsItemValue {
     font-size: var(--font-size-h2);
   }
@@ -423,5 +434,11 @@
 
   .sectionGreetingTitle {
     font-size: var(--font-size-h3);
+  }
+
+  /* Watchlist tab properties */
+  .watchlistAndFavouritesContainer {
+    gap: 10px;
+    grid-template-columns: repeat(auto-fill, minmax(min(150px, 100%), 1fr));
   }
 }

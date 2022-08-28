@@ -153,8 +153,7 @@ function MoviesData() {
                               src={`${baseImageURL}${movie.poster_path}`}
                               alt={movie.name}
                               className={styles.movieImage}
-                              width={200}
-                              height={310}
+                              layout="fill"
                             />
                           </div>
                           <div className={styles.movieTitleAndVoteAvg}>
@@ -166,7 +165,7 @@ function MoviesData() {
                               <FaStar className={styles.movieVoteIcon} />
                             </div>
                           </div>
-                          <p className={styles.movieDescription}>{truncate(movie?.overview, 310)}</p>
+                          <p className={styles.movieDescription}>{truncate(movie?.overview, 250)}</p>
                         </article>
                       </Link>
                     )

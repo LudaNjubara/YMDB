@@ -106,7 +106,7 @@ function Watchlist({ watchlists }) {
                           </div>
                         </div>
                         <p className={styles.watchlistAndFavouritesDescription}>
-                          {truncate(movie?.overview, 245)}
+                          {truncate(movie?.overview, 210)}
                         </p>
                       </article>
                     </Link>
@@ -140,7 +140,7 @@ function Watchlist({ watchlists }) {
                           </div>
                         </div>
                         <p className={styles.watchlistAndFavouritesDescription}>
-                          {truncate(serie?.overview, 245)}
+                          {truncate(serie?.overview, 210)}
                         </p>
                       </article>
                     </Link>

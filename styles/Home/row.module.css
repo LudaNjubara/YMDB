@@ -291,12 +291,6 @@
 
   .movieArticle {
     flex: 0 0 250px;
-    background: var(--dark-blue-color);
-    border-radius: 10px;
-    cursor: pointer;
-    outline: none;
-    transition: box-shadow 0.5s ease-out;
-    scroll-snap-align: start;
   }
 
   .movieArticle.large {

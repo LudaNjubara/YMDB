@@ -171,6 +171,12 @@
   max-width: 150px;
   line-height: 1.1;
   letter-spacing: 0.3px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
 .relatedVoteContainer {
@@ -189,4 +195,113 @@
 .relatedDescription {
   font-weight: 300;
   font-size: var(--font-size-sm);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 5; /* number of lines to show */
+  line-clamp: 5;
+  -webkit-box-orient: vertical;
+}
+
+/* Media query for desktops */
+@media screen and (max-width: 1200px) {
+}
+
+/* Media query for laptops */
+@media screen and (max-width: 992px) {
+  .statsWrapper {
+    padding: 200px var(--padding-md) 100px;
+  }
+}
+
+/* Media query for tablets */
+@media screen and (max-width: 768px) {
+  /* General */
+  .statsWrapper {
+    padding: 150px var(--padding-md) 0;
+    gap: 20px;
+  }
+
+  .statChartArticleTitle {
+    font-size: var(--font-size-h2);
+    font-weight: 400;
+  }
+
+  .statChartArticleTitle_small {
+    font-size: var(--font-size-h3);
+    font-weight: 500;
+    letter-spacing: 0.4px;
+    padding-bottom: 15px;
+  }
+}
+
+/* Media query for mobile phones */
+@media screen and (max-width: 576px) {
+  /* General */
+  .statsWrapper {
+    padding: 150px var(--padding-sm) 0;
+  }
+
+  .statChartArticleTitle {
+    font-size: var(--font-size-h3);
+    padding-bottom: 15px;
+  }
+
+  .statChartArticleTitle_small {
+    font-size: var(--font-size-h4);
+  }
+
+  /* ChooseTimeAgo */
+  .backgroundPill {
+    width: 150px;
+  }
+
+  .backgroundPill.monthActive {
+    transform: translateY(-50%) translateX(165px);
+  }
+
+  .chooseTimeAgoButton {
+    width: 150px;
+    font-size: var(--font-size-sm);
+  }
+
+  /* Top 10 */
+  .relatedContainer {
+    flex: 0 0 250px;
+  }
+
+  .relatedContainer .relatedDescription {
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
+  }
+}
+
+@media screen and (max-width: 430px) {
+  /* ChooseTimeAgo */
+  .chooseTimeAgoContainer {
+    width: 100%;
+    border-radius: 20px;
+  }
+
+  .chooseTimeAgoButtonsContainer {
+    flex-direction: column;
+    row-gap: 5px;
+    width: 100%;
+    border-radius: 18px;
+  }
+
+  .backgroundPill {
+    top: 22px;
+    width: calc(100% - 10px);
+    border-radius: 15px;
+  }
+
+  .backgroundPill.monthActive {
+    transform: unset;
+    transform: translateY(18px);
+  }
+
+  .chooseTimeAgoButton {
+    width: 100%;
+  }
 }

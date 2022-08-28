@@ -194,6 +194,7 @@
   }
 
   .profileContainer {
+    position: relative;
     flex-direction: column;
     width: 100%;
     max-width: unset;
@@ -201,21 +202,26 @@
     min-height: 600px;
     max-height: unset;
     margin: unset;
-    padding-top: 80px;
+    padding: 80px 0 50px;
     border-radius: 0 0 15px 15px;
   }
 
   /* Profile Aside Properties */
   .profileAside {
-    order: 2;
+    position: absolute;
+    bottom: 0;
+    left: 0;
     flex-direction: row;
     flex-basis: initial;
     gap: unset;
+    width: 100%;
     margin: unset;
     padding: var(--padding-xs) var(--padding-sm);
     border-radius: 15px;
     border: none;
     box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    background: var(--purple-darker-color);
   }
 
   /* Aside - User Main info properties */

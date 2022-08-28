@@ -106,7 +106,7 @@ function Favourites({ favourites }) {
                           </div>
                         </div>
                         <p className={styles.watchlistAndFavouritesDescription}>
-                          {truncate(movie?.overview, 232)}
+                          {truncate(movie?.overview, 210)}
                         </p>
                       </article>
                     </Link>
@@ -140,7 +140,7 @@ function Favourites({ favourites }) {
                           </div>
                         </div>
                         <p className={styles.watchlistAndFavouritesDescription}>
-                          {truncate(serie?.overview, 232)}
+                          {truncate(serie?.overview, 210)}
                         </p>
                       </article>
                     </Link>

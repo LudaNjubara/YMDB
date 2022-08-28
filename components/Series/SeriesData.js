@@ -150,8 +150,7 @@ function SeriesData() {
                               src={`${baseImageURL}${serie.poster_path}`}
                               alt={serie.name}
                               className={styles.serieImage}
-                              width={200}
-                              height={310}
+                              layout="fill"
                             />
                           </div>
                           <div className={styles.serieTitleAndVoteAvg}>
@@ -161,7 +160,7 @@ function SeriesData() {
                               <FaStar className={styles.serieVoteIcon} />
                             </div>
                           </div>
-                          <p className={styles.serieDescription}>{truncate(serie?.overview, 310)}</p>
+                          <p className={styles.serieDescription}>{truncate(serie?.overview, 250)}</p>
                         </article>
                       </Link>
                     )
