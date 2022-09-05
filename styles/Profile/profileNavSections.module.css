@@ -54,6 +54,22 @@
   overflow: hidden;
 }
 
+.profileImageWarningMessage {
+  display: inline-flex;
+  align-items: center;
+  margin: 10px 0;
+  padding: 3px 8px;
+  border-radius: 5px;
+  background: var(--warning-color);
+}
+
+.profileImageWarningIcon {
+  fill: #ffd270;
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+}
+
 .buttonsContainer {
   display: flex;
   gap: 10px;

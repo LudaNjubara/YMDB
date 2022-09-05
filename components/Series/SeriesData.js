@@ -35,6 +35,8 @@ function SeriesData() {
   const [year, setYear] = useState(currentYear());
   let selectedYearOptionIndex = selectedYearOptionIndex || 0;
   let selectedGenreOptionIndex = selectedGenreOptionIndex || 0;
+  const STALE_TIME = 1000 * 60 * 60 * 24; // 24 hours
+  const CACHE_TIME = 1000 * 60 * 60 * 24; // 24 hours
 
   const fetchSeries = async ({ pageParam = 1 }) =>
     await fetch(
@@ -50,6 +52,8 @@ function SeriesData() {
     fetchSeries,
     {
       refetchOnWindowFocus: false,
+      staleTime: STALE_TIME,
+      cacheTime: CACHE_TIME,
       getNextPageParam: (lastPage, pages) => {
         if (lastPage.page < lastPage.total_pages) {
           return pages.length + 1;

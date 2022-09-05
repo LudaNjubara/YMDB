@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import uniqid from "uniqid";
@@ -7,7 +7,7 @@ import axios from "axios";
 import { database } from "../firebase";
 import instance from "../axios";
 import HorizontalScrollButton from "../Reusable/HorizontalScrollButtons";
-import { baseImageURL, truncate } from "../Utils/utils";
+import { baseImageURL } from "../Utils/utils";
 import {
   Chart as ChartJS,
   ArcElement,
@@ -63,7 +63,7 @@ function Stats() {
   const cancelToken = axios.CancelToken;
   const source = cancelToken.source();
 
-  async function getPageStatsData(timeAgo) {
+  const getPageStatsData = useCallback(async (timeAgo) => {
     setTop10MoviesDetails([]);
     setTop10SeriesDetails([]);
 
@@ -114,7 +114,7 @@ function Stats() {
       serieDetails = await fetchMovieOrSerieDetails(doc.id, false);
       setTop10SeriesDetails((prevState) => [...prevState, serieDetails]);
     });
-  }
+  });
 
   async function getMostCommentedMovieOrSerie(isMovie) {
     const q = query(
@@ -312,7 +312,7 @@ function Stats() {
                 {canLoadCharts && (
                   <Bar
                     data={chartData("totalViewCount")}
-                    height={100}
+                    height={90}
                     options={chartOptions("totalViewCount")}
                   />
                 )}
@@ -336,7 +336,7 @@ function Stats() {
           <div className={styles.noDataMessage}>No data</div>
         )}
 
-        {top10MoviesDetails || typeof top10SeriesDetails ? (
+        {top10MoviesDetails || top10SeriesDetails ? (
           <section className={styles.statChartSection}>
             <h2 className={styles.statChartArticleTitle}>Top 10 movies & series</h2>
 
@@ -349,6 +349,8 @@ function Stats() {
                   onClick={() => {
                     // get closest span element and add class monthActive
                     const backgroundPill = document.querySelector(`.${styles.backgroundPill}`);
+                    if (!backgroundPill.classList.contains(styles.monthActive)) return;
+
                     backgroundPill.classList.remove(styles.monthActive);
                     getPageStatsData("week");
                   }}
@@ -360,6 +362,8 @@ function Stats() {
                   className={styles.chooseTimeAgoButton}
                   onClick={() => {
                     const backgroundPill = document.querySelector(`.${styles.backgroundPill}`);
+
+                    if (backgroundPill.classList.contains(styles.monthActive)) return;
                     backgroundPill.classList.add(styles.monthActive);
                     getPageStatsData("month");
                   }}

@@ -6,7 +6,7 @@ import { login } from "../redux/userSlice";
 import { auth, updateProfile } from "../firebase";
 
 import { IoMdCheckmark } from "react-icons/io";
-import { AiOutlineCloudUpload } from "react-icons/ai";
+import { AiOutlineCloudUpload, AiFillWarning } from "react-icons/ai";
 import { FaEdit } from "react-icons/fa";
 
 import styles from "../../styles/Profile/profileNavSections.module.css";
@@ -15,6 +15,7 @@ function Personal_Info({ user, statistics, watchlists, favourites }) {
   const [updateProfileUsernameButtonDisabled, setUpdateProfileUsernameButtonDisabled] = useState(true);
   const [updateProfileImageButtonDisabled, setUpdateProfileImageButtonDisabled] = useState(true);
   const [previewProfileImage, setPreviewProfileImage] = useState(null);
+  const [profileImageWarningMessage, setProfileImageWarningMessage] = useState("");
   const allowedImageTypes = ["png", "jpg", "jpeg"];
   const dispatch = useDispatch();
 
@@ -91,6 +92,14 @@ function Personal_Info({ user, statistics, watchlists, favourites }) {
                 className={styles.profileImage}
               />
             </div>
+
+            {profileImageWarningMessage.length > 0 && (
+              <p className={styles.profileImageWarningMessage}>
+                <AiFillWarning className={styles.profileImageWarningIcon} />
+                {profileImageWarningMessage}
+              </p>
+            )}
+
             <div className={styles.buttonsContainer}>
               <label htmlFor="uploadImageInput" className={styles.uploadImageLabel} tabIndex="0">
                 <AiOutlineCloudUpload className={styles.uploadImageIcon} />
@@ -110,13 +119,14 @@ function Personal_Info({ user, statistics, watchlists, favourites }) {
                         if (imageSizeMB < 10) {
                           setPreviewProfileImage(URL.createObjectURL(image));
                           setUpdateProfileImageButtonDisabled(false);
+                          setProfileImageWarningMessage("");
                         } else {
                           setUpdateProfileImageButtonDisabled(true);
-                          console.log("file size is too big");
+                          setProfileImageWarningMessage("Image size must be less than 10MB");
                         }
                       } else {
                         setUpdateProfileImageButtonDisabled(true);
-                        console.log("file type is not allowed");
+                        setProfileImageWarningMessage("Image type must be png, jpg or jpeg");
                       }
                     } else {
                       setUpdateProfileImageButtonDisabled(true);
