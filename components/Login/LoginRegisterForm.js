@@ -53,7 +53,8 @@ function LoginRegisterForm() {
           displayName: usernameRefRegister.current.value,
         })
           .then(() => {
-            router.push("/");
+            const returnUrl = router.query.returnUrl || "/";
+            router.push(returnUrl);
           })
           .catch((err) => {
             console.log(err);
