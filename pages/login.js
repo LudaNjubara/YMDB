@@ -8,6 +8,7 @@ function Login() {
       <Head>
         <title key="title">YMDB - Login or Register</title>
       </Head>
+
       <LoginRegisterForm />
     </div>
   );

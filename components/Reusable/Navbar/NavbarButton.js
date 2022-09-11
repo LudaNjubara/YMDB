@@ -68,8 +68,9 @@ const NavbarButton = () => {
           <div
             className={styles.userOptionContainer}
             onClick={() => {
+              const currentURL = router.asPath;
               auth.signOut();
-              router.push("/");
+              router.push(currentURL || "/");
             }}
           >
             <BiLogOut className={styles.userOptionIcon} />

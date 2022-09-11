@@ -63,118 +63,116 @@ function SeriesData() {
   );
 
   return (
-    <>
-      <main className={styles.serieDataContainer}>
-        <aside className={styles.filterAndSortContainer}>
-          <div className={styles.filterAndSortInnerContainer}>
-            <h3 className={styles.filterAndSortTitle}>Genre</h3>
-            <select
-              name="genreSelect"
-              id="genreSelectId"
-              className={styles.filterAndSortSelect}
-              defaultValue={genre}
-            >
-              {genresArray.map((genre) => {
-                return (
-                  <option value={genre.id} key={uniqid()}>
-                    {genre.name}
-                  </option>
-                );
-              })}
-            </select>
-          </div>
-
-          <div className={styles.filterAndSortInnerContainer}>
-            <h3 className={styles.filterAndSortTitle}>Year</h3>
-            <select
-              name="yearSelect"
-              id="yearSelectId"
-              className={styles.filterAndSortSelect}
-              defaultValue={year}
-            >
-              {getListOfSelectableYears().map((year) => (
-                <option value={year} key={uniqid()}>
-                  {year}
+    <main className={styles.serieDataContainer}>
+      <aside className={styles.filterAndSortContainer}>
+        <div className={styles.filterAndSortInnerContainer}>
+          <h3 className={styles.filterAndSortTitle}>Genre</h3>
+          <select
+            name="genreSelect"
+            id="genreSelectId"
+            className={styles.filterAndSortSelect}
+            defaultValue={genre}
+          >
+            {genresArray.map((genre) => {
+              return (
+                <option value={genre.id} key={uniqid()}>
+                  {genre.name}
                 </option>
-              ))}
-            </select>
-          </div>
+              );
+            })}
+          </select>
+        </div>
 
-          {/* <div className={styles.filterAndSortInnerContainer}>
+        <div className={styles.filterAndSortInnerContainer}>
+          <h3 className={styles.filterAndSortTitle}>Year</h3>
+          <select
+            name="yearSelect"
+            id="yearSelectId"
+            className={styles.filterAndSortSelect}
+            defaultValue={year}
+          >
+            {getListOfSelectableYears().map((year) => (
+              <option value={year} key={uniqid()}>
+                {year}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        {/* <div className={styles.filterAndSortInnerContainer}>
             <h3 className={styles.filterAndSortTitle}>Sort</h3>
           </div> */}
 
-          <button
-            type="button"
-            className={styles.filterAndSortButton}
-            onClick={() => {
-              const yearSelect = document.getElementById("yearSelectId");
-              const genreSelect = document.getElementById("genreSelectId");
+        <button
+          type="button"
+          className={styles.filterAndSortButton}
+          onClick={() => {
+            const yearSelect = document.getElementById("yearSelectId");
+            const genreSelect = document.getElementById("genreSelectId");
 
-              selectedYearOptionIndex = yearSelect.selectedIndex;
-              selectedGenreOptionIndex = genreSelect.selectedIndex;
+            selectedYearOptionIndex = yearSelect.selectedIndex;
+            selectedGenreOptionIndex = genreSelect.selectedIndex;
 
-              setYear(yearSelect.value);
-              setGenre(genreSelect.value);
-            }}
+            setYear(yearSelect.value);
+            setGenre(genreSelect.value);
+          }}
+        >
+          <FaSearch className={styles.filterAndSortButtonIcon} /> Search
+        </button>
+      </aside>
+
+      <div className={styles.infiniteScrollWrapper}>
+        {isSuccess && (
+          <InfiniteScroll
+            className={styles.seriesContainer}
+            dataLength={data?.pages.length}
+            next={fetchNextPage}
+            hasMore={hasNextPage}
+            height={1200}
+            loader={
+              <div className={styles.statusMessageContainer}>
+                <p className={styles.statusMessage}>Loading more series...</p>
+              </div>
+            }
+            endMessage={
+              <div className={styles.statusMessageContainer}>
+                <p className={styles.statusMessage}>
+                  Wow, you&apos;ve searched it all. We&apos;ve got no more.
+                </p>
+              </div>
+            }
           >
-            <FaSearch className={styles.filterAndSortButtonIcon} /> Search
-          </button>
-        </aside>
-
-        <div className={styles.infiniteScrollWrapper}>
-          {isSuccess && (
-            <InfiniteScroll
-              className={styles.seriesContainer}
-              dataLength={data?.pages.length}
-              next={fetchNextPage}
-              hasMore={hasNextPage}
-              height={1200}
-              loader={
-                <div className={styles.statusMessageContainer}>
-                  <p className={styles.statusMessage}>Loading more series...</p>
-                </div>
-              }
-              endMessage={
-                <div className={styles.statusMessageContainer}>
-                  <p className={styles.statusMessage}>
-                    Wow, you&apos;ve searched it all. We&apos;ve got no more.
-                  </p>
-                </div>
-              }
-            >
-              {data?.pages.map((page) =>
-                page.results.map(
-                  (serie) =>
-                    serie.poster_path && (
-                      <Link href={`/series/${encodeURIComponent(serie.id)}`} key={uniqid()}>
-                        <article className={`${styles.serieArticle}`} tabIndex="0">
-                          <div className={styles.serieImageContainer}>
-                            <Image
-                              src={`${baseImageURL}${serie.poster_path}`}
-                              alt={serie.name}
-                              className={styles.serieImage}
-                              layout="fill"
-                            />
+            {data?.pages.map((page) =>
+              page.results.map(
+                (serie) =>
+                  serie.poster_path && (
+                    <Link href={`/series/${encodeURIComponent(serie.id)}`} key={uniqid()}>
+                      <article className={`${styles.serieArticle}`} tabIndex="0">
+                        <div className={styles.serieImageContainer}>
+                          <Image
+                            src={`${baseImageURL}${serie.poster_path}`}
+                            alt={serie.name}
+                            className={styles.serieImage}
+                            layout="fill"
+                          />
+                        </div>
+                        <div className={styles.serieTitleAndVoteAvg}>
+                          <h3 className={styles.serieTitle}>{serie.name || serie.original_name}</h3>
+                          <div className={styles.serieVoteContainer}>
+                            <span className={styles.serieVoteAvg}>{serie?.vote_average}</span>
+                            <FaStar className={styles.serieVoteIcon} />
                           </div>
-                          <div className={styles.serieTitleAndVoteAvg}>
-                            <h3 className={styles.serieTitle}>{serie.name || serie.original_name}</h3>
-                            <div className={styles.serieVoteContainer}>
-                              <span className={styles.serieVoteAvg}>{serie?.vote_average}</span>
-                              <FaStar className={styles.serieVoteIcon} />
-                            </div>
-                          </div>
-                          <p className={styles.serieDescription}>{truncate(serie?.overview, 250)}</p>
-                        </article>
-                      </Link>
-                    )
-                )
-              )}
-            </InfiniteScroll>
-          )}
-        </div>
-      </main>
-    </>
+                        </div>
+                        <p className={styles.serieDescription}>{truncate(serie?.overview, 250)}</p>
+                      </article>
+                    </Link>
+                  )
+              )
+            )}
+          </InfiniteScroll>
+        )}
+      </div>
+    </main>
   );
 }
 

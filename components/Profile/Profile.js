@@ -81,93 +81,95 @@ function Profile() {
   }, [user]);
 
   return (
-    <main className={styles.profileWrapper}>
-      <div className={styles.profileContainer}>
-        <aside className={styles.profileAside}>
-          <div className={styles.userMainInfo}>
-            <div className={styles.profileImageContainer}>
-              <Image
-                src={`${user?.photoURL || auth.currentUser.photoURL || "/defaultUser.png"}`}
-                width={60}
-                height={60}
-                className={styles.profileImage}
-              />
+    user && (
+      <main className={styles.profileWrapper}>
+        <div className={styles.profileContainer}>
+          <aside className={styles.profileAside}>
+            <div className={styles.userMainInfo}>
+              <div className={styles.profileImageContainer}>
+                <Image
+                  src={`${user?.photoURL || auth.currentUser.photoURL || "/defaultUser.png"}`}
+                  width={60}
+                  height={60}
+                  className={styles.profileImage}
+                />
+              </div>
+              <h1 className={styles.profileUsername}>{user?.displayName}</h1>
             </div>
-            <h1 className={styles.profileUsername}>{user?.displayName}</h1>
-          </div>
-          <nav className={styles.profileNavigation}>
-            <ul className={styles.profileNavigationList}>
-              <li className={styles.profileNavigationItem}>
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    setActiveTab("personal_info");
-                    changeActiveTab(e.target);
-                  }}
-                  className={`${styles.profileNavigationButton} ${styles.active}`}
-                >
-                  <MdSpaceDashboard className={styles.profileNavigationButtonIcon} />
-                  <span className={styles.profileNavigationButtonText}>Personal Info</span>
-                </button>
-              </li>
-              <li className={styles.profileNavigationItem}>
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    setActiveTab("watchlist");
-                    changeActiveTab(e.target);
-                  }}
-                  className={styles.profileNavigationButton}
-                >
-                  <BsBookmarkFill className={styles.profileNavigationButtonIcon} />
-                  <span className={styles.profileNavigationButtonText}>Watchlist</span>
-                </button>
-              </li>
-              <li className={styles.profileNavigationItem}>
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    setActiveTab("favourites");
-                    changeActiveTab(e.target);
-                  }}
-                  className={styles.profileNavigationButton}
-                >
-                  <BsStarFill className={styles.profileNavigationButtonIcon} />
-                  <span className={styles.profileNavigationButtonText}>Favourites</span>
-                </button>
-              </li>
-              <li className={styles.profileNavigationItem}>
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    setActiveTab("dangerZone");
-                    changeActiveTab(e.target);
-                  }}
-                  className={styles.profileNavigationButton}
-                >
-                  <FaBiohazard className={styles.profileNavigationButtonIcon} />
-                  <span className={styles.profileNavigationButtonText}>Danger Zone</span>
-                </button>
-              </li>
-            </ul>
-          </nav>
-        </aside>
+            <nav className={styles.profileNavigation}>
+              <ul className={styles.profileNavigationList}>
+                <li className={styles.profileNavigationItem}>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      setActiveTab("personal_info");
+                      changeActiveTab(e.target);
+                    }}
+                    className={`${styles.profileNavigationButton} ${styles.active}`}
+                  >
+                    <MdSpaceDashboard className={styles.profileNavigationButtonIcon} />
+                    <span className={styles.profileNavigationButtonText}>Personal Info</span>
+                  </button>
+                </li>
+                <li className={styles.profileNavigationItem}>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      setActiveTab("watchlist");
+                      changeActiveTab(e.target);
+                    }}
+                    className={styles.profileNavigationButton}
+                  >
+                    <BsBookmarkFill className={styles.profileNavigationButtonIcon} />
+                    <span className={styles.profileNavigationButtonText}>Watchlist</span>
+                  </button>
+                </li>
+                <li className={styles.profileNavigationItem}>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      setActiveTab("favourites");
+                      changeActiveTab(e.target);
+                    }}
+                    className={styles.profileNavigationButton}
+                  >
+                    <BsStarFill className={styles.profileNavigationButtonIcon} />
+                    <span className={styles.profileNavigationButtonText}>Favourites</span>
+                  </button>
+                </li>
+                <li className={styles.profileNavigationItem}>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      setActiveTab("dangerZone");
+                      changeActiveTab(e.target);
+                    }}
+                    className={styles.profileNavigationButton}
+                  >
+                    <FaBiohazard className={styles.profileNavigationButtonIcon} />
+                    <span className={styles.profileNavigationButtonText}>Danger Zone</span>
+                  </button>
+                </li>
+              </ul>
+            </nav>
+          </aside>
 
-        <section className={styles.profileContent}>
-          {activeTab === "personal_info" && (
-            <Personal_Info
-              user={user}
-              statistics={statisticsData}
-              watchlists={watchlistData}
-              favourites={favouritesData}
-            />
-          )}
-          {activeTab === "watchlist" && <Watchlist watchlists={watchlistData} />}
-          {activeTab === "favourites" && <Favourites favourites={favouritesData} />}
-          {activeTab === "dangerZone" && <DangerZone />}
-        </section>
-      </div>
-    </main>
+          <section className={styles.profileContent}>
+            {activeTab === "personal_info" && (
+              <Personal_Info
+                user={user}
+                statistics={statisticsData}
+                watchlists={watchlistData}
+                favourites={favouritesData}
+              />
+            )}
+            {activeTab === "watchlist" && <Watchlist watchlists={watchlistData} />}
+            {activeTab === "favourites" && <Favourites favourites={favouritesData} />}
+            {activeTab === "dangerZone" && <DangerZone />}
+          </section>
+        </div>
+      </main>
+    )
   );
 }
 export default Profile;

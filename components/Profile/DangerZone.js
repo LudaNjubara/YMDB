@@ -1,10 +1,17 @@
 import { useState } from "react";
+import { useRouter } from "next/router";
 import { doc, deleteDoc } from "firebase/firestore";
+
+import { useDispatch } from "react-redux";
+import { logout } from "../redux/userSlice";
 import { auth, database, deleteUser, EmailAuthProvider, reauthenticateWithCredential } from "../firebase";
 
 import styles from "../../styles/Profile/profileNavSections.module.css";
 
 function DangerZone() {
+  const router = useRouter();
+  const dispatch = useDispatch();
+
   const [typeOfDeletion, setTypeOfDeletion] = useState("");
   const [popupTimeout, setPopupTimeout] = useState(null);
 
@@ -61,7 +68,7 @@ function DangerZone() {
             .then(() => {
               openOrCloseDangerZonePopup(true);
               alert("Statistics data deleted");
-              /* window.location.reload(); */
+              router.reload();
             })
             .catch((error) => {
               // An error happened.
@@ -80,6 +87,7 @@ function DangerZone() {
           deleteUser(user)
             .then(() => {
               // Account deleted.
+              dispatch(logout());
               alert("Account deleted");
             })
             .catch((error) => {

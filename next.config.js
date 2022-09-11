@@ -4,11 +4,11 @@ const nextConfig = {
 };
 
 module.exports = {
-  /* experimental: {
+  experimental: {
     images: {
       unoptimized: true,
     },
-  }, */
+  },
   images: {
     domains: ["images.pexels.com", "image.tmdb.org", "www.gravatar.com", "res.cloudinary.com"],
   },

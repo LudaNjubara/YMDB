@@ -40,6 +40,8 @@ export default function AppWrapper({ Component, pageProps }) {
         <Head>
           {/* icon */}
           <link rel="icon" href="/logo.svg" />
+          {/* set theme to blue */}
+          <meta name="theme-color" content="#040b2a" />
         </Head>
         <QueryClientProvider client={queryClient}>
           <Navbar />

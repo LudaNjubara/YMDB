@@ -10,11 +10,11 @@ export default function Home() {
   return (
     <div id="root">
       <Head>
-        <title key="title">YMDB - Your Movie DataBase</title>
+        <title key="title">YMDB - Your Movie Database</title>
         <meta name="google-site-verification" content="XJNmUcYtBUBDsXwwo3qJbIekYufFozDjpMFU1fS2O80" />
         <meta
           name="description"
-          content="Browse all the movies and TV Shows. Make your account for free, create your watchlists, mark your favourites and find out all important info about any movie, TV Show or person, in a glimpse."
+          content="Browse all the movies and TV Shows. Make your account for free, create your watchlists, mark your favourites and find out all important data about any movie, TV Show or person, in a glimpse."
         />
       </Head>
 

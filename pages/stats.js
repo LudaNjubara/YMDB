@@ -5,8 +5,9 @@ function stats() {
   return (
     <>
       <Head>
-        <title key="title">YMDB - Trending stats</title>
+        <title key="title">YMDB-Trending stats</title>
       </Head>
+
       <Stats />
     </>
   );
