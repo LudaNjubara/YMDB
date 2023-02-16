@@ -22,7 +22,7 @@ Javna verzija dostupna je pod [https://ymdb.vercel.app/](https://ymdb.vercel.app
 ### Getting started
 
 To install all the necessary dependencies for this application you need to run the CLI command 
-```npm install```
+```npm i```
 which will ensure all the files and dependencies are installed.
 
 After executing aforementioned CLI command, you can start the application by executing the following command in CLI
