@@ -40,6 +40,8 @@ export default function AppWrapper({ Component, pageProps }) {
         <Head>
           {/* icon */}
           <link rel="icon" href="/logo.svg" />
+          {/* Set no indexing for Google Search */}
+          <meta name="robots" content="noindex" />
           {/* set theme to blue */}
           <meta name="theme-color" content="#040b2a" />
         </Head>
